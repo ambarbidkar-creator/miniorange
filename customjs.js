@@ -362,7 +362,7 @@
     if (!document.getElementById("mo-bottom")) {
       var row = document.createElement("div"); row.id = "mo-bottom";
       var fl = document.createElement("a"); fl.id = "mo-forgot";
-      fl.href = getForgotHref(); fl.textContent = "Forgot password";
+      fl.href = "/moas/idp/resetpassword"; fl.textContent = "Forgot password";
       row.appendChild(fl);
       wrap.parentNode.insertBefore(row, wrap.nextSibling);
     }
@@ -554,7 +554,7 @@
         if (!document.getElementById("mo-bottom")) {
           var row = document.createElement("div"); row.id = "mo-bottom";
           var fl = document.createElement("a"); fl.id = "mo-forgot";
-          fl.href = getForgotHref(); fl.textContent = "Forgot password";
+          fl.href = "/moas/idp/resetpassword"; fl.textContent = "Forgot password";
           row.appendChild(fl);
           wrap.parentNode.insertBefore(row, wrap.nextSibling);
         }
