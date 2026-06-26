@@ -98,7 +98,7 @@
 
       /* Hide original page elements */
       ".login-header.custom-title,hr,#dynamicUserName,#feedback-msg,#username-error,br.my-2," +
-      "#goBack,#error-alert-message," +
+      "#goBack," +
       "a[href*='businessfreetrial'],a[href*='forgotpassword']:not(#mo-forgot),a[href*='resetpassword']:not(#mo-forgot),.col-auto.form-group{display:none!important;}" +
 
       /* LOG IN heading — top LEFT */
@@ -342,35 +342,90 @@
   }
 
   /* ── LOGIN ERROR HANDLER ── */
-  /* The JSP renders failures into #error-alert-message (hidden via CSS).
-     Pull the text out and drop it under the email box. */
   function handleLoginErrors() {
-    var banner = document.getElementById("error-alert-message");
-    var span = banner && banner.querySelector(".errorMessage li span");
-    var message = span ? span.textContent.trim() : "";
+    var feedbackEl = document.getElementById("feedback-msg");
+    var userErrorEl = document.getElementById("username-error");
+    var errorText = "";
 
-    var userBox = document.getElementById("mo-user-display");
+    if (feedbackEl && feedbackEl.textContent.trim()) {
+      errorText = feedbackEl.textContent.trim();
+    } else if (userErrorEl && userErrorEl.textContent.trim()) {
+      errorText = userErrorEl.textContent.trim();
+    }
+
+    // Clean existing styled error indicators
+    document.querySelectorAll(".mo-input-error").forEach(function (inp) {
+      inp.classList.remove("mo-input-error");
+    });
+    document.querySelectorAll(".mo-error-icon").forEach(function (ico) {
+      ico.remove();
+    });
+    document.querySelectorAll(".mo-error-text").forEach(function (txt) {
+      txt.remove();
+    });
+
+    if (!errorText) return;
+
+    var isLogin = checkIsLogin();
+    if (!isLogin) return;
+
     var pwField = document.getElementById("plaintextPassword");
+    var isPasswordStep = pwField && pwField.style.display !== "none" && !pwField.classList.contains("d-none");
 
-    if (!message || !userBox) {
-      var old = document.getElementById("mo-login-error-msg");
-      if (old) old.remove();
-      if (userBox) userBox.classList.remove("mo-input-error");
-      if (pwField) pwField.classList.remove("mo-input-error");
-      return;
+    if (isPasswordStep) {
+      var input = document.getElementById("plaintextPassword");
+      if (input) {
+        input.classList.add("mo-input-error");
+        var wrap = input.closest(".mo-pw-wrap");
+        if (wrap && !wrap.querySelector(".mo-error-icon")) {
+          var icon = document.createElement("span");
+          icon.className = "mo-error-icon";
+          icon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+          wrap.appendChild(icon);
+        }
+        var errorMsgId = "mo-pw-error-msg";
+        var errorMsg = document.getElementById(errorMsgId);
+        if (!errorMsg) {
+          errorMsg = document.createElement("span");
+          errorMsg.id = errorMsgId;
+          errorMsg.className = "mo-error-text";
+          var insertTarget = wrap || input;
+          insertTarget.parentNode.insertBefore(errorMsg, insertTarget.nextSibling);
+        }
+        errorMsg.textContent = errorText;
+      }
+    } else {
+      var input = document.getElementById("username");
+      if (input) {
+        input.classList.add("mo-input-error");
+        var wrap = input.parentNode;
+        if (wrap.className !== "mo-input-wrap") {
+          wrap = document.createElement("div");
+          wrap.className = "mo-input-wrap";
+          wrap.style.position = "relative";
+          wrap.style.display = "flex";
+          wrap.style.alignItems = "center";
+          wrap.style.width = "100%";
+          input.parentNode.insertBefore(wrap, input);
+          wrap.appendChild(input);
+        }
+        if (wrap && !wrap.querySelector(".mo-error-icon")) {
+          var icon = document.createElement("span");
+          icon.className = "mo-error-icon";
+          icon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+          wrap.appendChild(icon);
+        }
+        var errorMsgId = "mo-email-error-msg";
+        var errorMsg = document.getElementById(errorMsgId);
+        if (!errorMsg) {
+          errorMsg = document.createElement("span");
+          errorMsg.id = errorMsgId;
+          errorMsg.className = "mo-error-text";
+          wrap.parentNode.insertBefore(errorMsg, wrap.nextSibling);
+        }
+        errorMsg.textContent = errorText;
+      }
     }
-
-    userBox.classList.add("mo-input-error");
-    if (pwField) pwField.classList.add("mo-input-error");
-
-    var msg = document.getElementById("mo-login-error-msg");
-    if (!msg) {
-      msg = document.createElement("span");
-      msg.id = "mo-login-error-msg";
-      msg.className = "mo-error-text";
-      userBox.after(msg);
-    }
-    if (msg.textContent !== message) msg.textContent = message;
   }
 
   /* ── FORGOT PASSWORD PAGE (/moas/idp/forgotpassword) ── */
