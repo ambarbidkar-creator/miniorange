@@ -573,6 +573,13 @@
     var isPageHasError = errorOnPage();
     if (isPageHasError) {
       console.log('IN ERROR SECTION ');
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#username').after(
+        '<div class="error-message text-start" style="color:red;">' + message + '</div>'
+      );
+      $('input').addClass('border border-danger');
+      $('.username').addClass('border border-danger');
+      $('#error-alert-message').hide();
       
     }
 
