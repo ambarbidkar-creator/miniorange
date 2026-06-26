@@ -304,6 +304,7 @@
       }
     }
 
+    var isPageHasError = errorOnPage();
     if(isPageHasError) {
       console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
