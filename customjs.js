@@ -56,6 +56,17 @@
     return false;
   }
 
+  function checkIsLogout() {
+    var path = window.location.pathname.toLowerCase();
+    return path.indexOf("/moas/logoutpage") !== -1;
+  }
+
+  /* ── LOGOUT PAGE: auto-redirect ── */
+  function applyLogoutPage() {
+    if (!checkIsLogout()) return;
+    window.location.replace("https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout");
+  }
+
   /* ── ERROR DETECTION HELPER ── */
   /* Detects the server-rendered error banner (#error-alert-message).
      The wrapper structure stays constant — only the message text changes:
@@ -1365,6 +1376,8 @@
 
   /* ── MAIN RUN ── */
   function run() {
+    if (checkIsLogout()) { applyLogoutPage(); return; }
+
     var isLogin = checkIsLogin();
     var isRedirectToIdpLogin = checkIsRedirectToIdpLogin();
     var isForgot = checkIsForgot();
