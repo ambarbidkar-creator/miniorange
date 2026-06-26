@@ -468,7 +468,10 @@
   /* Same styling/behaviour as the /moas/login page — reuses the shared
      CSS injection and the login step helpers so it stays in sync. */
   function applyRedirectToIdpLogin() {
+    console.log('in apply redirecto idplogin')
     if (!checkIsRedirectToIdpLogin()) return;
+
+    console('IN SIDE')
 
     injectFontAndCss();
     applyEmailStep();
