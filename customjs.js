@@ -324,14 +324,16 @@
       }
     }
 
+    /* Guarded by #mo-pw-error so it appends ONCE (otherwise the observer
+       re-runs this block and stacks duplicate error messages). */
     var isPageHasError = errorOnPage();
-    if(isPageHasError) {
+    if(isPageHasError && !document.getElementById("mo-pw-error")) {
       console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
       $('#mo-user-display').after(
-        '<div class="error-message text-start" style="color:red;">' + message + '</div>'
+        '<div id="mo-pw-error" class="error-message text-start" style="color:red;">' + message + '</div>'
       );
-      $('input').addClass('border border-danger');
+      $('#username, #plaintextPassword').addClass('border border-danger');
       $('.mo-user-display').addClass('border border-danger');
       $('#error-alert-message').hide();
     }
