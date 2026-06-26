@@ -56,6 +56,17 @@
     return false;
   }
 
+  function checkIsLogout() {
+    var path = window.location.pathname.toLowerCase();
+    return path.indexOf("/moas/logoutpage") !== -1;
+  }
+
+  /* ── LOGOUT PAGE: auto-redirect ── */
+  function applyLogoutPage() {
+    if (!checkIsLogout()) return;
+    window.location.replace("https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout");
+  }
+
   /* ── ERROR DETECTION HELPER ── */
   /* Detects the server-rendered error banner (#error-alert-message).
      The wrapper structure stays constant — only the message text changes:
@@ -362,7 +373,7 @@
     if (!document.getElementById("mo-bottom")) {
       var row = document.createElement("div"); row.id = "mo-bottom";
       var fl = document.createElement("a"); fl.id = "mo-forgot";
-      fl.href = getForgotHref(); fl.textContent = "Forgot password";
+      fl.href = "/moas/idp/resetpassword"; fl.textContent = "Forgot password";
       row.appendChild(fl);
       wrap.parentNode.insertBefore(row, wrap.nextSibling);
     }
@@ -554,7 +565,7 @@
         if (!document.getElementById("mo-bottom")) {
           var row = document.createElement("div"); row.id = "mo-bottom";
           var fl = document.createElement("a"); fl.id = "mo-forgot";
-          fl.href = getForgotHref(); fl.textContent = "Forgot password";
+          fl.href = "/moas/idp/resetpassword"; fl.textContent = "Forgot password";
           row.appendChild(fl);
           wrap.parentNode.insertBefore(row, wrap.nextSibling);
         }
@@ -937,6 +948,18 @@
     var otpDone = document.createElement("span");
     otpDone.id = "mo-otp-done"; otpDone.style.display = "none";
     document.body.appendChild(otpDone);
+
+    var isPageHasError = errorOnPage();
+    if (isPageHasError) {
+      console.log('IN ERROR SECTION ');
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#otpToken').after(
+        '<div id="mo-userlogin-error" class="error-message text-start" style="color:red;">' + message + '</div>'
+      );
+      $('input').addClass('border border-danger')
+      $('#error-alert-message').hide();
+    }
+
   }
 
   /* ── CHANGE PASSWORD PAGE (/moas/idp/changepassword) ── */
@@ -1023,6 +1046,7 @@
       var cpSt = document.createElement("style");
       cpSt.id = "mo-cp-css"; cpSt.textContent = cpCss;
       document.head.appendChild(cpSt);
+      $('#login-body').addClass('d-flex justify-content-center align-items-center')
     }
 
     var fpForm = document.getElementById("passwordform") || document.getElementById("userform");
@@ -1353,6 +1377,8 @@
 
   /* ── MAIN RUN ── */
   function run() {
+    if (checkIsLogout()) { applyLogoutPage(); return; }
+
     var isLogin = checkIsLogin();
     var isRedirectToIdpLogin = checkIsRedirectToIdpLogin();
     var isForgot = checkIsForgot();
