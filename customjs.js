@@ -471,7 +471,7 @@
     console.log('in apply redirecto idplogin')
     if (!checkIsRedirectToIdpLogin()) return;
 
-    console('IN SIDE')
+    
 
     injectFontAndCss();
     applyEmailStep();
