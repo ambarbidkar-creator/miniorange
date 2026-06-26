@@ -1,8 +1,6 @@
 (function () {
   "use strict";
 
-  $('#login-main-body').css('display','block');
-  console.log('asdasd 123 ')
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
     var path = window.location.pathname.toLowerCase();
@@ -99,7 +97,7 @@
       "#enduserloginform .row,#idploginform .row{margin:0!important;}" +
 
       /* Hide original page elements */
-      ".login-header.custom-title,hr,#dynamicUserName,#feedback-msg,#username-error,#error-alert-message,br.my-2," +
+      ".login-header.custom-title,hr,#dynamicUserName,#feedback-msg,#username-error,br.my-2," +
       "#goBack," +
       "a[href*='businessfreetrial'],a[href*='forgotpassword']:not(#mo-forgot),a[href*='resetpassword']:not(#mo-forgot),.col-auto.form-group{display:none!important;}" +
 
@@ -344,111 +342,89 @@
   }
 
   /* ── LOGIN ERROR HANDLER ── */
-  /* Reusable filled-circle "x" icon for error states */
-  var MO_ERROR_ICON = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+  function handleLoginErrors() {
+    var feedbackEl = document.getElementById("feedback-msg");
+    var userErrorEl = document.getElementById("username-error");
+    var errorText = "";
 
-  /* Tear down any inline error UI we previously rendered (no-op once clean,
-     so it never churns the DOM under the MutationObserver). */
-  function clearLoginErrorUI() {
-    ["mo-user-display", "username", "plaintextPassword"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.classList.remove("mo-input-error");
+    if (feedbackEl && feedbackEl.textContent.trim()) {
+      errorText = feedbackEl.textContent.trim();
+    } else if (userErrorEl && userErrorEl.textContent.trim()) {
+      errorText = userErrorEl.textContent.trim();
+    }
+
+    // Clean existing styled error indicators
+    document.querySelectorAll(".mo-input-error").forEach(function (inp) {
+      inp.classList.remove("mo-input-error");
     });
-    var msg = document.getElementById("mo-login-error-msg");
-    if (msg) msg.remove();
-    document.querySelectorAll("#enduserloginform .mo-error-icon,#idploginform .mo-error-icon").forEach(function (ico) {
+    document.querySelectorAll(".mo-error-icon").forEach(function (ico) {
       ico.remove();
     });
-  }
+    document.querySelectorAll(".mo-error-text").forEach(function (txt) {
+      txt.remove();
+    });
 
-  function handleLoginErrors() {
-    /* The IdP (JSP) renders login failures inside the #error-alert-message
-       banner: <ul class="errorMessage"><li><span>…</span></li></ul>.
-       Parse the text out of it, suppress the banner (hidden via CSS), and
-       render the message inline. Fall back to the legacy empty containers. */
-    var errorText = "";
-    var alertEl = document.getElementById("error-alert-message");
-    if (alertEl) {
-      var msgNode = alertEl.querySelector(".errorMessage");
-      errorText = ((msgNode || alertEl).textContent || "").trim();
-    }
-    if (!errorText) {
-      var feedbackEl = document.getElementById("feedback-msg");
-      var userErrorEl = document.getElementById("username-error");
-      if (feedbackEl && feedbackEl.textContent.trim()) {
-        errorText = feedbackEl.textContent.trim();
-      } else if (userErrorEl && userErrorEl.textContent.trim()) {
-        errorText = userErrorEl.textContent.trim();
-      }
-    }
+    if (!errorText) return;
 
-    /* No error → make sure any previous error UI is removed, then stop. */
-    if (!errorText) { clearLoginErrorUI(); return; }
-    if (!checkIsLogin()) return;
+    var isLogin = checkIsLogin();
+    if (!isLogin) return;
 
     var pwField = document.getElementById("plaintextPassword");
     var isPasswordStep = pwField && pwField.style.display !== "none" && !pwField.classList.contains("d-none");
 
     if (isPasswordStep) {
-      /* Highlight BOTH the read-only email box and the password field. */
-      var emailBox = document.getElementById("mo-user-display");
-      if (emailBox) emailBox.classList.add("mo-input-error");
-
-      pwField.classList.add("mo-input-error");
-      var pwWrap = pwField.closest(".mo-pw-wrap");
-      if (pwWrap && !pwWrap.querySelector(".mo-error-icon")) {
-        var pwIcon = document.createElement("span");
-        pwIcon.className = "mo-error-icon";
-        pwIcon.innerHTML = MO_ERROR_ICON;
-        pwWrap.appendChild(pwIcon);
-      }
-
-      /* Message goes directly UNDER the email box. */
-      var msg = document.getElementById("mo-login-error-msg");
-      if (!msg) {
-        msg = document.createElement("span");
-        msg.id = "mo-login-error-msg";
-        msg.className = "mo-error-text";
-        if (emailBox) {
-          emailBox.parentNode.insertBefore(msg, emailBox.nextSibling);
-        } else if (pwWrap) {
-          pwWrap.parentNode.insertBefore(msg, pwWrap.nextSibling);
-        } else {
-          pwField.parentNode.insertBefore(msg, pwField.nextSibling);
+      var input = document.getElementById("plaintextPassword");
+      if (input) {
+        input.classList.add("mo-input-error");
+        var wrap = input.closest(".mo-pw-wrap");
+        if (wrap && !wrap.querySelector(".mo-error-icon")) {
+          var icon = document.createElement("span");
+          icon.className = "mo-error-icon";
+          icon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+          wrap.appendChild(icon);
         }
+        var errorMsgId = "mo-pw-error-msg";
+        var errorMsg = document.getElementById(errorMsgId);
+        if (!errorMsg) {
+          errorMsg = document.createElement("span");
+          errorMsg.id = errorMsgId;
+          errorMsg.className = "mo-error-text";
+          var insertTarget = wrap || input;
+          insertTarget.parentNode.insertBefore(errorMsg, insertTarget.nextSibling);
+        }
+        errorMsg.textContent = errorText;
       }
-      if (msg.textContent !== errorText) msg.textContent = errorText;
     } else {
-      /* Email step (step 1): highlight the username input, message under it. */
       var input = document.getElementById("username");
-      if (!input) return;
-      input.classList.add("mo-input-error");
-      var wrap = input.parentNode;
-      if (!wrap.classList.contains("mo-input-wrap")) {
-        var newWrap = document.createElement("div");
-        newWrap.className = "mo-input-wrap";
-        newWrap.style.position = "relative";
-        newWrap.style.display = "flex";
-        newWrap.style.alignItems = "center";
-        newWrap.style.width = "100%";
-        input.parentNode.insertBefore(newWrap, input);
-        newWrap.appendChild(input);
-        wrap = newWrap;
+      if (input) {
+        input.classList.add("mo-input-error");
+        var wrap = input.parentNode;
+        if (wrap.className !== "mo-input-wrap") {
+          wrap = document.createElement("div");
+          wrap.className = "mo-input-wrap";
+          wrap.style.position = "relative";
+          wrap.style.display = "flex";
+          wrap.style.alignItems = "center";
+          wrap.style.width = "100%";
+          input.parentNode.insertBefore(wrap, input);
+          wrap.appendChild(input);
+        }
+        if (wrap && !wrap.querySelector(".mo-error-icon")) {
+          var icon = document.createElement("span");
+          icon.className = "mo-error-icon";
+          icon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+          wrap.appendChild(icon);
+        }
+        var errorMsgId = "mo-email-error-msg";
+        var errorMsg = document.getElementById(errorMsgId);
+        if (!errorMsg) {
+          errorMsg = document.createElement("span");
+          errorMsg.id = errorMsgId;
+          errorMsg.className = "mo-error-text";
+          wrap.parentNode.insertBefore(errorMsg, wrap.nextSibling);
+        }
+        errorMsg.textContent = errorText;
       }
-      if (!wrap.querySelector(".mo-error-icon")) {
-        var icon = document.createElement("span");
-        icon.className = "mo-error-icon";
-        icon.innerHTML = MO_ERROR_ICON;
-        wrap.appendChild(icon);
-      }
-      var emsg = document.getElementById("mo-login-error-msg");
-      if (!emsg) {
-        emsg = document.createElement("span");
-        emsg.id = "mo-login-error-msg";
-        emsg.className = "mo-error-text";
-        wrap.parentNode.insertBefore(emsg, wrap.nextSibling);
-      }
-      if (emsg.textContent !== errorText) emsg.textContent = errorText;
     }
   }
 
@@ -1249,4 +1225,4 @@
     attributeFilter: ["style", "class"]
   });
 
-}());a
+}());
