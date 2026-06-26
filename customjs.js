@@ -569,19 +569,21 @@
     handleLoginErrors();
     forceHide();
 
-    /* Server-rendered error banner -> show below the password field */
+    /* Server-rendered error banner -> show below the password field.
+       Guarded by #mo-redirect-error so it runs ONCE — otherwise the DOM
+       mutations below keep re-triggering the observer (infinite loop). */
     var isPageHasError = errorOnPage();
-    if (isPageHasError) {
+    if (isPageHasError && !document.getElementById("mo-redirect-error")) {
       console.log('IN ERROR SECTION ');
-      console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
-      $('#mo-user-display').after(
-        '<div class="error-message text-start" style="color:red;">' + message + '</div>'
-      );
-      $('input').addClass('border border-danger');
-      $('.mo-user-display').addClass('border border-danger');
+      var errHtml = '<div id="mo-redirect-error" class="error-message text-start" style="color:red;">' + message + '</div>';
+      if ($('.mo-pw-wrap').length) {
+        $('.mo-pw-wrap').after(errHtml);
+      } else {
+        $('#username').after(errHtml);
+      }
+      $('#username, #plaintextPassword').addClass('border border-danger');
       $('#error-alert-message').hide();
-      
     }
 
     /* Hide original forgot/create link wrappers — skip our custom #mo-forgot */
