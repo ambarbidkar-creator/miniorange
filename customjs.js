@@ -34,7 +34,8 @@
 
   function checkIsOtp() {
     var path = window.location.pathname.toLowerCase();
-    if (path.indexOf("/moas/idp/validatenextfactor") !== -1) {
+    if (path.indexOf("/moas/idp/validatenextfactor") !== -1 ||
+        path.indexOf("validatechallenge") !== -1) {
       return true;
     }
     return !!document.getElementById("otpToken");
@@ -897,6 +898,19 @@
       var otpSt = document.createElement("style");
       otpSt.id = "mo-otp-css"; otpSt.textContent = otpCss;
       document.head.appendChild(otpSt);
+    }
+
+    /* Server-rendered error banner -> show below the OTP input.
+       Runs on every call (errors appear after a wrong submit) but is
+       guarded by #mo-otp-error so it appends ONCE. */
+    if (errorOnPage() && document.getElementById("otpToken") && !document.getElementById("mo-otp-error")) {
+      console.log('IN OTP ERROR SECTION ');
+      var otpErrMsg = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#otpToken').after(
+        '<div id="mo-otp-error" class="error-message text-start" style="color:red;">' + otpErrMsg + '</div>'
+      );
+      $('#otpToken').addClass('border border-danger');
+      $('#error-alert-message').hide();
     }
 
     /* DOM changes — only once */
