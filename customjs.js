@@ -1235,7 +1235,7 @@
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
 
-    if (!isLogin && !isForgot && !isOtp && !isChangePass) return;
+    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass) return;
 
     var isPageHasError = errorOnPage();
     if (isPageHasError) { console.log("this page has errir"); }
@@ -1260,6 +1260,7 @@
       if (wrapper) wrapper.querySelectorAll("hr,br").forEach(function (el) { el.style.display = "none"; });
     }
 
+    if (isRedirectToIdpLogin) { applyRedirectToIdpLogin(); }
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
@@ -1282,6 +1283,7 @@
     var isChangePass = checkIsChangePass();
 
     if (isLogin) { forceHide(); applyPasswordStep(); handleLoginErrors(); }
+    if (isRedirectToIdpLogin) { applyRedirectToIdpLogin(); }
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
