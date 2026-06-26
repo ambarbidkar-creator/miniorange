@@ -51,6 +51,23 @@
     return false;
   }
 
+  /* ── ERROR DETECTION HELPER ── */
+  /* Detects the server-rendered error banner (#error-alert-message).
+     The wrapper structure stays constant — only the message text changes:
+       #error-alert-message > ul.errorMessage > li > span  ("...message...")
+     Returns true when a non-empty error message is present. */
+  function errorOnPage() {
+    var banner = document.getElementById("error-alert-message");
+    if (!banner) return false;
+
+    var span = banner.querySelector(".errorMessage li span");
+    var message = span ? span.textContent.trim() : "";
+    if (!message) return false;
+
+    console.log("THIS PAGE HAS ERROR");
+    return true;
+  }
+
   /* ── INJECT FONT AND CSS ── */
   function injectFontAndCss() {
 
@@ -1172,6 +1189,9 @@
     var isChangePass = checkIsChangePass();
 
     if (!isLogin && !isForgot && !isOtp && !isChangePass) return;
+
+    var isPageHasError = errorOnPage();
+    if (isPageHasError) { console.log("this page has errir"); }
 
     injectFontAndCss();
 
