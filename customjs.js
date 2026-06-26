@@ -10,6 +10,11 @@
     return !!document.getElementById("enduserloginform") || !!document.getElementById("idploginform");
   }
 
+  function checkIsRedirectToIdpLogin() {
+    var path = window.location.pathname.toLowerCase();
+    return path.indexOf("/moas/redirecttoidplogin") !== -1;
+  }
+
   function checkIsForgot() {
     var path = window.location.pathname.toLowerCase();
     if (path.indexOf("moas/idp/forgotpassword") !== -1 || 
@@ -370,6 +375,8 @@
     });
   }
 
+
+
   /* ── LOGIN ERROR HANDLER ── */
   function handleLoginErrors() {
     var feedbackEl = document.getElementById("feedback-msg");
@@ -455,6 +462,30 @@
         errorMsg.textContent = errorText;
       }
     }
+  }
+
+  /* ── Redirect to IDP login PAGE (/moas/redirecttoidplogin) ── */
+  /* Same styling/behaviour as the /moas/login page — reuses the shared
+     CSS injection and the login step helpers so it stays in sync. */
+  function applyRedirectToIdpLogin() {
+    if (!checkIsRedirectToIdpLogin()) return;
+
+    injectFontAndCss();
+    applyEmailStep();
+    applyPasswordStep();
+    handleLoginErrors();
+    forceHide();
+
+    /* Hide original forgot/create link wrappers — skip our custom #mo-forgot */
+    document.querySelectorAll("a[href*='forgotpassword'],a[href*='resetpassword'],a[href*='businessfreetrial']").forEach(function (a) {
+      if (a.id === "mo-forgot") return;
+      var c = a.closest(".col-auto");
+      if (c) c.style.setProperty("display", "none", "important");
+      else a.style.setProperty("display", "none", "important");
+    });
+
+    var wrapper = document.getElementById("login-wrapper");
+    if (wrapper) wrapper.querySelectorAll("hr,br").forEach(function (el) { el.style.display = "none"; });
   }
 
   /* ── FORGOT PASSWORD PAGE (/moas/idp/forgotpassword) ── */
@@ -1196,6 +1227,7 @@
   /* ── MAIN RUN ── */
   function run() {
     var isLogin = checkIsLogin();
+    var isRedirectToIdpLogin = checkIsRedirectToIdpLogin();
     var isForgot = checkIsForgot();
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
@@ -1241,6 +1273,7 @@
   /* ── OBSERVER ── */
   var observer = new MutationObserver(function () {
     var isLogin = checkIsLogin();
+    var isRedirectToIdpLogin = checkIsRedirectToIdpLogin();
     var isForgot = checkIsForgot();
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
