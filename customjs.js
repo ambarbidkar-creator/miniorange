@@ -236,6 +236,16 @@
       if (inp) inp.setAttribute("placeholder", "email");
     }
 
+    var isPageHasError = errorOnPage();
+    if(isPageHasError) {
+      console.log('IN ERROR SECTION ')
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#userName').after(
+        '<div class="error-message text-start" style="color:red;">' + message + '</div>'
+      );
+      $('#error-alert-message').hide();
+    }
+
     /* Button label */
     var btn = document.getElementById("loginbutton");
     if (btn && !btn.dataset.mo) {
