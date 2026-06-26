@@ -1046,8 +1046,9 @@
       var cpSt = document.createElement("style");
       cpSt.id = "mo-cp-css"; cpSt.textContent = cpCss;
       document.head.appendChild(cpSt);
-      $('#login-body').addClass('d-flex justify-content-center align-items-center')
     }
+
+    $('#login-body').addClass('d-flex justify-content-center align-items-center');
 
     var fpForm = document.getElementById("passwordform") || document.getElementById("userform");
     if (!fpForm) return;
