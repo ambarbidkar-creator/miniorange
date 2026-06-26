@@ -464,20 +464,110 @@
     }
   }
 
+  /* ── COMBINED EMAIL + PASSWORD STEP (redirecttoidplogin) ── */
+  /* On this page both the email and password fields are visible at once,
+     so we style both together — no two-step toggle and no read-only
+     username box (the email field stays editable). */
+  function applyEmailPasswordStep() {
+    var wrapper = document.getElementById("login-wrapper");
+    if (!wrapper) return;
+
+    /* LOG IN title — insert once before any form child */
+    if (!document.getElementById("mo-title")) {
+      var t = document.createElement("span");
+      t.id = "mo-title"; t.textContent = "LOG IN";
+      wrapper.insertBefore(t, wrapper.firstChild);
+    }
+
+    /* Email label + placeholder */
+    var userDiv = document.getElementById("userName");
+    if (userDiv && !document.getElementById("mo-email-lbl")) {
+      var fg = document.createElement("div"); fg.className = "mo-fg";
+      var lbl = document.createElement("label");
+      lbl.id = "mo-email-lbl"; lbl.className = "mo-lbl";
+      lbl.setAttribute("for", "username");
+      lbl.innerHTML = 'Email address <span class="mo-req">*</span>';
+      fg.appendChild(lbl);
+      userDiv.parentNode.insertBefore(fg, userDiv);
+      fg.appendChild(userDiv);
+    }
+    /* redirecttoidplogin only: drop the #userName id from the wrapper div */
+    var userNameDiv = document.getElementById("userName");
+    if (userNameDiv) userNameDiv.removeAttribute("id");
+    var emailInp = document.getElementById("username");
+    if (emailInp) emailInp.setAttribute("placeholder", "email");
+
+    /* Password label + eye toggle + placeholder */
+    var pwField = document.getElementById("plaintextPassword");
+    if (pwField) {
+      pwField.setAttribute("placeholder", "Password");
+
+      if (!document.getElementById("mo-pw-lbl")) {
+        var pwLbl = document.createElement("label");
+        pwLbl.id = "mo-pw-lbl"; pwLbl.className = "mo-lbl";
+        pwLbl.setAttribute("for", "plaintextPassword");
+        pwLbl.innerHTML = 'Password <span class="mo-req">*</span>';
+        pwField.parentNode.insertBefore(pwLbl, pwField);
+      }
+
+      /* Wrap password field in .mo-pw-wrap for eye toggle (once) */
+      if (!pwField.parentNode.classList.contains("mo-pw-wrap")) {
+        var wrap = document.createElement("div"); wrap.className = "mo-pw-wrap";
+        pwField.parentNode.insertBefore(wrap, pwField);
+        wrap.appendChild(pwField);
+
+        var EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+        var EYE_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+        var eyeBtn = document.createElement("button");
+        eyeBtn.type = "button"; eyeBtn.className = "mo-eye";
+        eyeBtn.setAttribute("aria-label", "Toggle password visibility");
+        eyeBtn.innerHTML = EYE_OFF;
+        eyeBtn.addEventListener("click", function () {
+          var show = pwField.type === "password";
+          pwField.type = show ? "text" : "password";
+          eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
+        });
+        wrap.appendChild(eyeBtn);
+
+        /* Forgot password link row */
+        if (!document.getElementById("mo-bottom")) {
+          var row = document.createElement("div"); row.id = "mo-bottom";
+          var fl = document.createElement("a"); fl.id = "mo-forgot";
+          fl.href = getForgotHref(); fl.textContent = "Forgot password";
+          row.appendChild(fl);
+          wrap.parentNode.insertBefore(row, wrap.nextSibling);
+        }
+      }
+    }
+
+    /* Button label */
+    var btn = document.getElementById("loginbutton");
+    if (btn && btn.value !== "LOG IN →") {
+      btn.value = "LOG IN →";
+      btn.dataset.mo = "1";
+    }
+
+    $('#loginbutton').parent().addClass('d-flex')
+
+    /* Hide hr and br inside the card */
+    wrapper.querySelectorAll("hr,br").forEach(function (el) { el.style.display = "none"; });
+  }
+
   /* ── Redirect to IDP login PAGE (/moas/redirecttoidplogin) ── */
   /* Same styling/behaviour as the /moas/login page — reuses the shared
-     CSS injection and the login step helpers so it stays in sync. */
+     CSS injection. Uses the combined step (both fields shown at once). */
   function applyRedirectToIdpLogin() {
     console.log('in apply redirecto idplogin')
     if (!checkIsRedirectToIdpLogin()) return;
 
-    
-
     injectFontAndCss();
-    applyEmailStep();
-    applyPasswordStep();
+    applyEmailPasswordStep();
     handleLoginErrors();
     forceHide();
+
+    $('.d-flex.justify-content-center.container-fluid.w-100').addClass('h-100 align-items-center');
+    $('.row.w-75.px-4').removeClass('w-75 px-4').addClass('w-100');
+    $('.login-header').hide();
 
     /* Hide original forgot/create link wrappers — skip our custom #mo-forgot */
     document.querySelectorAll("a[href*='forgotpassword'],a[href*='resetpassword'],a[href*='businessfreetrial']").forEach(function (a) {
