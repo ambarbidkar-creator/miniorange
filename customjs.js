@@ -236,21 +236,26 @@
       if (inp) inp.setAttribute("placeholder", "email");
     }
 
-    var isPageHasError = errorOnPage();
-    if(isPageHasError) {
-      console.log('IN ERROR SECTION ')
-      var message = $('#error-alert-message .errorMessage li span').text().trim();
-      $('#userName').after(
-        '<div class="error-message text-start" style="color:red;">' + message + '</div>'
-      );
-      $('#error-alert-message').hide();
-    }
+ 
 
     /* Button label */
     var btn = document.getElementById("loginbutton");
     if (btn && !btn.dataset.mo) {
       btn.value = "LOG IN \u2192";
       btn.dataset.mo = "1";
+    }
+
+    /* Server-rendered error banner -> show below the email field.
+       Guarded by #mo-userlogin-error so it runs ONCE (avoids the
+       observer infinite-loop from repeated DOM mutations). */
+    var isPageHasError = errorOnPage();
+    if (isPageHasError && !document.getElementById("mo-userlogin-error")) {
+      console.log('IN ERROR SECTION ');
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#userName').after(
+        '<div id="mo-userlogin-error" class="error-message text-start" style="color:red;">' + message + '</div>'
+      );
+      $('#error-alert-message').hide();
     }
 
     /* Hide hr and br */
