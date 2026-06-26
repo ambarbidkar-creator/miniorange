@@ -132,7 +132,7 @@
 
       /* Shared input style */
       "#username,#plaintextPassword,.mo-styled-input{" +
-      "height:40px!important;border:1px solid #C1CFD7!important;border-radius:4px!important;" +
+      "height:40px!important;border:1px solid #C1CFD7;border-radius:4px!important;" +
       "padding:0 12px!important;font-size:14px!important;font-family:'Figtree',sans-serif!important;" +
       "color:#000933!important;background:#fff!important;width:100%!important;" +
       "box-shadow:none!important;outline:none!important;box-sizing:border-box!important;" +
@@ -302,6 +302,16 @@
         userFg.appendChild(userLbl); userFg.appendChild(userBox);
         pwLbl.parentNode.insertBefore(userFg, pwLbl);
       }
+    }
+
+    if(isPageHasError) {
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#mo-user-display').after(
+        '<div class="error-message text-start" style="color:red;">' + message + '</div>'
+      );
+      $('input').addClass('border border-danger');
+      $('.mo-user-display').addClass('border border-danger');
+      $('#error-alert-message').hide();
     }
 
     /* Wrap password field in .mo-pw-wrap for eye toggle */
@@ -526,7 +536,7 @@
 
         /* Email input */
         "#emailAddress,#username{" +
-        "height:40px!important;border:1px solid #C1CFD7!important;border-radius:4px!important;" +
+        "height:40px!important;border:1px solid #C1CFD7;border-radius:4px!important;" +
         "padding:0 12px!important;padding-left:12px!important;font-size:14px!important;" +
         "font-family:'Figtree',sans-serif!important;color:#000933!important;" +
         "background:#fff!important;width:100%!important;box-shadow:none!important;" +
@@ -696,7 +706,7 @@
         "#mo-otp-lbl{display:block;font-family:'Figtree',sans-serif;font-size:14px;" +
         "font-weight:700;color:#3c515d;margin-bottom:6px;}" +
         "#mo-otp-lbl .mo-req{color:#e02020;margin-left:2px;}" +
-        "#otpToken{height:40px!important;border:1px solid #C1CFD7!important;" +
+        "#otpToken{height:40px!important;border:1px solid #C1CFD7;" +
         "border-radius:4px!important;padding:0 12px!important;font-size:14px!important;" +
         "font-family:'Figtree',sans-serif!important;color:#000933!important;" +
         "background:#fff!important;box-shadow:none!important;" +
@@ -821,7 +831,7 @@
 
         /* Style inputs */
         "#newPassword,#confirmPassword,#password,#userform input[type='password']{" +
-        "height:40px!important;border:1px solid #C1CFD7!important;border-radius:4px!important;" +
+        "height:40px!important;border:1px solid #C1CFD7;border-radius:4px!important;" +
         "padding:0 42px 0 12px!important;font-size:14px!important;font-family:'Figtree',sans-serif!important;" +
         "color:#000933!important;background:#fff!important;width:100%!important;" +
         "box-shadow:none!important;outline:none!important;box-sizing:border-box!important;" +
