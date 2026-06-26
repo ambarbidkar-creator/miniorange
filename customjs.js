@@ -1366,7 +1366,10 @@
 
     injectFontAndCss();
 
-    if (isLogin) {
+    /* The redirecttoidplogin page also matches checkIsLogin() (it has
+       #idploginform), so exclude it here — it has its own handler below.
+       Otherwise both flows run and each appends its own error message. */
+    if (isLogin && !isRedirectToIdpLogin) {
       applyEmailStep();
       applyPasswordStep();
       handleLoginErrors();
@@ -1406,7 +1409,7 @@
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
 
-    if (isLogin) { forceHide(); applyPasswordStep(); handleLoginErrors(); }
+    if (isLogin && !isRedirectToIdpLogin) { forceHide(); applyPasswordStep(); handleLoginErrors(); }
     if (isRedirectToIdpLogin) { applyRedirectToIdpLogin(); }
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
