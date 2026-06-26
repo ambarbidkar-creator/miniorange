@@ -304,6 +304,16 @@
       }
     }
 
+    /* If the page came back with a server error, show it under the email field */
+    var isPageHasError = errorOnPage();
+    if (isPageHasError) {
+      var errorMessage = $("#error-alert-message .errorMessage li span").text().trim();
+      if (errorMessage && $("#mo-user-display").length && !document.getElementById("mo-login-error-msg")) {
+        var errSpan = $('<span id="mo-login-error-msg" class="mo-error-text"></span>').text(errorMessage);
+        $("#mo-user-display").addClass("mo-input-error").after(errSpan);
+      }
+    }
+
     /* Wrap password field in .mo-pw-wrap for eye toggle */
     var wrap = document.createElement("div"); wrap.className = "mo-pw-wrap";
     pwField.parentNode.insertBefore(wrap, pwField);
@@ -1128,6 +1138,8 @@
 
   /* ── MAIN RUN ── */
   function run() {
+    var isPageHasError = errorOnPage();
+
     var isLogin = checkIsLogin();
     var isForgot = checkIsForgot();
     var isOtp = checkIsOtp();
@@ -1170,6 +1182,8 @@
 
   /* ── OBSERVER ── */
   var observer = new MutationObserver(function () {
+    var isPageHasError = errorOnPage();
+
     var isLogin = checkIsLogin();
     var isForgot = checkIsForgot();
     var isOtp = checkIsOtp();
