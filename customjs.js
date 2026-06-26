@@ -537,7 +537,7 @@
         if (!document.getElementById("mo-bottom")) {
           var row = document.createElement("div"); row.id = "mo-bottom";
           var fl = document.createElement("a"); fl.id = "mo-forgot";
-          fl.href = "/moas/resetpassword"; fl.textContent = "Forgot password";
+          fl.href = getForgotHref(); fl.textContent = "Forgot password";
           row.appendChild(fl);
           wrap.parentNode.insertBefore(row, wrap.nextSibling);
         }
@@ -573,12 +573,13 @@
     var isPageHasError = errorOnPage();
     if (isPageHasError) {
       console.log('IN ERROR SECTION ');
+      console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
-      $('#username').after(
+      $('#mo-user-display').after(
         '<div class="error-message text-start" style="color:red;">' + message + '</div>'
       );
       $('input').addClass('border border-danger');
-      $('.username').addClass('border border-danger');
+      $('.mo-user-display').addClass('border border-danger');
       $('#error-alert-message').hide();
       
     }
