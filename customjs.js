@@ -573,17 +573,7 @@
     var isPageHasError = errorOnPage();
     if (isPageHasError) {
       console.log('IN ERROR SECTION ');
-      var message = $('#error-alert-message .errorMessage li span').text().trim();
-      if ($('#mo-redirect-error').length === 0) {
-        $('.mo-pw-wrap').after(
-          '<div id="mo-redirect-error" class="error-message text-start" style="color:red;">' + message + '</div>'
-        );
-      } else {
-        $('#mo-redirect-error').text(message);
-      }
-      $('input').addClass('border border-danger');
-      $('.mo-user-display').addClass('border border-danger');
-      $('#error-alert-message').hide();
+      
     }
 
     /* Hide original forgot/create link wrappers — skip our custom #mo-forgot */
