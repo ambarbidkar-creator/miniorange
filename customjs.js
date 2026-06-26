@@ -937,6 +937,18 @@
     var otpDone = document.createElement("span");
     otpDone.id = "mo-otp-done"; otpDone.style.display = "none";
     document.body.appendChild(otpDone);
+
+    var isPageHasError = errorOnPage();
+    if (isPageHasError) {
+      console.log('IN ERROR SECTION ');
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      $('#otpToken').after(
+        '<div id="mo-userlogin-error" class="error-message text-start" style="color:red;">' + message + '</div>'
+      );
+      $('input').addClass('border border-danger')
+      $('#error-alert-message').hide();
+    }
+
   }
 
   /* ── CHANGE PASSWORD PAGE (/moas/idp/changepassword) ── */
