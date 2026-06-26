@@ -479,6 +479,10 @@
       wrapper.insertBefore(t, wrapper.firstChild);
     }
 
+    $('.d-flex.justify-content-center.container-fluid.w-100').addClass('h-100 align-items-center');
+    $('.row.w-75.px-4').removeClass('w-75 px-4').addClass('w-100');
+    $('.login-header').hide();
+
     /* Email label + placeholder */
     var userDiv = document.getElementById("userName");
     if (userDiv && !document.getElementById("mo-email-lbl")) {
@@ -565,9 +569,6 @@
     handleLoginErrors();
     forceHide();
 
-    $('.d-flex.justify-content-center.container-fluid.w-100').addClass('h-100 align-items-center');
-    $('.row.w-75.px-4').removeClass('w-75 px-4').addClass('w-100');
-    $('.login-header').hide();
 
     /* Hide original forgot/create link wrappers — skip our custom #mo-forgot */
     document.querySelectorAll("a[href*='forgotpassword'],a[href*='resetpassword'],a[href*='businessfreetrial']").forEach(function (a) {
