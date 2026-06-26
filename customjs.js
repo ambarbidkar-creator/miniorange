@@ -575,11 +575,11 @@
       console.log('IN ERROR SECTION ');
       console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
-      $('#mo-user-display').after(
+      $('#username').after(
         '<div class="error-message text-start" style="color:red;">' + message + '</div>'
       );
       $('input').addClass('border border-danger');
-      $('.mo-user-display').addClass('border border-danger');
+      $('.username').addClass('border border-danger');
       $('#error-alert-message').hide();
       
     }
