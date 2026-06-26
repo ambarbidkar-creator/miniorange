@@ -572,14 +572,14 @@
     /* Server-rendered error banner -> show below the password field */
     var isPageHasError = errorOnPage();
     if (isPageHasError) {
-      console.log('IN ERROR SECTION fghjkftgykjh ');
+      console.log('IN ERROR SECTION ');
       console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
-      $('#username').after(
+      $('#mo-user-display').after(
         '<div class="error-message text-start" style="color:red;">' + message + '</div>'
       );
       $('input').addClass('border border-danger');
-      $('.username').addClass('border border-danger');
+      $('.mo-user-display').addClass('border border-danger');
       $('#error-alert-message').hide();
       
     }
