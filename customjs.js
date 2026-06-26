@@ -2,7 +2,7 @@
   "use strict";
 
   $('#login-main-body').css('display','block');
-  console.log('asdasd')
+  console.log('asdasd 123')
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
     var path = window.location.pathname.toLowerCase();
