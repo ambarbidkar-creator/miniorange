@@ -287,8 +287,6 @@
       }
     }
 
-    
-
     /* Wrap password field in .mo-pw-wrap for eye toggle */
     var wrap = document.createElement("div"); wrap.className = "mo-pw-wrap";
     pwField.parentNode.insertBefore(wrap, pwField);
@@ -344,71 +342,35 @@
   }
 
   /* ── LOGIN ERROR HANDLER ── */
-  /* Source of truth: the JSP renders failures into #error-alert-message
-     (ul.errorMessage > li > span). #feedback-msg / #username-error are present
-     but empty, so they're only fallbacks. The banner itself is hidden via CSS. */
-  function getLoginErrorText() {
-    var banner = document.getElementById("error-alert-message");
-    if (banner) {
-      var span = banner.querySelector("ul.errorMessage li span") ||
-                 banner.querySelector("ul.errorMessage li");
-      if (span && span.textContent.trim()) return span.textContent.trim();
-    }
-    var feedbackEl = document.getElementById("feedback-msg");
-    if (feedbackEl && feedbackEl.textContent.trim()) return feedbackEl.textContent.trim();
-    var userErrorEl = document.getElementById("username-error");
-    if (userErrorEl && userErrorEl.textContent.trim()) return userErrorEl.textContent.trim();
-    return "";
-  }
-
-  /* Tear down the inline error UI (idempotent). */
-  function clearLoginErrorUI() {
-    ["mo-user-display", "plaintextPassword", "username"].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.classList.remove("mo-input-error");
-    });
-    var msg = document.getElementById("mo-login-error-msg");
-    if (msg) msg.remove();
-  }
-
+  /* The JSP renders failures into #error-alert-message (hidden via CSS).
+     Pull the text out and drop it under the email box. */
   function handleLoginErrors() {
-    if (!checkIsLogin()) return;
+    var banner = document.getElementById("error-alert-message");
+    var span = banner && banner.querySelector(".errorMessage li span");
+    var message = span ? span.textContent.trim() : "";
 
-    var errorText = getLoginErrorText();
-    if (!errorText) { clearLoginErrorUI(); return; }
-
+    var userBox = document.getElementById("mo-user-display");
     var pwField = document.getElementById("plaintextPassword");
-    var isPasswordStep = pwField &&
-      pwField.style.display !== "none" && !pwField.classList.contains("d-none");
 
-    /* Anchor the single message node under the relevant field, and pick which
-       inputs get the red border. */
-    var anchor, redFields;
-    if (isPasswordStep) {
-      var userBox = document.getElementById("mo-user-display");
-      anchor = userBox || pwField;
-      redFields = [userBox, pwField];
-    } else {
-      anchor = document.getElementById("username");
-      redFields = [anchor];
+    if (!message || !userBox) {
+      var old = document.getElementById("mo-login-error-msg");
+      if (old) old.remove();
+      if (userBox) userBox.classList.remove("mo-input-error");
+      if (pwField) pwField.classList.remove("mo-input-error");
+      return;
     }
-    if (!anchor) return;
 
-    redFields.forEach(function (el) {
-      if (el) el.classList.add("mo-input-error");
-    });
+    userBox.classList.add("mo-input-error");
+    if (pwField) pwField.classList.add("mo-input-error");
 
     var msg = document.getElementById("mo-login-error-msg");
     if (!msg) {
       msg = document.createElement("span");
       msg.id = "mo-login-error-msg";
       msg.className = "mo-error-text";
+      userBox.after(msg);
     }
-    /* Insert directly under the anchor field (inside its .mo-fg group). */
-    if (msg.previousSibling !== anchor) {
-      anchor.parentNode.insertBefore(msg, anchor.nextSibling);
-    }
-    if (msg.textContent !== errorText) msg.textContent = errorText;
+    if (msg.textContent !== message) msg.textContent = message;
   }
 
   /* ── FORGOT PASSWORD PAGE (/moas/idp/forgotpassword) ── */
