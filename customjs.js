@@ -88,11 +88,57 @@
   function applyPasswordSentMessage() {
     if (!checkIsPasswordSentMessage()) return;
     console.log('on passowrd sent message page');
-    $('.d-flex.flex-column.align-items-center.justify-content-center').css('height','100vh')
 
-    /* Reuse the shared /login page styling (background, card, font,
-       #mo-title, etc.) — same CSS the login page injects. */
+    /* Reuse the shared /login page styling (background, card, font, etc.) */
     injectFontAndCss();
+
+    /* Full-height centering for the React layout wrapper */
+    $('.d-flex.flex-column.align-items-center.justify-content-center').css('height', '100vh');
+
+    /* Page-specific styling (inject once) — makes this page match /login:
+       carded wrapper, left-aligned bold heading, clean green message box,
+       and styled links. */
+    if (!document.getElementById("mo-psm-css")) {
+      var psmCss =
+        /* Page background + font */
+        "body,#login-body,#root{background:#eef1f7!important;font-family:'Figtree',sans-serif!important;}" +
+        "#root>div{background:#eef1f7!important;}" +
+
+        /* Center the card in the viewport */
+        "body #login-body,body .container-fluid{min-height:100vh!important;display:flex!important;" +
+        "flex-direction:column!important;align-items:center!important;justify-content:center!important;" +
+        "box-sizing:border-box!important;padding:40px 16px!important;background:transparent!important;}" +
+
+        /* Card (override the inline white border/bg from the markup) */
+        "#login-wrapper{background:#fff!important;border:1px solid #e0e7ef!important;" +
+        "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
+        "padding:36px 40px 32px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
+
+        /* Heading -> left-aligned bold, like the LOG IN title */
+        "#login-wrapper h4{font-family:'Figtree',sans-serif!important;font-size:26px!important;" +
+        "font-weight:800!important;color:#0d1b2a!important;text-align:left!important;margin:0 0 20px 0!important;}" +
+
+        /* Hide the separator */
+        "#login-wrapper hr{display:none!important;}" +
+
+        /* Green success message box */
+        "#login-wrapper .alert-success{background:#e8f5e9!important;border:none!important;" +
+        "border-left:4px solid #2e7d32!important;border-radius:4px!important;color:#1b5e20!important;" +
+        "padding:14px 16px!important;text-align:left!important;font-family:'Figtree',sans-serif!important;" +
+        "font-size:14px!important;line-height:1.5!important;margin-bottom:0!important;}" +
+        "#login-wrapper .alert-success .actionMessage{list-style:none!important;padding:0!important;margin:0!important;}" +
+        "#login-wrapper .alert-success .actionMessage li span{font-weight:600!important;}" +
+
+        /* Links row -> left aligned, blue links like #mo-forgot */
+        "#login-wrapper .d-flex.justify-content-center{justify-content:flex-start!important;gap:16px!important;margin-top:18px!important;}" +
+        "#go-back-link,#try-again-link{font-family:'Figtree',sans-serif!important;font-size:13px!important;" +
+        "font-weight:500!important;color:#0A55D7!important;text-decoration:none!important;padding:0!important;}" +
+        "#go-back-link:hover,#try-again-link:hover{text-decoration:underline!important;}";
+
+      var psmSt = document.createElement("style");
+      psmSt.id = "mo-psm-css"; psmSt.textContent = psmCss;
+      document.head.appendChild(psmSt);
+    }
   }
 
   /* ── ERROR DETECTION HELPER ── */
