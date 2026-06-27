@@ -88,6 +88,10 @@
   function applyPasswordSentMessage() {
     if (!checkIsPasswordSentMessage()) return;
     console.log('on passowrd sent message page');
+
+    /* Reuse the shared /login page styling (background, card, font,
+       #mo-title, etc.) — same CSS the login page injects. */
+    injectFontAndCss();
   }
 
   /* ── ERROR DETECTION HELPER ── */
