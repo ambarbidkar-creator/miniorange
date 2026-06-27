@@ -1416,16 +1416,12 @@
     var newPasswordWrap = newPasswordInput ? newPasswordInput.closest(".mo-pw-wrap") : null;
     if (newPasswordWrap && !document.getElementById("mo-cp-helper-text")) {
       // Error text container
-      var errorText = document.createElement("div");
+      var errorText = document.createElement("p");
       errorText.id = "mo-cp-error-text";
-      errorText.className = "mo-error-text";
-      errorText.style.fontFamily = "'Figtree', sans-serif";
+      errorText.className = "text-danger pb-2";
       errorText.style.fontSize = "12px";
-      errorText.style.color = "#ef2f2f";
-      errorText.style.lineHeight = "1.5";
       errorText.style.marginTop = "-10px";
-      errorText.style.marginBottom = "16px";
-      errorText.style.textAlign = "left";
+      errorText.style.marginBottom = "8px";
       errorText.style.display = "none";
 
       // Helper text
