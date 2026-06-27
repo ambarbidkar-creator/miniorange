@@ -87,22 +87,29 @@
   /* ── PASSWORD SENT MESSAGE PAGE (idp/showpasswordsentmessage) ── */
   function applyPasswordSentMessage() {
     if (!checkIsPasswordSentMessage()) return;
-    console.log('on passowrd sent message page');
 
     /* Reuse the shared /login page styling (background, card, font, etc.) */
     injectFontAndCss();
 
-    /* Full-height centering for the React layout wrapper */
-    $('.d-flex.flex-column.align-items-center.justify-content-center').css('height', '100vh');
+    /* Full-height centering for the React layout wrapper.
+       Only set when not already set — otherwise the style mutation
+       retriggers the observer and creates an infinite loop. */
+    $('.d-flex.flex-column.align-items-center.justify-content-center').each(function () {
+      if (this.style.height !== "100vh") this.style.height = "100vh";
+    });
 
-    /* Replace heading text with RESET PASSWORD (localized) */
+    /* Replace heading text with RESET PASSWORD (localized).
+       Guarded so we only write when it differs — avoids the observer loop. */
     var psmTitle = document.querySelector("#login-wrapper h4");
-    if (psmTitle) psmTitle.textContent = tr("reset.password");
+    if (psmTitle && psmTitle.textContent !== tr("reset.password")) {
+      psmTitle.textContent = tr("reset.password");
+    }
 
     /* Page-specific styling (inject once) — makes this page match /login:
        carded wrapper, left-aligned bold heading, clean green message box,
        and styled links. */
     if (!document.getElementById("mo-psm-css")) {
+      console.log('on passowrd sent message page');
       var psmCss =
         /* Page background + font */
         "body,#login-body,#root{background:#eef1f7!important;font-family:'Figtree',sans-serif!important;}" +
