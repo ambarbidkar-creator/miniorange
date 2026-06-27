@@ -653,6 +653,8 @@
       var userNameWrap = document.getElementById("userName");
       if (userNameWrap && !userNameWrap.querySelector(".mo-error-icon")) {
         userNameWrap.style.position = "relative";
+        userNameWrap.style.display = "flex";
+        userNameWrap.style.alignItems = "center";
         var ulIcon = document.createElement("span");
         ulIcon.id = "mo-userlogin-icon";
         ulIcon.className = "mo-error-icon";
