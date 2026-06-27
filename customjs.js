@@ -1749,6 +1749,23 @@
     }
     bindPasswordMatchCheck();
 
+    /* Server-rendered error banner -> show below the new password field.
+       Guarded by #mo-cp-server-error so it appends ONCE (otherwise the
+       observer re-runs this block and stacks duplicate messages). */
+    var isPageHasError = errorOnPage();
+    if (isPageHasError && !document.getElementById("mo-cp-server-error")) {
+      console.log('IN ERROR SECTION ');
+      var message = $('#error-alert-message .errorMessage li span').text().trim();
+      var $cpWrap = $('.mo-pw-wrap');
+      var cpErrHtml = '<p id="mo-cp-server-error" class="text-danger pb-2" style="font-size:12px;margin-top:-10px;margin-bottom:8px;">' + message + '</p>';
+      if ($cpWrap.length) {
+        $cpWrap.eq(0).after(cpErrHtml);
+      } else {
+        $(newPasswordInput).after(cpErrHtml);
+      }
+      $('#error-alert-message').hide();
+    }
+
   }
 
   /* ── MAIN RUN ── */
