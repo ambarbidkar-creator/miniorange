@@ -729,6 +729,17 @@
       );
       $('#username, #plaintextPassword').addClass('border border-danger');
       $('.mo-user-display').addClass('border border-danger');
+      /* Red cross icon inside the read-only email display box */
+      var userBox = document.getElementById("mo-user-display");
+      if (userBox && !userBox.querySelector(".mo-error-icon")) {
+        userBox.style.position = "relative";
+        userBox.style.paddingRight = "40px";
+        var emailErrIcon = document.createElement("span");
+        emailErrIcon.id = "mo-email-server-icon";
+        emailErrIcon.className = "mo-error-icon";
+        emailErrIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+        userBox.appendChild(emailErrIcon);
+      }
       $('#error-alert-message').hide();
     }
 
@@ -822,7 +833,7 @@
       inp.classList.remove("mo-input-error");
     });
     document.querySelectorAll(".mo-error-icon").forEach(function (ico) {
-      if (ico.id === "mo-pw-server-icon") return;
+      if (ico.id === "mo-pw-server-icon" || ico.id === "mo-email-server-icon") return;
       ico.remove();
     });
     document.querySelectorAll(".mo-error-text").forEach(function (txt) {
