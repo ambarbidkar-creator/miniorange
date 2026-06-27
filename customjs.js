@@ -1631,13 +1631,10 @@
         }
       });
 
-      // Show message and toggle visibility
+      // Show message (requirements list stays visible at all times)
       if (errEl) {
         errEl.textContent = msg;
         errEl.style.display = "block";
-      }
-      if (helpEl) {
-        helpEl.style.display = "none";
       }
     }
 
