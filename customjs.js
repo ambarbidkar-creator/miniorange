@@ -1644,13 +1644,17 @@
       var helpEl = document.getElementById("mo-cp-helper-text");
 
       // Remove highlighting
-      if (newPasswordInput) newPasswordInput.classList.remove("mo-input-error");
-      if (confirmPasswordInput) confirmPasswordInput.classList.remove("mo-input-error");
+      if (newPasswordInput) newPasswordInput.classList.remove("mo-input-error", "border", "border-danger");
+      if (confirmPasswordInput) confirmPasswordInput.classList.remove("mo-input-error", "border", "border-danger");
 
       // Remove red cross icons
       document.querySelectorAll(".mo-pw-wrap .mo-error-icon").forEach(function (ico) {
         ico.remove();
       });
+
+      // Remove the server-rendered error message (once user edits)
+      var serverErr = document.getElementById("mo-cp-server-error");
+      if (serverErr) serverErr.remove();
 
       // Hide message and show helper text
       if (errEl) {
