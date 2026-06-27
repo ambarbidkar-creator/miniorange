@@ -61,10 +61,21 @@
     return path.indexOf("/moas/logoutpage") !== -1;
   }
 
+  function checkIsEnduserDashboard() {
+    var path = window.location.pathname.toLowerCase();
+    return path.indexOf("/moas/enduserwelcome") !== -1;
+  }
+
   /* ── LOGOUT PAGE: auto-redirect ── */
   function applyLogoutPage() {
     if (!checkIsLogout()) return;
     window.location.replace("https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout");
+  }
+
+  /* ── ENDUSER DASHBOARD PAGE (/moas/enduserwelcome) ── */
+  function applyEnduserDashboard() {
+    if (!checkIsEnduserDashboard()) return;
+    window.location.replace("https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession");
   }
 
   /* ── ERROR DETECTION HELPER ── */
@@ -1385,8 +1396,9 @@
     var isForgot = checkIsForgot();
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
+    var isEnduserDashboard = checkIsEnduserDashboard();
 
-    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass) return;
+    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass && !isEnduserDashboard) return;
 
     var isPageHasError = errorOnPage();
     if (isPageHasError) { console.log("this page has errir"); }
@@ -1418,6 +1430,7 @@
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
+    if (isEnduserDashboard) { applyEnduserDashboard(); }
   }
 
   /* ── TIMING ── */
@@ -1441,6 +1454,7 @@
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
+    if (checkIsEnduserDashboard()) { applyEnduserDashboard(); }
   });
   observer.observe(document.body, {
     childList: true,
