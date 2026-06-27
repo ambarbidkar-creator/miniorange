@@ -272,7 +272,15 @@
       "otp.cancel.button": "CANCEL",
       "changepw.newpassword.label": "New password",
       "changepw.confirmpassword.label": "Confirm password",
-      "changepw.page.helper": "8–50 characters, including 1 uppercase, 1 number, and 1 symbol (!@#$.%^&*_-). Must not contain more than 2 consecutive characters from your name, username, or email.",
+      "changepw.req.min": "Minimum 8 characters should be present",
+      "changepw.req.max": "Maximum 50 characters should be present",
+      "changepw.req.number": "1 number character should be present",
+      "changepw.req.uppercase": "1 uppercase character should be present",
+      "changepw.req.symbol": "At least one of the following symbols !@#$.%^&*-_ should be present",
+      "changepw.req.firstname": "More than 2 characters of FirstName should not be present",
+      "changepw.req.lastname": "More than 2 characters of LastName should not be present",
+      "changepw.req.username": "More than 2 characters of Username should not be present",
+      "changepw.req.email": "More than 2 characters of Email should not be present.",
       "changepw.error.required": "New password is required.",
       "changepw.error.requirements": "Please satisfy all password requirements.",
       "changepw.error.mismatch": "The password don't match. Please try again"
@@ -297,7 +305,15 @@
       "otp.cancel.button": "ABBRECHEN",
       "changepw.newpassword.label": "Neues Passwort",
       "changepw.confirmpassword.label": "Passwort bestätigen",
-      "changepw.page.helper": "8–50 Zeichen, einschließlich 1 Großbuchstabe, 1 Zahl und 1 Symbol (!@#$.%^&*_-). Darf nicht mehr als 2 aufeinanderfolgende Zeichen aus Ihrem Namen, Benutzernamen oder Ihrer E-Mail enthalten.",
+      "changepw.req.min": "Mindestens 8 Zeichen müssen vorhanden sein",
+      "changepw.req.max": "Maximal 50 Zeichen dürfen vorhanden sein",
+      "changepw.req.number": "1 Ziffer muss vorhanden sein",
+      "changepw.req.uppercase": "1 Großbuchstabe muss vorhanden sein",
+      "changepw.req.symbol": "Mindestens eines der folgenden Symbole !@#$.%^&*-_ muss vorhanden sein",
+      "changepw.req.firstname": "Nicht mehr als 2 Zeichen des Vornamens dürfen vorhanden sein",
+      "changepw.req.lastname": "Nicht mehr als 2 Zeichen des Nachnamens dürfen vorhanden sein",
+      "changepw.req.username": "Nicht mehr als 2 Zeichen des Benutzernamens dürfen vorhanden sein",
+      "changepw.req.email": "Nicht mehr als 2 Zeichen der E-Mail dürfen vorhanden sein.",
       "changepw.error.required": "Neues Passwort ist erforderlich.",
       "changepw.error.requirements": "Bitte erfüllen Sie alle Passwortanforderungen.",
       "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut."
@@ -322,7 +338,15 @@
       "otp.cancel.button": "ANNULLA",
       "changepw.newpassword.label": "Nuova password",
       "changepw.confirmpassword.label": "Conferma password",
-      "changepw.page.helper": "8–50 caratteri, inclusi 1 maiuscola, 1 numero e 1 simbolo (!@#$.%^&*_-). Non deve contenere più di 2 caratteri consecutivi del tuo nome, nome utente o email.",
+      "changepw.req.min": "Devono essere presenti almeno 8 caratteri",
+      "changepw.req.max": "Devono essere presenti al massimo 50 caratteri",
+      "changepw.req.number": "Deve essere presente 1 numero",
+      "changepw.req.uppercase": "Deve essere presente 1 lettera maiuscola",
+      "changepw.req.symbol": "Deve essere presente almeno uno dei seguenti simboli !@#$.%^&*-_",
+      "changepw.req.firstname": "Non devono essere presenti più di 2 caratteri del nome",
+      "changepw.req.lastname": "Non devono essere presenti più di 2 caratteri del cognome",
+      "changepw.req.username": "Non devono essere presenti più di 2 caratteri del nome utente",
+      "changepw.req.email": "Non devono essere presenti più di 2 caratteri dell'email.",
       "changepw.error.required": "La nuova password è obbligatoria.",
       "changepw.error.requirements": "Soddisfa tutti i requisiti della password.",
       "changepw.error.mismatch": "Le password non corrispondono. Riprova."
@@ -347,7 +371,15 @@
       "otp.cancel.button": "إلغاء",
       "changepw.newpassword.label": "كلمة المرور الجديدة",
       "changepw.confirmpassword.label": "تأكيد كلمة المرور",
-      "changepw.page.helper": "من 8 إلى 50 حرفًا، بما في ذلك حرف كبير واحد ورقم واحد ورمز واحد (!@#$.%^&*_-). يجب ألا يحتوي على أكثر من حرفين متتاليين من اسمك أو اسم المستخدم أو بريدك الإلكتروني.",
+      "changepw.req.min": "يجب أن يحتوي على 8 أحرف على الأقل",
+      "changepw.req.max": "يجب ألا يزيد عن 50 حرفًا",
+      "changepw.req.number": "يجب أن يحتوي على رقم واحد",
+      "changepw.req.uppercase": "يجب أن يحتوي على حرف كبير واحد",
+      "changepw.req.symbol": "يجب أن يحتوي على أحد الرموز التالية على الأقل !@#$.%^&*-_",
+      "changepw.req.firstname": "يجب ألا يحتوي على أكثر من حرفين من الاسم الأول",
+      "changepw.req.lastname": "يجب ألا يحتوي على أكثر من حرفين من اسم العائلة",
+      "changepw.req.username": "يجب ألا يحتوي على أكثر من حرفين من اسم المستخدم",
+      "changepw.req.email": "يجب ألا يحتوي على أكثر من حرفين من البريد الإلكتروني.",
       "changepw.error.required": "كلمة المرور الجديدة مطلوبة.",
       "changepw.error.requirements": "يرجى استيفاء جميع متطلبات كلمة المرور.",
       "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى."
@@ -372,7 +404,15 @@
       "otp.cancel.button": "CANCELAR",
       "changepw.newpassword.label": "Nova senha",
       "changepw.confirmpassword.label": "Confirmar senha",
-      "changepw.page.helper": "8–50 caracteres, incluindo 1 maiúscula, 1 número e 1 símbolo (!@#$.%^&*_-). Não deve conter mais de 2 caracteres consecutivos do seu nome, nome de usuário ou e-mail.",
+      "changepw.req.min": "Devem estar presentes no mínimo 8 caracteres",
+      "changepw.req.max": "Devem estar presentes no máximo 50 caracteres",
+      "changepw.req.number": "Deve estar presente 1 número",
+      "changepw.req.uppercase": "Deve estar presente 1 letra maiúscula",
+      "changepw.req.symbol": "Deve estar presente pelo menos um dos seguintes símbolos !@#$.%^&*-_",
+      "changepw.req.firstname": "Não devem estar presentes mais de 2 caracteres do nome",
+      "changepw.req.lastname": "Não devem estar presentes mais de 2 caracteres do sobrenome",
+      "changepw.req.username": "Não devem estar presentes mais de 2 caracteres do nome de usuário",
+      "changepw.req.email": "Não devem estar presentes mais de 2 caracteres do e-mail.",
       "changepw.error.required": "A nova senha é obrigatória.",
       "changepw.error.requirements": "Atenda a todos os requisitos da senha.",
       "changepw.error.mismatch": "As senhas não coincidem. Tente novamente."
@@ -397,7 +437,15 @@
       "otp.cancel.button": "CANCELAR",
       "changepw.newpassword.label": "Nueva contraseña",
       "changepw.confirmpassword.label": "Confirmar contraseña",
-      "changepw.page.helper": "8–50 caracteres, incluyendo 1 mayúscula, 1 número y 1 símbolo (!@#$.%^&*_-). No debe contener más de 2 caracteres consecutivos de su nombre, nombre de usuario o correo electrónico.",
+      "changepw.req.min": "Debe haber al menos 8 caracteres",
+      "changepw.req.max": "Debe haber como máximo 50 caracteres",
+      "changepw.req.number": "Debe haber 1 número",
+      "changepw.req.uppercase": "Debe haber 1 letra mayúscula",
+      "changepw.req.symbol": "Debe haber al menos uno de los siguientes símbolos !@#$.%^&*-_",
+      "changepw.req.firstname": "No debe haber más de 2 caracteres del nombre",
+      "changepw.req.lastname": "No debe haber más de 2 caracteres del apellido",
+      "changepw.req.username": "No debe haber más de 2 caracteres del nombre de usuario",
+      "changepw.req.email": "No debe haber más de 2 caracteres del correo electrónico.",
       "changepw.error.required": "La nueva contraseña es obligatoria.",
       "changepw.error.requirements": "Cumpla con todos los requisitos de la contraseña.",
       "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo."
@@ -422,7 +470,15 @@
       "otp.cancel.button": "ANNULER",
       "changepw.newpassword.label": "Nouveau mot de passe",
       "changepw.confirmpassword.label": "Confirmer le mot de passe",
-      "changepw.page.helper": "8 à 50 caractères, dont 1 majuscule, 1 chiffre et 1 symbole (!@#$.%^&*_-). Ne doit pas contenir plus de 2 caractères consécutifs de votre nom, nom d'utilisateur ou e-mail.",
+      "changepw.req.min": "Au moins 8 caractères doivent être présents",
+      "changepw.req.max": "Au maximum 50 caractères doivent être présents",
+      "changepw.req.number": "1 chiffre doit être présent",
+      "changepw.req.uppercase": "1 lettre majuscule doit être présente",
+      "changepw.req.symbol": "Au moins l'un des symboles suivants !@#$.%^&*-_ doit être présent",
+      "changepw.req.firstname": "Pas plus de 2 caractères du prénom ne doivent être présents",
+      "changepw.req.lastname": "Pas plus de 2 caractères du nom de famille ne doivent être présents",
+      "changepw.req.username": "Pas plus de 2 caractères du nom d'utilisateur ne doivent être présents",
+      "changepw.req.email": "Pas plus de 2 caractères de l'e-mail ne doivent être présents.",
       "changepw.error.required": "Le nouveau mot de passe est requis.",
       "changepw.error.requirements": "Veuillez satisfaire à toutes les exigences du mot de passe.",
       "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer."
@@ -447,7 +503,15 @@
       "otp.cancel.button": "ANNULEREN",
       "changepw.newpassword.label": "Nieuw wachtwoord",
       "changepw.confirmpassword.label": "Wachtwoord bevestigen",
-      "changepw.page.helper": "8–50 tekens, inclusief 1 hoofdletter, 1 cijfer en 1 symbool (!@#$.%^&*_-). Mag niet meer dan 2 opeenvolgende tekens uit uw naam, gebruikersnaam of e-mail bevatten.",
+      "changepw.req.min": "Er moeten minimaal 8 tekens aanwezig zijn",
+      "changepw.req.max": "Er mogen maximaal 50 tekens aanwezig zijn",
+      "changepw.req.number": "Er moet 1 cijfer aanwezig zijn",
+      "changepw.req.uppercase": "Er moet 1 hoofdletter aanwezig zijn",
+      "changepw.req.symbol": "Ten minste een van de volgende symbolen !@#$.%^&*-_ moet aanwezig zijn",
+      "changepw.req.firstname": "Niet meer dan 2 tekens van de voornaam mogen aanwezig zijn",
+      "changepw.req.lastname": "Niet meer dan 2 tekens van de achternaam mogen aanwezig zijn",
+      "changepw.req.username": "Niet meer dan 2 tekens van de gebruikersnaam mogen aanwezig zijn",
+      "changepw.req.email": "Niet meer dan 2 tekens van het e-mailadres mogen aanwezig zijn.",
       "changepw.error.required": "Nieuw wachtwoord is vereist.",
       "changepw.error.requirements": "Voldoe aan alle wachtwoordvereisten.",
       "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw."
@@ -1424,18 +1488,34 @@
       errorText.style.marginBottom = "8px";
       errorText.style.display = "none";
 
-      // Helper text
-      var helper = document.createElement("div");
+      // Helper text — rendered as a bulleted requirements list
+      var helper = document.createElement("ul");
       helper.id = "mo-cp-helper-text";
       helper.style.fontFamily = "'Figtree', sans-serif";
       helper.style.fontSize = "12px";
       helper.style.color = "#6b7a8d";
-      helper.style.lineHeight = "1.5";
-      helper.style.marginTop = "-10px";
+      helper.style.lineHeight = "1.6";
+      helper.style.marginTop = "-6px";
       helper.style.marginBottom = "16px";
+      helper.style.paddingLeft = "18px";
       helper.style.textAlign = "left";
       helper.style.display = "block";
-      helper.textContent = tr("changepw.page.helper");
+      var moReqKeys = [
+        "changepw.req.min",
+        "changepw.req.max",
+        "changepw.req.number",
+        "changepw.req.uppercase",
+        "changepw.req.symbol",
+        "changepw.req.firstname",
+        "changepw.req.lastname",
+        "changepw.req.username",
+        "changepw.req.email"
+      ];
+      moReqKeys.forEach(function (k) {
+        var li = document.createElement("li");
+        li.textContent = tr(k);
+        helper.appendChild(li);
+      });
       
       newPasswordWrap.parentNode.insertBefore(errorText, newPasswordWrap.nextSibling);
       newPasswordWrap.parentNode.insertBefore(helper, newPasswordWrap.nextSibling);
