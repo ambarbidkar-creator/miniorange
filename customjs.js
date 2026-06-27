@@ -67,6 +67,11 @@
     return path.indexOf("/moas/enduserwelcome") !== -1;
   }
 
+  function checkIsPasswordSentMessage() {
+    var path = window.location.pathname.toLowerCase();
+    return path.indexOf("idp/showpasswordsentmessage") !== -1;
+  }
+
   /* ── LOGOUT PAGE: auto-redirect ── */
   function applyLogoutPage() {
     if (!checkIsLogout()) return;
@@ -77,6 +82,12 @@
   function applyEnduserDashboard() {
     if (!checkIsEnduserDashboard()) return;
     window.location.replace("https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession");
+  }
+
+  /* ── PASSWORD SENT MESSAGE PAGE (idp/showpasswordsentmessage) ── */
+  function applyPasswordSentMessage() {
+    if (!checkIsPasswordSentMessage()) return;
+    console.log('on passowrd sent message page');
   }
 
   /* ── ERROR DETECTION HELPER ── */
@@ -1799,8 +1810,9 @@
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
     var isEnduserDashboard = checkIsEnduserDashboard();
+    var isPasswordSentMessage = checkIsPasswordSentMessage();
 
-    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass && !isEnduserDashboard) return;
+    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass && !isEnduserDashboard && !isPasswordSentMessage) return;
 
     var isPageHasError = errorOnPage();
     if (isPageHasError) { console.log("this page has errir"); }
@@ -1833,6 +1845,7 @@
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
     if (isEnduserDashboard) { applyEnduserDashboard(); }
+    if (isPasswordSentMessage) { applyPasswordSentMessage(); }
   }
 
   /* ── TIMING ── */
@@ -1857,6 +1870,7 @@
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
     if (checkIsEnduserDashboard()) { applyEnduserDashboard(); }
+    if (checkIsPasswordSentMessage()) { applyPasswordSentMessage(); }
   });
   observer.observe(document.body, {
     childList: true,
