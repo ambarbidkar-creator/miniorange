@@ -61,10 +61,21 @@
     return path.indexOf("/moas/logoutpage") !== -1;
   }
 
+  function checkIsEnduserDashboard() {
+    var path = window.location.pathname.toLowerCase();
+    return path.indexOf("/moas/enduserwelcome") !== -1;
+  }
+
   /* ── LOGOUT PAGE: auto-redirect ── */
   function applyLogoutPage() {
     if (!checkIsLogout()) return;
     window.location.replace("https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout");
+  }
+
+  /* ── ENDUSER DASHBOARD PAGE (/moas/enduserwelcome) ── */
+  function applyEnduserDashboard() {
+    if (!checkIsEnduserDashboard()) return;
+    window.location.replace("https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession");
   }
 
   /* ── ERROR DETECTION HELPER ── */
@@ -119,7 +130,7 @@
       "#login-wrapper{" +
       "background:#fff!important;border:1px solid #e0e7ef!important;" +
       "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-      "padding:36px 40px 32px!important;max-width:560px!important;margin:0 auto!important;" +
+      "padding:20px 15px!important;max-width:560px!important;margin:0 auto!important;" +
       "}" +
 
       /* Form: stretch children to full width (removes Bootstrap center alignment) */
@@ -220,6 +231,237 @@
     return a ? a.href : "#";
   }
 
+  function getUrlParam(name) {
+    var params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+
+  function getLocale() {
+    var lang = getUrlParam("request_locale");
+    if (!lang) {
+      var sel = document.getElementById("languageSelect");
+      if (sel) lang = sel.value;
+    }
+    if (lang) localStorage.setItem("mo_locale", lang);
+    return lang;
+  }
+
+  /* ── TRANSLATIONS ──
+     Keyed by locale code (matches #languageSelect option values + mo_locale).
+     tr(key) resolves against the current mo_locale, falling back to English,
+     then to the raw key if nothing is found. Structural glyphs (→, *) are
+     appended in code, never stored here. */
+  var TRANSLATIONS = {
+    en: {
+      "login.page.title": "LOG IN",
+      "login.page.button": "LOG IN",
+      "email.field.placeholder": "Email",
+      "email.field.label": "Email address",
+      "password.field.label": "Password",
+      "password.field.placeholder": "Password",
+      "forgot.password.link": "Forgot password",
+      "reset.password": "RESET PASSWORD",
+      "reset.password.subtext": "We will send you an email with instructions on how to recover it",
+      "forgot.page.helper": "Not receiving an email to reset your password? Then the e-mail address used is not known to us. Can’t figure it out?",
+      "forgot.page.helper.link": "Contact customer service",
+      "next.button": "NEXT",
+      "otp.page.title": "VERIFY YOUR IDENTITY",
+      "otp.field.label": "Enter OTP here",
+      "otp.field.placeholder": "OTP number",
+      "otp.verify.button": "VERIFY",
+      "otp.cancel.button": "CANCEL",
+      "changepw.newpassword.label": "New password",
+      "changepw.confirmpassword.label": "Confirm password",
+      "changepw.page.helper": "8–50 characters, including 1 uppercase, 1 number, and 1 symbol (!@#$.%^&*_-). Must not contain more than 2 consecutive characters from your name, username, or email.",
+      "changepw.error.required": "New password is required.",
+      "changepw.error.requirements": "Please satisfy all password requirements.",
+      "changepw.error.mismatch": "The password don't match. Please try again"
+    },
+    de: {
+      "login.page.title": "ANMELDEN",
+      "login.page.button": "ANMELDEN",
+      "email.field.placeholder": "E-Mail",
+      "email.field.label": "E-Mail-Adresse",
+      "password.field.label": "Passwort",
+      "password.field.placeholder": "Passwort",
+      "forgot.password.link": "Passwort vergessen",
+      "reset.password": "PASSWORT ZURÜCKSETZEN",
+      "reset.password.subtext": "Wir senden Ihnen eine E-Mail mit Anweisungen zur Wiederherstellung",
+      "forgot.page.helper": "Sie erhalten keine E-Mail zum Zurücksetzen Ihres Passworts? Dann ist die verwendete E-Mail-Adresse uns nicht bekannt. Kommen Sie nicht weiter?",
+      "forgot.page.helper.link": "Kundenservice kontaktieren",
+      "next.button": "WEITER",
+      "otp.page.title": "IDENTITÄT BESTÄTIGEN",
+      "otp.field.label": "OTP hier eingeben",
+      "otp.field.placeholder": "OTP-Nummer",
+      "otp.verify.button": "BESTÄTIGEN",
+      "otp.cancel.button": "ABBRECHEN",
+      "changepw.newpassword.label": "Neues Passwort",
+      "changepw.confirmpassword.label": "Passwort bestätigen",
+      "changepw.page.helper": "8–50 Zeichen, einschließlich 1 Großbuchstabe, 1 Zahl und 1 Symbol (!@#$.%^&*_-). Darf nicht mehr als 2 aufeinanderfolgende Zeichen aus Ihrem Namen, Benutzernamen oder Ihrer E-Mail enthalten.",
+      "changepw.error.required": "Neues Passwort ist erforderlich.",
+      "changepw.error.requirements": "Bitte erfüllen Sie alle Passwortanforderungen.",
+      "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut."
+    },
+    it: {
+      "login.page.title": "ACCEDI",
+      "login.page.button": "ACCEDI",
+      "email.field.placeholder": "Email",
+      "email.field.label": "Indirizzo email",
+      "password.field.label": "Password",
+      "password.field.placeholder": "Password",
+      "forgot.password.link": "Password dimenticata",
+      "reset.password": "REIMPOSTA PASSWORD",
+      "reset.password.subtext": "Ti invieremo un'email con le istruzioni su come recuperarla",
+      "forgot.page.helper": "Non ricevi l'email per reimpostare la password? Allora l'indirizzo email utilizzato non è registrato. Non riesci a capire?",
+      "forgot.page.helper.link": "Contatta il servizio clienti",
+      "next.button": "AVANTI",
+      "otp.page.title": "VERIFICA LA TUA IDENTITÀ",
+      "otp.field.label": "Inserisci qui l'OTP",
+      "otp.field.placeholder": "Numero OTP",
+      "otp.verify.button": "VERIFICA",
+      "otp.cancel.button": "ANNULLA",
+      "changepw.newpassword.label": "Nuova password",
+      "changepw.confirmpassword.label": "Conferma password",
+      "changepw.page.helper": "8–50 caratteri, inclusi 1 maiuscola, 1 numero e 1 simbolo (!@#$.%^&*_-). Non deve contenere più di 2 caratteri consecutivi del tuo nome, nome utente o email.",
+      "changepw.error.required": "La nuova password è obbligatoria.",
+      "changepw.error.requirements": "Soddisfa tutti i requisiti della password.",
+      "changepw.error.mismatch": "Le password non corrispondono. Riprova."
+    },
+    ar: {
+      "login.page.title": "تسجيل الدخول",
+      "login.page.button": "تسجيل الدخول",
+      "email.field.placeholder": "البريد الإلكتروني",
+      "email.field.label": "عنوان البريد الإلكتروني",
+      "password.field.label": "كلمة المرور",
+      "password.field.placeholder": "كلمة المرور",
+      "forgot.password.link": "نسيت كلمة المرور",
+      "reset.password": "إعادة تعيين كلمة المرور",
+      "reset.password.subtext": "سنرسل لك بريدًا إلكترونيًا يحتوي على تعليمات حول كيفية استعادتها",
+      "forgot.page.helper": "ألا تتلقى بريدًا إلكترونيًا لإعادة تعيين كلمة المرور؟ إذًا عنوان البريد الإلكتروني المستخدم غير معروف لدينا. لا يمكنك معرفة ذلك؟",
+      "forgot.page.helper.link": "اتصل بخدمة العملاء",
+      "next.button": "التالي",
+      "otp.page.title": "تحقق من هويتك",
+      "otp.field.label": "أدخل رمز OTP هنا",
+      "otp.field.placeholder": "رقم OTP",
+      "otp.verify.button": "تحقق",
+      "otp.cancel.button": "إلغاء",
+      "changepw.newpassword.label": "كلمة المرور الجديدة",
+      "changepw.confirmpassword.label": "تأكيد كلمة المرور",
+      "changepw.page.helper": "من 8 إلى 50 حرفًا، بما في ذلك حرف كبير واحد ورقم واحد ورمز واحد (!@#$.%^&*_-). يجب ألا يحتوي على أكثر من حرفين متتاليين من اسمك أو اسم المستخدم أو بريدك الإلكتروني.",
+      "changepw.error.required": "كلمة المرور الجديدة مطلوبة.",
+      "changepw.error.requirements": "يرجى استيفاء جميع متطلبات كلمة المرور.",
+      "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى."
+    },
+    pt: {
+      "login.page.title": "ENTRAR",
+      "login.page.button": "ENTRAR",
+      "email.field.placeholder": "E-mail",
+      "email.field.label": "Endereço de e-mail",
+      "password.field.label": "Senha",
+      "password.field.placeholder": "Senha",
+      "forgot.password.link": "Esqueceu a senha",
+      "reset.password": "REDEFINIR SENHA",
+      "reset.password.subtext": "Enviaremos um e-mail com instruções sobre como recuperá-la",
+      "forgot.page.helper": "Não está recebendo um e-mail para redefinir sua senha? Então o endereço de e-mail usado não é conhecido por nós. Não consegue descobrir?",
+      "forgot.page.helper.link": "Entre em contato com o atendimento ao cliente",
+      "next.button": "PRÓXIMO",
+      "otp.page.title": "VERIFIQUE SUA IDENTIDADE",
+      "otp.field.label": "Digite o OTP aqui",
+      "otp.field.placeholder": "Número OTP",
+      "otp.verify.button": "VERIFICAR",
+      "otp.cancel.button": "CANCELAR",
+      "changepw.newpassword.label": "Nova senha",
+      "changepw.confirmpassword.label": "Confirmar senha",
+      "changepw.page.helper": "8–50 caracteres, incluindo 1 maiúscula, 1 número e 1 símbolo (!@#$.%^&*_-). Não deve conter mais de 2 caracteres consecutivos do seu nome, nome de usuário ou e-mail.",
+      "changepw.error.required": "A nova senha é obrigatória.",
+      "changepw.error.requirements": "Atenda a todos os requisitos da senha.",
+      "changepw.error.mismatch": "As senhas não coincidem. Tente novamente."
+    },
+    es: {
+      "login.page.title": "INICIAR SESIÓN",
+      "login.page.button": "INICIAR SESIÓN",
+      "email.field.placeholder": "correo electrónico",
+      "email.field.label": "Correo electrónico",
+      "password.field.label": "Contraseña",
+      "password.field.placeholder": "Contraseña",
+      "forgot.password.link": "¿Olvidó su contraseña?",
+      "reset.password": "RESTABLECER CONTRASEÑA",
+      "reset.password.subtext": "Le enviaremos un correo electrónico con instrucciones sobre cómo recuperarla",
+      "forgot.page.helper": "¿No recibe un correo electrónico para restablecer su contraseña? Entonces la dirección de correo electrónico utilizada no es conocida por nosotros. ¿No lo puede averiguar?",
+      "forgot.page.helper.link": "Contactar con atención al cliente",
+      "next.button": "SIGUIENTE",
+      "otp.page.title": "VERIFIQUE SU IDENTIDAD",
+      "otp.field.label": "Ingrese el OTP aquí",
+      "otp.field.placeholder": "Número OTP",
+      "otp.verify.button": "VERIFICAR",
+      "otp.cancel.button": "CANCELAR",
+      "changepw.newpassword.label": "Nueva contraseña",
+      "changepw.confirmpassword.label": "Confirmar contraseña",
+      "changepw.page.helper": "8–50 caracteres, incluyendo 1 mayúscula, 1 número y 1 símbolo (!@#$.%^&*_-). No debe contener más de 2 caracteres consecutivos de su nombre, nombre de usuario o correo electrónico.",
+      "changepw.error.required": "La nueva contraseña es obligatoria.",
+      "changepw.error.requirements": "Cumpla con todos los requisitos de la contraseña.",
+      "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo."
+    },
+    fr: {
+      "login.page.title": "CONNEXION",
+      "login.page.button": "CONNEXION",
+      "email.field.placeholder": "E-mail",
+      "email.field.label": "Adresse e-mail",
+      "password.field.label": "Mot de passe",
+      "password.field.placeholder": "Mot de passe",
+      "forgot.password.link": "Mot de passe oublié",
+      "reset.password": "RÉINITIALISER LE MOT DE PASSE",
+      "reset.password.subtext": "Nous vous enverrons un e-mail contenant des instructions pour le récupérer",
+      "forgot.page.helper": "Vous ne recevez pas d'e-mail pour réinitialiser votre mot de passe ? Alors l'adresse e-mail utilisée ne nous est pas connue. Vous ne trouvez pas ?",
+      "forgot.page.helper.link": "Contacter le service client",
+      "next.button": "SUIVANT",
+      "otp.page.title": "VÉRIFIEZ VOTRE IDENTITÉ",
+      "otp.field.label": "Saisissez l'OTP ici",
+      "otp.field.placeholder": "Numéro OTP",
+      "otp.verify.button": "VÉRIFIER",
+      "otp.cancel.button": "ANNULER",
+      "changepw.newpassword.label": "Nouveau mot de passe",
+      "changepw.confirmpassword.label": "Confirmer le mot de passe",
+      "changepw.page.helper": "8 à 50 caractères, dont 1 majuscule, 1 chiffre et 1 symbole (!@#$.%^&*_-). Ne doit pas contenir plus de 2 caractères consécutifs de votre nom, nom d'utilisateur ou e-mail.",
+      "changepw.error.required": "Le nouveau mot de passe est requis.",
+      "changepw.error.requirements": "Veuillez satisfaire à toutes les exigences du mot de passe.",
+      "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer."
+    },
+    nl: {
+      "login.page.title": "INLOGGEN",
+      "login.page.button": "INLOGGEN",
+      "email.field.placeholder": "E-mail",
+      "email.field.label": "E-mailadres",
+      "password.field.label": "Wachtwoord",
+      "password.field.placeholder": "Wachtwoord",
+      "forgot.password.link": "Wachtwoord vergeten",
+      "reset.password": "WACHTWOORD OPNIEUW INSTELLEN",
+      "reset.password.subtext": "We sturen u een e-mail met instructies om het te herstellen",
+      "forgot.page.helper": "Ontvangt u geen e-mail om uw wachtwoord opnieuw in te stellen? Dan is het gebruikte e-mailadres bij ons niet bekend. Komt u er niet uit?",
+      "forgot.page.helper.link": "Neem contact op met de klantenservice",
+      "next.button": "VOLGENDE",
+      "otp.page.title": "VERIFIEER UW IDENTITEIT",
+      "otp.field.label": "Voer hier de OTP in",
+      "otp.field.placeholder": "OTP-nummer",
+      "otp.verify.button": "VERIFIËREN",
+      "otp.cancel.button": "ANNULEREN",
+      "changepw.newpassword.label": "Nieuw wachtwoord",
+      "changepw.confirmpassword.label": "Wachtwoord bevestigen",
+      "changepw.page.helper": "8–50 tekens, inclusief 1 hoofdletter, 1 cijfer en 1 symbool (!@#$.%^&*_-). Mag niet meer dan 2 opeenvolgende tekens uit uw naam, gebruikersnaam of e-mail bevatten.",
+      "changepw.error.required": "Nieuw wachtwoord is vereist.",
+      "changepw.error.requirements": "Voldoe aan alle wachtwoordvereisten.",
+      "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw."
+    }
+  };
+
+  function tr(key) {
+    var locale = localStorage.getItem("mo_locale") || "en";
+    var dict = TRANSLATIONS[locale] || TRANSLATIONS.en;
+    if (dict && dict[key] != null) return dict[key];
+    if (TRANSLATIONS.en && TRANSLATIONS.en[key] != null) return TRANSLATIONS.en[key];
+    return key;
+  }
+
   /* ── STEP 1: Email page UI ── */
   function applyEmailStep() {
     var wrapper = document.getElementById("login-wrapper");
@@ -228,7 +470,7 @@
     /* LOG IN title — insert once before any form child */
     if (!document.getElementById("mo-title")) {
       var t = document.createElement("span");
-      t.id = "mo-title"; t.textContent = "LOG IN";
+      t.id = "mo-title"; t.className = "px-2 mx-1"; t.textContent = tr("login.page.title");
       wrapper.insertBefore(t, wrapper.firstChild);
     }
 
@@ -239,12 +481,12 @@
       var lbl = document.createElement("label");
       lbl.id = "mo-email-lbl"; lbl.className = "mo-lbl";
       lbl.setAttribute("for", "username");
-      lbl.innerHTML = 'Email address <span class="mo-req">*</span>';
+      lbl.innerHTML = tr("email.field.label") + ' <span class="mo-req">*</span>';
       fg.appendChild(lbl);
       userDiv.parentNode.insertBefore(fg, userDiv);
       fg.appendChild(userDiv);
       var inp = document.getElementById("username");
-      if (inp) inp.setAttribute("placeholder", "email");
+      if (inp) inp.setAttribute("placeholder", tr("email.field.placeholder"));
     }
 
  
@@ -252,7 +494,7 @@
     /* Button label */
     var btn = document.getElementById("loginbutton");
     if (btn && !btn.dataset.mo) {
-      btn.value = "LOG IN \u2192";
+      btn.value = tr("login.page.button") + " \u2192";
       btn.dataset.mo = "1";
     }
 
@@ -298,14 +540,15 @@
     var wrapper = document.getElementById("login-wrapper");
     if (wrapper && !document.getElementById("mo-title")) {
       var t = document.createElement("span");
-      t.id = "mo-title"; t.textContent = "LOG IN";
+      t.id = "mo-title"; t.className = "px-2 mx-1"; t.textContent = tr("login.page.title");
       wrapper.insertBefore(t, wrapper.firstChild);
     }
 
     /* Button label */
     var btn = document.getElementById("loginbutton");
-    if (btn && btn.value !== "LOG IN \u2192") {
-      btn.value = "LOG IN \u2192";
+    var moLoginVal = tr("login.page.button") + " \u2192";
+    if (btn && btn.value !== moLoginVal) {
+      btn.value = moLoginVal;
     }
 
     if (document.getElementById("mo-pw-lbl")) return; // already applied
@@ -314,7 +557,7 @@
     var pwLbl = document.createElement("label");
     pwLbl.id = "mo-pw-lbl"; pwLbl.className = "mo-lbl";
     pwLbl.setAttribute("for", "plaintextPassword");
-    pwLbl.innerHTML = 'Password <span class="mo-req">*</span>';
+    pwLbl.innerHTML = tr("password.field.label") + ' <span class="mo-req">*</span>';
     pwField.parentNode.insertBefore(pwLbl, pwField);
 
     /* Show read-only username above password field */
@@ -326,7 +569,7 @@
       if (usernameVal) {
         var userFg = document.createElement("div"); userFg.className = "mo-fg";
         var userLbl = document.createElement("label"); userLbl.className = "mo-lbl";
-        userLbl.textContent = "Email address";
+        userLbl.textContent = tr("email.field.label");
         var userBox = document.createElement("div"); userBox.id = "mo-user-display";
         userBox.className = "mo-user-display";
         userBox.textContent = usernameVal;
@@ -353,7 +596,7 @@
     var wrap = document.createElement("div"); wrap.className = "mo-pw-wrap";
     pwField.parentNode.insertBefore(wrap, pwField);
     wrap.appendChild(pwField);
-    pwField.setAttribute("placeholder", "Password");
+    pwField.setAttribute("placeholder", tr("password.field.placeholder"));
 
     /* Eye toggle button */
     var EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
@@ -373,7 +616,7 @@
     if (!document.getElementById("mo-bottom")) {
       var row = document.createElement("div"); row.id = "mo-bottom";
       var fl = document.createElement("a"); fl.id = "mo-forgot";
-      fl.href = "/moas/idp/resetpassword"; fl.textContent = "Forgot password";
+      fl.href = "/moas/idp/resetpassword"; fl.textContent = tr("forgot.password.link");
       row.appendChild(fl);
       wrap.parentNode.insertBefore(row, wrap.nextSibling);
     }
@@ -503,7 +746,7 @@
     /* LOG IN title — insert once before any form child */
     if (!document.getElementById("mo-title")) {
       var t = document.createElement("span");
-      t.id = "mo-title"; t.textContent = "LOG IN";
+      t.id = "mo-title"; t.className = "px-2 mx-1"; t.textContent = tr("login.page.title");
       wrapper.insertBefore(t, wrapper.firstChild);
     }
 
@@ -518,7 +761,7 @@
       var lbl = document.createElement("label");
       lbl.id = "mo-email-lbl"; lbl.className = "mo-lbl";
       lbl.setAttribute("for", "username");
-      lbl.innerHTML = 'Email address <span class="mo-req">*</span>';
+      lbl.innerHTML = tr("email.field.label") + ' <span class="mo-req">*</span>';
       fg.appendChild(lbl);
       userDiv.parentNode.insertBefore(fg, userDiv);
       fg.appendChild(userDiv);
@@ -527,18 +770,18 @@
     var userNameDiv = document.getElementById("userName");
     if (userNameDiv) userNameDiv.removeAttribute("id");
     var emailInp = document.getElementById("username");
-    if (emailInp) emailInp.setAttribute("placeholder", "email");
+    if (emailInp) emailInp.setAttribute("placeholder", tr("email.field.placeholder"));
 
     /* Password label + eye toggle + placeholder */
     var pwField = document.getElementById("plaintextPassword");
     if (pwField) {
-      pwField.setAttribute("placeholder", "Password");
+      pwField.setAttribute("placeholder", tr("password.field.placeholder"));
 
       if (!document.getElementById("mo-pw-lbl")) {
         var pwLbl = document.createElement("label");
         pwLbl.id = "mo-pw-lbl"; pwLbl.className = "mo-lbl";
         pwLbl.setAttribute("for", "plaintextPassword");
-        pwLbl.innerHTML = 'Password <span class="mo-req">*</span>';
+        pwLbl.innerHTML = tr("password.field.label") + ' <span class="mo-req">*</span>';
         pwField.parentNode.insertBefore(pwLbl, pwField);
       }
 
@@ -565,7 +808,7 @@
         if (!document.getElementById("mo-bottom")) {
           var row = document.createElement("div"); row.id = "mo-bottom";
           var fl = document.createElement("a"); fl.id = "mo-forgot";
-          fl.href = "/moas/idp/resetpassword"; fl.textContent = "Forgot password";
+          fl.href = "/moas/idp/resetpassword"; fl.textContent = tr("forgot.password.link");
           row.appendChild(fl);
           wrap.parentNode.insertBefore(row, wrap.nextSibling);
         }
@@ -574,8 +817,9 @@
 
     /* Button label */
     var btn = document.getElementById("loginbutton");
-    if (btn && btn.value !== "LOG IN →") {
-      btn.value = "LOG IN →";
+    var moLoginVal = tr("login.page.button") + " →";
+    if (btn && btn.value !== moLoginVal) {
+      btn.value = moLoginVal;
       btn.dataset.mo = "1";
     }
 
@@ -670,7 +914,7 @@
         "margin-top:0!important;margin-bottom:0!important;" +
         "display:block!important;float:none!important;" +
         "position:relative!important;left:auto!important;right:auto!important;" +
-        "padding:36px 40px 32px!important;box-sizing:border-box!important;" +
+        "padding:20px 15px!important;box-sizing:border-box!important;" +
         "height:auto!important;min-height:unset!important;align-self:center!important;" +
         "}" +
 
@@ -728,7 +972,7 @@
 
         /* Helper text */
         "#mo-fp-helper{font-size:13px;color:#6b7a8d;font-family:'Figtree',sans-serif;" +
-        "margin:14px 0 18px;line-height:1.5;text-align:left!important;width:100%!important;}" +
+        "margin:14px 0 18px;line-height:1.5;text-align:left!important;width:100%!important;padding-left:0;padding-right:0;}" +
         "#mo-fp-helper a{color:#0A55D7;text-decoration:none;font-weight:500;}" +
         "#mo-fp-helper a:hover{text-decoration:underline;}" +
 
@@ -790,12 +1034,12 @@
     /* Insert RESET PASSWORD title + subtitle before the form */
     if (!document.getElementById("mo-fp-title")) {
       var fpTitle = document.createElement("span");
-      fpTitle.id = "mo-fp-title"; fpTitle.textContent = "RESET PASSWORD";
+      fpTitle.id = "mo-fp-title"; fpTitle.textContent = tr("reset.password");
       fpForm.parentNode.insertBefore(fpTitle, fpForm);
 
       var fpSub = document.createElement("span");
       fpSub.id = "mo-fp-subtitle";
-      fpSub.textContent = "We will send you an email with instructions on how to recover it";
+      fpSub.textContent = tr("reset.password.subtext");
       fpForm.parentNode.insertBefore(fpSub, fpForm);
     }
 
@@ -805,15 +1049,15 @@
       origLabel = document.createElement("label");
       origLabel.setAttribute("for", emailInput.id);
       origLabel.id = "mo-fp-lbl";
-      origLabel.innerHTML = 'Email address <span class="mo-req">*</span>';
+      origLabel.innerHTML = tr("email.field.label") + ' <span class="mo-req">*</span>';
       emailInput.parentNode.insertBefore(origLabel, emailInput);
     } else if (origLabel.id !== "mo-fp-lbl") {
       origLabel.id = "mo-fp-lbl"; origLabel.className = "";
-      origLabel.innerHTML = 'Email address <span class="mo-req">*</span>';
+      origLabel.innerHTML = tr("email.field.label") + ' <span class="mo-req">*</span>';
     }
 
     /* Fix input placeholder */
-    emailInput.setAttribute("placeholder", "email");
+    emailInput.setAttribute("placeholder", tr("email.field.placeholder"));
 
     /* Insert helper text after the input wrapper (once) */
     if (!document.getElementById("mo-fp-helper")) {
@@ -822,22 +1066,24 @@
         var helper = document.createElement("p");
         helper.id = "mo-fp-helper";
         helper.innerHTML =
-          "Not receiving an email to reset your password? Then the e-mail address used is not known to us. Can\u2019t figure it out?<br>" +
-          '<a href="mailto:support@example.com">Contact customer service</a>';
+          tr("forgot.page.helper") + "<br>" +
+          '<a href="mailto:support@example.com">' + tr("forgot.page.helper.link") + '</a>';
         inputWrapper.parentNode.insertBefore(helper, inputWrapper.nextSibling);
       }
     }
 
     /* Change button text to NEXT → */
     var fpBtn = fpForm.querySelector("button") || fpForm.querySelector("input[type='submit']");
-    if (fpBtn && fpBtn.textContent.trim().indexOf("NEXT") === -1) {
-      fpBtn.innerHTML = 'NEXT <span style="margin-left: 6px;">&rarr;</span>';
+    if (fpBtn) {
+      fpBtn.innerHTML = tr("next.button") + ' <span style="margin-left: 6px;">&rarr;</span>';
     }
 
     /* Mark as done */
     var done = document.createElement("span");
     done.id = "mo-forgot-done"; done.style.display = "none";
     document.body.appendChild(done);
+
+    $('.btn.mo-btn-primary.btn-block.custom-button.w-100').parent().addClass('px-0')
   }
 
   /* ── OTP VERIFY PAGE (/moas/idp/validatenextfactor) ── */
@@ -920,7 +1166,7 @@
     if (modalHeader && !document.getElementById("mo-otp-title")) {
       var otpTitle = document.createElement("span");
       otpTitle.id = "mo-otp-title";
-      otpTitle.textContent = "VERIFY YOUR IDENTITY";
+      otpTitle.textContent = tr("otp.page.title");
       modalHeader.insertBefore(otpTitle, modalHeader.firstChild);
     }
 
@@ -929,20 +1175,20 @@
       var otpLbl = document.createElement("label");
       otpLbl.id = "mo-otp-lbl";
       otpLbl.setAttribute("for", "otpToken");
-      otpLbl.innerHTML = 'Enter OTP here <span class="mo-req">*</span>';
+      otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
       otpInput.parentNode.insertBefore(otpLbl, otpInput);
     }
 
     /* Placeholder */
-    otpInput.setAttribute("placeholder", "OTP number");
+    otpInput.setAttribute("placeholder", tr("otp.field.placeholder"));
 
     /* Verify button */
     var verifyBtn = document.getElementById("validate");
-    if (verifyBtn) verifyBtn.value = "VERIFY \u2192";
+    if (verifyBtn) verifyBtn.value = tr("otp.verify.button") + " \u2192";
 
     /* Cancel button */
     var cancelBtn = document.querySelector(".btn-cancel");
-    if (cancelBtn) cancelBtn.textContent = "CANCEL";
+    if (cancelBtn) cancelBtn.textContent = tr("otp.cancel.button");
 
     /* Mark done */
     var otpDone = document.createElement("span");
@@ -977,7 +1223,7 @@
         "#login-wrapper{" +
         "background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:36px 40px 32px!important;max-width:560px!important;width:100%!important;" +
+        "padding:20px 15px!important;max-width:560px!important;width:100%!important;" +
         "margin:40px auto!important;box-sizing:border-box!important;" +
         "}" +
 
@@ -1067,9 +1313,9 @@
         }
       }
       if (titleTextNode) {
-        titleTextNode.nodeValue = "RESET PASSWORD";
+        titleTextNode.nodeValue = tr("reset.password");
       } else {
-        h3.insertBefore(document.createTextNode("RESET PASSWORD"), h3.firstChild);
+        h3.insertBefore(document.createTextNode(tr("reset.password")), h3.firstChild);
       }
       
       if (!document.getElementById("mo-cp-close")) {
@@ -1092,9 +1338,9 @@
     document.querySelectorAll(labelSelector).forEach(function (p) {
       var t = p.textContent.trim();
       if (t.toLowerCase().indexOf("new password") !== -1 && !p.querySelector(".mo-req")) {
-        p.innerHTML = 'New password <span class="mo-req" style="color:#e02020; margin-left:2px;">*</span>';
+        p.innerHTML = tr("changepw.newpassword.label") + ' <span class="mo-req" style="color:#e02020; margin-left:2px;">*</span>';
       } else if (t.toLowerCase().indexOf("confirm password") !== -1 && !p.querySelector(".mo-req")) {
-        p.innerHTML = 'Confirm password <span class="mo-req" style="color:#e02020; margin-left:2px;">*</span>';
+        p.innerHTML = tr("changepw.confirmpassword.label") + ' <span class="mo-req" style="color:#e02020; margin-left:2px;">*</span>';
       }
     });
 
@@ -1126,7 +1372,7 @@
       wrap.className = "mo-pw-wrap";
       newPasswordInput.parentNode.insertBefore(wrap, newPasswordInput);
       wrap.appendChild(newPasswordInput);
-      newPasswordInput.setAttribute("placeholder", "Password");
+      newPasswordInput.setAttribute("placeholder", tr("password.field.placeholder"));
 
       // Append eye toggle
       var EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
@@ -1149,7 +1395,7 @@
       wrap.className = "mo-pw-wrap";
       confirmPasswordInput.parentNode.insertBefore(wrap, confirmPasswordInput);
       wrap.appendChild(confirmPasswordInput);
-      confirmPasswordInput.setAttribute("placeholder", "Password");
+      confirmPasswordInput.setAttribute("placeholder", tr("password.field.placeholder"));
 
       // Append eye toggle
       var EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
@@ -1193,7 +1439,7 @@
       helper.style.marginBottom = "16px";
       helper.style.textAlign = "left";
       helper.style.display = "block";
-      helper.textContent = "8–50 characters, including 1 uppercase, 1 number, and 1 symbol (!@#$.%^&*_-). Must not contain more than 2 consecutive characters from your name, username, or email.";
+      helper.textContent = tr("changepw.page.helper");
       
       newPasswordWrap.parentNode.insertBefore(errorText, newPasswordWrap.nextSibling);
       newPasswordWrap.parentNode.insertBefore(helper, newPasswordWrap.nextSibling);
@@ -1263,9 +1509,9 @@
     var saveBtn = document.getElementById("validate") || document.getElementById("submit");
     if (saveBtn) {
       if (saveBtn.tagName === "INPUT") {
-        saveBtn.value = "NEXT \u2192";
+        saveBtn.value = tr("next.button") + " \u2192";
       } else {
-        saveBtn.innerHTML = 'NEXT <span style="margin-left: 6px;">&rarr;</span>';
+        saveBtn.innerHTML = tr("next.button") + ' <span style="margin-left: 6px;">&rarr;</span>';
       }
     }
 
@@ -1352,7 +1598,7 @@
 
         if (!val) {
           e.preventDefault();
-          showCpError("New password is required.");
+          showCpError(tr("changepw.error.required"));
           if (newPasswordInput) newPasswordInput.focus();
           return;
         }
@@ -1360,32 +1606,69 @@
         var invalidItems = document.querySelectorAll("#listcontent li.mo-invalid");
         if (invalidItems.length > 0) {
           e.preventDefault();
-          showCpError("Please satisfy all password requirements.");
+          showCpError(tr("changepw.error.requirements"));
           if (newPasswordInput) newPasswordInput.focus();
           return;
         }
 
         if (val !== confirmVal) {
           e.preventDefault();
-          showCpError("The password don't match. Please try again");
+          showCpError(tr("changepw.error.mismatch"));
           if (confirmPasswordInput) confirmPasswordInput.focus();
           return;
         }
       });
     }
+
+    /* ── PASSWORD MATCH CHECK (blur on confirm) ── */
+    function bindPasswordMatchCheck() {
+      if (!newPasswordInput || !confirmPasswordInput) return;
+      if (confirmPasswordInput.dataset.moMatchListener) return;
+      confirmPasswordInput.dataset.moMatchListener = "true";
+
+      function checkMatch() {
+        var newVal = newPasswordInput.value;
+        var confirmVal = confirmPasswordInput.value;
+        if (confirmVal && newVal !== confirmVal) {
+          $(newPasswordInput).addClass("border border-danger");
+          $(confirmPasswordInput).addClass("border border-danger");
+          if (!document.getElementById("mo-match-error")) {
+            var $newWrap = $('[name="password"]').closest(".mo-pw-wrap");
+            ($newWrap.length ? $newWrap : $('[name="password"]'))
+              .after('<p id="mo-match-error" class="text-danger pb-2" style="font-size:12px;margin-top:-10px;margin-bottom:8px;">' + tr("changepw.error.mismatch") + '</p>');
+          }
+        } else {
+          $(newPasswordInput).removeClass("border border-danger");
+          $(confirmPasswordInput).removeClass("border border-danger");
+          $("#mo-match-error").remove();
+        }
+      }
+
+      $(confirmPasswordInput).on("blur", checkMatch);
+
+      /* Re-run check live once mismatch is already flagged */
+      $(newPasswordInput).add(confirmPasswordInput).on("input", function () {
+        if ($(confirmPasswordInput).hasClass("border-danger")) { checkMatch(); }
+      });
+    }
+    bindPasswordMatchCheck();
+
   }
 
   /* ── MAIN RUN ── */
   function run() {
     if (checkIsLogout()) { applyLogoutPage(); return; }
 
+    getLocale();
+
     var isLogin = checkIsLogin();
     var isRedirectToIdpLogin = checkIsRedirectToIdpLogin();
     var isForgot = checkIsForgot();
     var isOtp = checkIsOtp();
     var isChangePass = checkIsChangePass();
+    var isEnduserDashboard = checkIsEnduserDashboard();
 
-    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass) return;
+    if (!isLogin && !isRedirectToIdpLogin && !isForgot && !isOtp && !isChangePass && !isEnduserDashboard) return;
 
     var isPageHasError = errorOnPage();
     if (isPageHasError) { console.log("this page has errir"); }
@@ -1417,6 +1700,7 @@
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
+    if (isEnduserDashboard) { applyEnduserDashboard(); }
   }
 
   /* ── TIMING ── */
@@ -1440,6 +1724,7 @@
     if (isForgot) { applyForgotPage(); }
     if (isOtp)    { applyOtpPage(); }
     if (isChangePass) { applyChangePasswordPage(); }
+    if (checkIsEnduserDashboard()) { applyEnduserDashboard(); }
   });
   observer.observe(document.body, {
     childList: true,
