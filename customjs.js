@@ -95,6 +95,10 @@
     /* Full-height centering for the React layout wrapper */
     $('.d-flex.flex-column.align-items-center.justify-content-center').css('height', '100vh');
 
+    /* Replace heading text with RESET PASSWORD (localized) */
+    var psmTitle = document.querySelector("#login-wrapper h4");
+    if (psmTitle) psmTitle.textContent = tr("reset.password");
+
     /* Page-specific styling (inject once) — makes this page match /login:
        carded wrapper, left-aligned bold heading, clean green message box,
        and styled links. */
