@@ -1387,6 +1387,21 @@
         '<div id="mo-userlogin-error" class="error-message text-start" style="color:red;">' + message + '</div>'
       );
       $('input').addClass('border border-danger')
+      /* Wrap the OTP input + add a red cross icon inside it */
+      if (otpInput && !document.getElementById("mo-otp-icon")) {
+        var otpWrap = document.createElement("div");
+        otpWrap.style.position = "relative";
+        otpWrap.style.display = "flex";
+        otpWrap.style.alignItems = "center";
+        otpInput.parentNode.insertBefore(otpWrap, otpInput);
+        otpWrap.appendChild(otpInput);
+        otpInput.classList.add("mo-input-error");
+        var otpIcon = document.createElement("span");
+        otpIcon.id = "mo-otp-icon";
+        otpIcon.className = "mo-error-icon";
+        otpIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+        otpWrap.appendChild(otpIcon);
+      }
       $('#error-alert-message').hide();
     }
 
