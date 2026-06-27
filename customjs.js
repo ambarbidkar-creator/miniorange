@@ -1652,9 +1652,11 @@
         ico.remove();
       });
 
-      // Remove the server-rendered error message (once user edits)
+      // Remove the server-rendered error message and prevent the observer
+      // from re-inserting it (set a dismissed flag once the user edits)
       var serverErr = document.getElementById("mo-cp-server-error");
       if (serverErr) serverErr.remove();
+      if (fpForm) fpForm.dataset.moServerErrDismissed = "true";
 
       // Hide message and show helper text
       if (errEl) {
@@ -1757,7 +1759,7 @@
        Guarded by #mo-cp-server-error so it appends ONCE (otherwise the
        observer re-runs this block and stacks duplicate messages). */
     var isPageHasError = errorOnPage();
-    if (isPageHasError && !document.getElementById("mo-cp-server-error")) {
+    if (isPageHasError && !document.getElementById("mo-cp-server-error") && !(fpForm && fpForm.dataset.moServerErrDismissed)) {
       console.log('IN ERROR SECTION ');
       var message = $('#error-alert-message .errorMessage li span').text().trim();
       var $cpWrap = $('.mo-pw-wrap');
