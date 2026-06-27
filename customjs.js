@@ -758,6 +758,7 @@
       pwField.classList.add("mo-input-error");
       if (!wrap.querySelector(".mo-error-icon")) {
         var pwErrIcon = document.createElement("span");
+        pwErrIcon.id = "mo-pw-server-icon";
         pwErrIcon.className = "mo-error-icon";
         pwErrIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
         wrap.appendChild(pwErrIcon);
@@ -812,11 +813,16 @@
       errorText = userErrorEl.textContent.trim();
     }
 
-    // Clean existing styled error indicators
+    // Clean existing styled error indicators.
+    // Preserve the server-error icon/state owned by applyPasswordStep
+    // (#mo-pw-server-icon) so its cross isn't wiped on every cycle.
+    var hasServerIcon = !!document.getElementById("mo-pw-server-icon");
     document.querySelectorAll(".mo-input-error").forEach(function (inp) {
+      if (hasServerIcon && inp.id === "plaintextPassword") return;
       inp.classList.remove("mo-input-error");
     });
     document.querySelectorAll(".mo-error-icon").forEach(function (ico) {
+      if (ico.id === "mo-pw-server-icon") return;
       ico.remove();
     });
     document.querySelectorAll(".mo-error-text").forEach(function (txt) {
