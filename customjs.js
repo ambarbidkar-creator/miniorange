@@ -1763,6 +1763,19 @@
       } else {
         $(newPasswordInput).after(cpErrHtml);
       }
+      /* Highlight both fields with red border + cross icon */
+      var CP_CROSS = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+      [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
+        if (!inp) return;
+        $(inp).addClass("border border-danger mo-input-error");
+        var w = inp.closest(".mo-pw-wrap");
+        if (w && !w.querySelector(".mo-error-icon")) {
+          var icon = document.createElement("span");
+          icon.className = "mo-error-icon";
+          icon.innerHTML = CP_CROSS;
+          w.appendChild(icon);
+        }
+      });
       $('#error-alert-message').hide();
     }
 
