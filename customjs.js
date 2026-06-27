@@ -1699,12 +1699,25 @@
       if (confirmPasswordInput.dataset.moMatchListener) return;
       confirmPasswordInput.dataset.moMatchListener = "true";
 
+      var MATCH_CROSS = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+
       function checkMatch() {
         var newVal = newPasswordInput.value;
         var confirmVal = confirmPasswordInput.value;
         if (confirmVal && newVal !== confirmVal) {
           $(newPasswordInput).addClass("border border-danger");
           $(confirmPasswordInput).addClass("border border-danger");
+          /* Red cross icon inside each field (same as requirement error) */
+          [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
+            inp.classList.add("mo-input-error");
+            var w = inp.closest(".mo-pw-wrap");
+            if (w && !w.querySelector(".mo-error-icon")) {
+              var icon = document.createElement("span");
+              icon.className = "mo-error-icon";
+              icon.innerHTML = MATCH_CROSS;
+              w.appendChild(icon);
+            }
+          });
           if (!document.getElementById("mo-match-error")) {
             var $newWrap = $('[name="password"]').closest(".mo-pw-wrap");
             ($newWrap.length ? $newWrap : $('[name="password"]'))
@@ -1713,6 +1726,15 @@
         } else {
           $(newPasswordInput).removeClass("border border-danger");
           $(confirmPasswordInput).removeClass("border border-danger");
+          /* Remove the red cross icons */
+          [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
+            inp.classList.remove("mo-input-error");
+            var w = inp.closest(".mo-pw-wrap");
+            if (w) {
+              var ic = w.querySelector(".mo-error-icon");
+              if (ic) ic.remove();
+            }
+          });
           $("#mo-match-error").remove();
         }
       }
