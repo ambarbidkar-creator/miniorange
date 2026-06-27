@@ -42,8 +42,9 @@
 
   function checkIsChangePass() {
     var path = window.location.pathname.toLowerCase();
-    if (path.indexOf("moas/idp/changepassword") !== -1 || 
-        path.indexOf("moas/idp/changeuserpassword") !== -1) {
+    if (path.indexOf("moas/idp/changepassword") !== -1 ||
+        path.indexOf("moas/idp/changeuserpassword") !== -1 ||
+        path.indexOf("moas/idp/updateuserpassword") !== -1) {
       return true;
     }
     if (document.getElementById("passwordform")) {
