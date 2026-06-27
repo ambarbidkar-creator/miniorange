@@ -88,6 +88,7 @@
   function applyPasswordSentMessage() {
     if (!checkIsPasswordSentMessage()) return;
     console.log('on passowrd sent message page');
+    $('.d-flex.flex-column.align-items-center.justify-content-center').css('height','100vh')
 
     /* Reuse the shared /login page styling (background, card, font,
        #mo-title, etc.) — same CSS the login page injects. */
