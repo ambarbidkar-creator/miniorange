@@ -1370,8 +1370,9 @@
       document.head.appendChild(otpSt);
     }
 
-    /* DOM changes — only once */
-    if (document.getElementById("mo-otp-done")) return;
+    /* Idempotent UI bits below run on EVERY call (incl. observer ticks after
+       the AJAX "resend OTP", which re-renders the OTP subtree without a page
+       reload) — each block is guarded so it neither duplicates nor stacks. */
     var otpInput = document.getElementById("otpToken");
     if (!otpInput) return;
 
@@ -1408,6 +1409,9 @@
     /* Cancel button */
     var cancelBtn = document.querySelector(".btn-cancel");
     if (cancelBtn) cancelBtn.textContent = tr("otp.cancel.button");
+
+    /* ── One-time-only below (server error handling + done marker) ── */
+    if (document.getElementById("mo-otp-done")) return;
 
     /* Mark done */
     var otpDone = document.createElement("span");
