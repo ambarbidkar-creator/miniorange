@@ -1384,14 +1384,19 @@
       modalHeader.insertBefore(otpTitle, modalHeader.firstChild);
     }
 
-    /* Label above OTP input */
-    if (!document.getElementById("mo-otp-lbl")) {
-      var otpLbl = document.createElement("label");
-      otpLbl.id = "mo-otp-lbl";
+    /* Label above OTP input — reuse a server-rendered label[for=otpToken]
+       if present, otherwise create one right before the input. Works whether
+       or not the page ships its own label. */
+    var otpLbl = document.getElementById("mo-otp-lbl") || otpInput.parentNode.querySelector('label[for="otpToken"]');
+    if (!otpLbl) {
+      otpLbl = document.createElement("label");
       otpLbl.setAttribute("for", "otpToken");
-      otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
       otpInput.parentNode.insertBefore(otpLbl, otpInput);
     }
+    otpLbl.id = "mo-otp-lbl";
+    otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
+
+    $('#validateIdentityForm').addClass('p-0');
 
     /* Placeholder */
     otpInput.setAttribute("placeholder", tr("otp.field.placeholder"));
