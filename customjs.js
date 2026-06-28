@@ -1,8 +1,7 @@
 (function () {
   "use strict";
   document.getElementById('login-main-body')
-    .style.setProperty('display', 'block', 'important'); 
-    
+    .style.setProperty('visibility', 'visible', 'important');
     
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
