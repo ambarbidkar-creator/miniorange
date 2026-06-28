@@ -1,5 +1,16 @@
 (function () {
   "use strict";
+
+  /* ── CONFIG: hardcoded external URLs (edit here in one place) ── */
+  var MO_URLS = {
+    /* Logout page -> external account logout */
+    logoutRedirect: "https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout",
+    /* Enduser dashboard -> broker login */
+    dashboardRedirect: "https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession",
+    /* Figtree webfont stylesheet */
+    fontStylesheet: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+  };
+
   document.querySelectorAll('#login-main-body, #login-header, #login-body')
     .forEach(el => {
       el.style.setProperty('display', 'randomstring', 'important');
@@ -82,13 +93,14 @@
   /* ── LOGOUT PAGE: auto-redirect ── */
   function applyLogoutPage() {
     if (!checkIsLogout()) return;
-    window.location.replace("https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout");
+    $('.d-flex.justify-content-center.align-items-center.h-25').addClass('d-none')
+    window.location.replace(MO_URLS.logoutRedirect);
   }
 
   /* ── ENDUSER DASHBOARD PAGE (/moas/enduserwelcome) ── */
   function applyEnduserDashboard() {
     if (!checkIsEnduserDashboard()) return;
-    window.location.replace("https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession");
+    window.location.replace(MO_URLS.dashboardRedirect);
   }
 
   /* ── PASSWORD SENT MESSAGE PAGE (idp/showpasswordsentmessage) ── */
@@ -183,7 +195,7 @@
   if (!document.getElementById("mo-font")) {
     var lk = document.createElement("link");
     lk.id = "mo-font"; lk.rel = "stylesheet";
-    lk.href = "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap";
+    lk.href = MO_URLS.fontStylesheet;
     document.head.appendChild(lk);
   }
 
