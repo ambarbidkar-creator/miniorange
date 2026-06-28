@@ -1396,7 +1396,7 @@
     otpLbl.id = "mo-otp-lbl";
     otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
 
-    $('#validateIdentityForm').addClass('p-0');
+    $('#validateIdentityForm').removeClass('p-4').addClass('p-0');
 
     /* Placeholder */
     otpInput.setAttribute("placeholder", tr("otp.field.placeholder"));
