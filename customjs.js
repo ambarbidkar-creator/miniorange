@@ -364,6 +364,7 @@
       "changepw.req.lastname": "More than 2 characters of LastName should not be present",
       "changepw.req.username": "More than 2 characters of Username should not be present",
       "changepw.req.email": "More than 2 characters of Email should not be present.",
+      "changepw.req.pii": "Does not contain more than 2 consecutive characters of your first name, last name, or email address.",
       "changepw.error.required": "New password is required.",
       "changepw.error.requirements": "Please satisfy all password requirements.",
       "changepw.error.mismatch": "The password don't match. Please try again"
@@ -397,6 +398,7 @@
       "changepw.req.lastname": "Nicht mehr als 2 Zeichen des Nachnamens dürfen vorhanden sein",
       "changepw.req.username": "Nicht mehr als 2 Zeichen des Benutzernamens dürfen vorhanden sein",
       "changepw.req.email": "Nicht mehr als 2 Zeichen der E-Mail dürfen vorhanden sein.",
+      "changepw.req.pii": "Enthält nicht mehr als 2 aufeinanderfolgende Zeichen Ihres Vornamens, Nachnamens oder Ihrer E-Mail-Adresse.",
       "changepw.error.required": "Neues Passwort ist erforderlich.",
       "changepw.error.requirements": "Bitte erfüllen Sie alle Passwortanforderungen.",
       "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut."
@@ -430,6 +432,7 @@
       "changepw.req.lastname": "Non devono essere presenti più di 2 caratteri del cognome",
       "changepw.req.username": "Non devono essere presenti più di 2 caratteri del nome utente",
       "changepw.req.email": "Non devono essere presenti più di 2 caratteri dell'email.",
+      "changepw.req.pii": "Non contiene più di 2 caratteri consecutivi del tuo nome, cognome o indirizzo email.",
       "changepw.error.required": "La nuova password è obbligatoria.",
       "changepw.error.requirements": "Soddisfa tutti i requisiti della password.",
       "changepw.error.mismatch": "Le password non corrispondono. Riprova."
@@ -463,6 +466,7 @@
       "changepw.req.lastname": "يجب ألا يحتوي على أكثر من حرفين من اسم العائلة",
       "changepw.req.username": "يجب ألا يحتوي على أكثر من حرفين من اسم المستخدم",
       "changepw.req.email": "يجب ألا يحتوي على أكثر من حرفين من البريد الإلكتروني.",
+      "changepw.req.pii": "لا يحتوي على أكثر من حرفين متتاليين من اسمك الأول أو اسم العائلة أو عنوان بريدك الإلكتروني.",
       "changepw.error.required": "كلمة المرور الجديدة مطلوبة.",
       "changepw.error.requirements": "يرجى استيفاء جميع متطلبات كلمة المرور.",
       "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى."
@@ -496,6 +500,7 @@
       "changepw.req.lastname": "Não devem estar presentes mais de 2 caracteres do sobrenome",
       "changepw.req.username": "Não devem estar presentes mais de 2 caracteres do nome de usuário",
       "changepw.req.email": "Não devem estar presentes mais de 2 caracteres do e-mail.",
+      "changepw.req.pii": "Não contém mais de 2 caracteres consecutivos do seu nome, sobrenome ou endereço de e-mail.",
       "changepw.error.required": "A nova senha é obrigatória.",
       "changepw.error.requirements": "Atenda a todos os requisitos da senha.",
       "changepw.error.mismatch": "As senhas não coincidem. Tente novamente."
@@ -529,6 +534,7 @@
       "changepw.req.lastname": "No debe haber más de 2 caracteres del apellido",
       "changepw.req.username": "No debe haber más de 2 caracteres del nombre de usuario",
       "changepw.req.email": "No debe haber más de 2 caracteres del correo electrónico.",
+      "changepw.req.pii": "No contiene más de 2 caracteres consecutivos de su nombre, apellido o dirección de correo electrónico.",
       "changepw.error.required": "La nueva contraseña es obligatoria.",
       "changepw.error.requirements": "Cumpla con todos los requisitos de la contraseña.",
       "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo."
@@ -562,6 +568,7 @@
       "changepw.req.lastname": "Pas plus de 2 caractères du nom de famille ne doivent être présents",
       "changepw.req.username": "Pas plus de 2 caractères du nom d'utilisateur ne doivent être présents",
       "changepw.req.email": "Pas plus de 2 caractères de l'e-mail ne doivent être présents.",
+      "changepw.req.pii": "Ne contient pas plus de 2 caractères consécutifs de votre prénom, nom ou adresse e-mail.",
       "changepw.error.required": "Le nouveau mot de passe est requis.",
       "changepw.error.requirements": "Veuillez satisfaire à toutes les exigences du mot de passe.",
       "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer."
@@ -595,6 +602,7 @@
       "changepw.req.lastname": "Niet meer dan 2 tekens van de achternaam mogen aanwezig zijn",
       "changepw.req.username": "Niet meer dan 2 tekens van de gebruikersnaam mogen aanwezig zijn",
       "changepw.req.email": "Niet meer dan 2 tekens van het e-mailadres mogen aanwezig zijn.",
+      "changepw.req.pii": "Bevat niet meer dan 2 opeenvolgende tekens van uw voornaam, achternaam of e-mailadres.",
       "changepw.error.required": "Nieuw wachtwoord is vereist.",
       "changepw.error.requirements": "Voldoe aan alle wachtwoordvereisten.",
       "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw."
@@ -1702,10 +1710,7 @@
         "changepw.req.number",
         "changepw.req.uppercase",
         "changepw.req.symbol",
-        "changepw.req.firstname",
-        "changepw.req.lastname",
-        "changepw.req.username",
-        "changepw.req.email"
+        "changepw.req.pii"
       ];
       moReqKeys.forEach(function (k) {
         var li = document.createElement("li");
@@ -1806,8 +1811,8 @@
         marker.dataset.state = state;
         if (state === "dot") { marker.textContent = "•"; marker.style.color = "#6b7a8d"; }
         else if (state === "empty") { marker.textContent = ""; marker.style.color = ""; }
-        else if (state === "ok") { marker.textContent = "✓"; marker.style.color = "#1b8f3a"; }
-        else { marker.textContent = "✗"; marker.style.color = "#e02020"; }
+        else if (state === "ok") { marker.textContent = "✔"; marker.style.color = "#1b8f3a"; }
+        else { marker.textContent = "○"; marker.style.color = "#6b7a8d"; }  /* not satisfied -> hollow dot */
       });
     }
 
