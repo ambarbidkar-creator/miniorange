@@ -6,7 +6,7 @@
     });
   document.querySelectorAll('#login-body')
     .forEach(el => {
-      el.style.setProperty('display', 'block', 'important');
+      el.style.setProperty('display', 'flex', 'important');
     });
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
