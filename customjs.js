@@ -1406,6 +1406,9 @@
       }
       $('#error-alert-message').hide();
     }
+
+    $('.btn.mo-btn-primary.btn-block.custom-button.w-100').parent().addClass('d-flex');
+    $('#go-back-link').parent().hide();
   }
 
   /* ── OTP VERIFY PAGE (/moas/idp/validatenextfactor) ── */
@@ -1579,6 +1582,7 @@
   function applyChangePasswordPage() {
     if (!checkIsChangePass()) return;
 
+    $('br').remove();
     /* CSS — inject once */
     if (!document.getElementById("mo-cp-css")) {
       var cpCss =
