@@ -1889,17 +1889,13 @@
     function calcStrength(v) {
       if (!v) return 0;
       var score = 0;
-      if (v.length >= 8) score += 15;
-      if (v.length >= 12) score += 15;
+      if (v.length >= 8) score += 30;
+      if (v.length >= 12) score += 10;
       if (v.length >= 16) score += 10;
-      if (/[a-z]/.test(v)) score += 10;                                  /* lowercase */
-      if (/[A-Z]/.test(v)) score += 10;                                  /* uppercase */
-      if ((v.match(/[A-Z]/g) || []).length >= 2) score += 5;            /* 2+ uppercase */
-      if (/[0-9]/.test(v)) score += 10;                                  /* a digit */
-      if ((v.match(/[0-9]/g) || []).length >= 2) score += 5;           /* 2+ digits */
-      var sp = (v.match(/[!@#$.%^&*_-]/g) || []).length;
-      if (sp >= 1) score += 10;                                          /* a symbol */
-      if (sp >= 2) score += 10;                                          /* 2+ symbols */
+      if (/[a-z]/.test(v)) score += 10;   /* lowercase */
+      if (/[A-Z]/.test(v)) score += 15;   /* uppercase */
+      if (/[0-9]/.test(v)) score += 15;   /* digit */
+      if (/[!@#$.%^&*_-]/.test(v)) score += 20;   /* symbol */
       return Math.min(score, 100);
     }
 
@@ -1916,9 +1912,9 @@
       if (!val) { box.style.display = "none"; return; }
       box.style.display = "block";
       var tier, color;
-      if (score < 40) { tier = tr("changepw.strength.weak"); color = "#ef2f2f"; }
-      else if (score < 70) { tier = tr("changepw.strength.fair"); color = "#f59e0b"; }
-      else if (score < 90) { tier = tr("changepw.strength.good"); color = "#0A55D7"; }
+      if (score < 30) { tier = tr("changepw.strength.weak"); color = "#ef2f2f"; }
+      else if (score < 55) { tier = tr("changepw.strength.fair"); color = "#f59e0b"; }
+      else if (score < 75) { tier = tr("changepw.strength.good"); color = "#0A55D7"; }
       else { tier = tr("changepw.strength.strong"); color = "#1b8f3a"; }
       if (fill) { fill.style.width = score + "%"; fill.style.background = color; }
       if (label) { label.textContent = tr("changepw.strength.label") + ": " + tier; label.style.color = color; }
