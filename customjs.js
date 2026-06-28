@@ -796,6 +796,18 @@
       }
     }
 
+    /* Clear all login error indicators once the user edits the password
+       (message, red borders, and both cross icons) — like the reset page. */
+    if (!pwField.dataset.moLoginClear) {
+      pwField.dataset.moLoginClear = "true";
+      pwField.addEventListener("input", function () {
+        $('#mo-pw-error').remove();
+        $('#mo-pw-server-icon, #mo-email-server-icon').remove();
+        $('#username, #plaintextPassword').removeClass('border border-danger mo-input-error');
+        $('.mo-user-display').removeClass('border border-danger').css('padding-right', '');
+      });
+    }
+
     /* Forgot password link only (no Remember me checkbox) */
     if (!document.getElementById("mo-bottom")) {
       var row = document.createElement("div"); row.id = "mo-bottom";
