@@ -1305,50 +1305,6 @@
       el.style.setProperty("display", "none", "important");
     });
 
-    /* Server-rendered error banner -> show below the email field, with a red
-       border + cross icon on the input (same look as other pages). Guarded by
-       #mo-fp-error + a dismissed flag so it neither stacks nor re-appears once
-       the user edits. */
-    var fpHasError = errorOnPage();
-    if (fpHasError && !document.getElementById("mo-fp-error") && !(emailInput && emailInput.dataset.moFpErrDismissed)) {
-      console.log('IN ERROR SECTION ');
-      var fpMessage = $('#error-alert-message .errorMessage li span').text().trim();
-      /* Wrap the input in a relative flex container so the cross can sit inside it */
-      if (!emailInput.parentNode.classList.contains("mo-fp-inputwrap")) {
-        var fpIw = document.createElement("div");
-        fpIw.className = "mo-fp-inputwrap";
-        fpIw.style.position = "relative";
-        fpIw.style.display = "flex";
-        fpIw.style.alignItems = "center";
-        fpIw.style.width = "100%";
-        emailInput.parentNode.insertBefore(fpIw, emailInput);
-        fpIw.appendChild(emailInput);
-      }
-      $(emailInput).addClass("border border-danger mo-input-error");
-      var fpIwrap = emailInput.closest(".mo-fp-inputwrap");
-      if (fpIwrap && !fpIwrap.querySelector(".mo-error-icon")) {
-        var fpIcon = document.createElement("span");
-        fpIcon.id = "mo-fp-error-icon";
-        fpIcon.className = "mo-error-icon";
-        fpIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
-        fpIwrap.appendChild(fpIcon);
-      }
-      /* Message directly below the email input (above the helper text) */
-      var fpAnchor = emailInput.closest(".mo-fp-inputwrap") || emailInput;
-      $(fpAnchor).after('<div id="mo-fp-error" class="error-message text-start" style="color:red;font-size:13px;margin-top:6px;">' + fpMessage + '</div>');
-      /* Clear once the user edits the email again */
-      if (!emailInput.dataset.moFpClear) {
-        emailInput.dataset.moFpClear = "true";
-        emailInput.addEventListener("input", function () {
-          this.dataset.moFpErrDismissed = "true";
-          $('#mo-fp-error').remove();
-          $('#mo-fp-error-icon').remove();
-          $(this).removeClass("border border-danger mo-input-error");
-        });
-      }
-      $('#error-alert-message').hide();
-    }
-
     /* ── DOM injection — only once ── */
     if (document.getElementById("mo-forgot-done")) return;
 
@@ -1409,6 +1365,47 @@
     document.body.appendChild(done);
 
     $('.btn.mo-btn-primary.btn-block.custom-button.w-100').parent().addClass('px-0')
+
+    /* Server-rendered error banner -> red border + cross on the input and a
+       message directly below it. Runs after the label exists so the wrap won't
+       trap the label. Guarded so it doesn't stack; cleared once the user edits. */
+    var fpHasError = errorOnPage();
+    if (fpHasError && !document.getElementById("mo-fp-error")) {
+      console.log('IN ERROR SECTION ');
+      var fpMessage = $('#error-alert-message .errorMessage li span').text().trim();
+      /* Wrap ONLY the input in a relative flex container for the cross icon */
+      if (!emailInput.parentNode.classList.contains("mo-fp-inputwrap")) {
+        var fpIw = document.createElement("div");
+        fpIw.className = "mo-fp-inputwrap";
+        fpIw.style.position = "relative";
+        fpIw.style.display = "flex";
+        fpIw.style.alignItems = "center";
+        fpIw.style.width = "100%";
+        emailInput.parentNode.insertBefore(fpIw, emailInput);
+        fpIw.appendChild(emailInput);
+      }
+      $(emailInput).addClass("border border-danger mo-input-error");
+      var fpIwrap = emailInput.closest(".mo-fp-inputwrap");
+      if (fpIwrap && !fpIwrap.querySelector(".mo-error-icon")) {
+        var fpIcon = document.createElement("span");
+        fpIcon.id = "mo-fp-error-icon";
+        fpIcon.className = "mo-error-icon";
+        fpIcon.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+        fpIwrap.appendChild(fpIcon);
+      }
+      /* Message directly below the input wrapper */
+      $(fpIwrap || emailInput).after('<div id="mo-fp-error" class="error-message text-start" style="color:red;font-size:13px;margin-top:6px;">' + fpMessage + '</div>');
+      /* Clear once the user edits the email again */
+      if (!emailInput.dataset.moFpClear) {
+        emailInput.dataset.moFpClear = "true";
+        emailInput.addEventListener("input", function () {
+          $('#mo-fp-error').remove();
+          $('#mo-fp-error-icon').remove();
+          $(this).removeClass("border border-danger mo-input-error");
+        });
+      }
+      $('#error-alert-message').hide();
+    }
   }
 
   /* ── OTP VERIFY PAGE (/moas/idp/validatenextfactor) ── */
