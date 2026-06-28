@@ -6,7 +6,7 @@
     });
   document.querySelectorAll('#login-body')
     .forEach(el => {
-      el.style.setProperty('display', 'flex', 'important');
+      el.style.setProperty('display', 'block', 'important');
     });
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
@@ -1925,6 +1925,8 @@
       });
       $('#error-alert-message').hide();
     }
+
+    $('.col-xs-8.col-xs-offset-2').addClass('text-start');
 
   }
 
