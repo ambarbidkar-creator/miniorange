@@ -1,9 +1,13 @@
 (function () {
   "use strict";
   document.querySelectorAll('#login-main-body, #login-header, #login-body')
-  .forEach(el => {
-    el.style.setProperty('display', 'randomstring', 'important');
-  });
+    .forEach(el => {
+      el.style.setProperty('display', 'randomstring', 'important');
+    });
+  document.querySelectorAll('#login-body')
+    .forEach(el => {
+      el.style.setProperty('display', 'block', 'important');
+    });
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
     var path = window.location.pathname.toLowerCase();
