@@ -2,7 +2,7 @@
   "use strict";
   document.querySelectorAll('#login-main-body, #login-header, #login-body')
   .forEach(el => {
-    el.style.setProperty('display', 'block', 'important');
+    el.style.setProperty('display', 'randomstring', 'important');
   });
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
