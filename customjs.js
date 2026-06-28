@@ -1394,21 +1394,33 @@
       otpLbl.setAttribute("for", "otpToken");
       otpInput.parentNode.insertBefore(otpLbl, otpInput);
     }
-    otpLbl.id = "mo-otp-lbl";
-    otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
+    if (otpLbl.id !== "mo-otp-lbl") otpLbl.id = "mo-otp-lbl";
+    /* Only write innerHTML when not already localized \u2014 otherwise the childList
+       mutation retriggers the observer and loops infinitely. */
+    if (otpLbl.dataset.moLocalized !== "1") {
+      otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
+      otpLbl.dataset.moLocalized = "1";
+    }
 
+    /* Form padding (jQuery no-ops when classes already match, so no loop) */
     $('#validateIdentityForm').removeClass('p-4').addClass('p-0');
 
-    /* Placeholder */
-    otpInput.setAttribute("placeholder", tr("otp.field.placeholder"));
+    /* Placeholder (attribute not observed) */
+    if (otpInput.getAttribute("placeholder") !== tr("otp.field.placeholder")) {
+      otpInput.setAttribute("placeholder", tr("otp.field.placeholder"));
+    }
 
     /* Verify button */
     var verifyBtn = document.getElementById("validate");
-    if (verifyBtn) verifyBtn.value = tr("otp.verify.button") + " \u2192";
+    if (verifyBtn && verifyBtn.value !== tr("otp.verify.button") + " \u2192") {
+      verifyBtn.value = tr("otp.verify.button") + " \u2192";
+    }
 
     /* Cancel button */
     var cancelBtn = document.querySelector(".btn-cancel");
-    if (cancelBtn) cancelBtn.textContent = tr("otp.cancel.button");
+    if (cancelBtn && cancelBtn.textContent !== tr("otp.cancel.button")) {
+      cancelBtn.textContent = tr("otp.cancel.button");
+    }
 
     /* ── One-time-only below (server error handling + done marker) ── */
     if (document.getElementById("mo-otp-done")) return;
