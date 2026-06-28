@@ -1692,7 +1692,8 @@
       helper.style.lineHeight = "1.6";
       helper.style.marginTop = "-6px";
       helper.style.marginBottom = "16px";
-      helper.style.paddingLeft = "18px";
+      helper.style.paddingLeft = "0";
+      helper.style.listStyle = "none";
       helper.style.textAlign = "left";
       helper.style.display = "block";
       var moReqKeys = [
@@ -1708,10 +1709,24 @@
       ];
       moReqKeys.forEach(function (k) {
         var li = document.createElement("li");
-        li.textContent = tr(k);
+        li.dataset.req = k;
+        li.style.display = "flex";
+        li.style.alignItems = "flex-start";
+        li.style.gap = "6px";
+        var marker = document.createElement("span");
+        marker.className = "mo-req-marker";
+        marker.style.flexShrink = "0";
+        marker.style.width = "14px";
+        marker.style.textAlign = "center";
+        marker.style.fontWeight = "700";
+        marker.style.lineHeight = "1.6";
+        var txt = document.createElement("span");
+        txt.textContent = tr(k);
+        li.appendChild(marker);
+        li.appendChild(txt);
         helper.appendChild(li);
       });
-      
+
       newPasswordWrap.parentNode.insertBefore(errorText, newPasswordWrap.nextSibling);
       newPasswordWrap.parentNode.insertBefore(helper, newPasswordWrap.nextSibling);
     }
@@ -1764,13 +1779,51 @@
       });
     }
 
+    /* Live green-tick / red-cross on our visible requirements list.
+       Empty field -> no marker on the 5 character rules. The 4 name/email
+       rules always show a plain dot (we don't have that data client-side). */
+    function updateMoReqList(val) {
+      var list = document.getElementById("mo-cp-helper-text");
+      if (!list) return;
+      var checks = {
+        "changepw.req.min": val.length >= 8,
+        "changepw.req.max": val.length <= 50,
+        "changepw.req.number": /[0-9]/.test(val),
+        "changepw.req.uppercase": /[A-Z]/.test(val),
+        "changepw.req.symbol": /[!@#$.%^&*_-]/.test(val)
+      };
+      list.querySelectorAll("li[data-req]").forEach(function (li) {
+        var key = li.dataset.req;
+        var marker = li.querySelector(".mo-req-marker");
+        if (!marker) return;
+        var state;
+        if (!(key in checks)) state = "dot";      /* name/email -> plain dot */
+        else if (!val) state = "empty";           /* empty field -> no marker */
+        else state = checks[key] ? "ok" : "bad";
+        /* Only touch the DOM when the state actually changes — otherwise the
+           textContent/style writes retrigger the observer and loop. */
+        if (marker.dataset.state === state) return;
+        marker.dataset.state = state;
+        if (state === "dot") { marker.textContent = "•"; marker.style.color = "#6b7a8d"; }
+        else if (state === "empty") { marker.textContent = ""; marker.style.color = ""; }
+        else if (state === "ok") { marker.textContent = "✓"; marker.style.color = "#1b8f3a"; }
+        else { marker.textContent = "✗"; marker.style.color = "#e02020"; }
+      });
+    }
+
     /* Bind events for dynamic updates */
     if (newPasswordInput && !newPasswordInput.dataset.moListener) {
       newPasswordInput.dataset.moListener = "true";
       newPasswordInput.addEventListener("input", updatePasswordRequirementsAndStrength);
       newPasswordInput.addEventListener("input", clearCpError);
+      newPasswordInput.addEventListener("input", function () {
+        updateMoReqList(newPasswordInput.value || "");
+      });
       updatePasswordRequirementsAndStrength();
     }
+    /* Initial paint (handles dots + empty-state, runs even if listeners
+       were already bound on a previous call) */
+    updateMoReqList(newPasswordInput ? (newPasswordInput.value || "") : "");
     if (confirmPasswordInput && !confirmPasswordInput.dataset.moListener) {
       confirmPasswordInput.dataset.moListener = "true";
       confirmPasswordInput.addEventListener("input", clearCpError);
