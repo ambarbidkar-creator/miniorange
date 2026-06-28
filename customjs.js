@@ -1,6 +1,9 @@
 (function () {
   "use strict";
-
+  document.getElementById('login-main-body')
+    .style.setProperty('display', 'block', 'important'); 
+    
+    
   /* ── PAGE DETECTION HELPERS ── */
   function checkIsLogin() {
     var path = window.location.pathname.toLowerCase();
