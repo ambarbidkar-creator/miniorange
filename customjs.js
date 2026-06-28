@@ -365,6 +365,11 @@
       "changepw.req.username": "More than 2 characters of Username should not be present",
       "changepw.req.email": "More than 2 characters of Email should not be present.",
       "changepw.req.pii": "Does not contain more than 2 consecutive characters of your first name, last name, or email address.",
+      "changepw.strength.label": "Password strength",
+      "changepw.strength.weak": "Weak",
+      "changepw.strength.fair": "Fair",
+      "changepw.strength.good": "Good",
+      "changepw.strength.strong": "Strong",
       "changepw.error.required": "New password is required.",
       "changepw.error.requirements": "Please satisfy all password requirements.",
       "changepw.error.mismatch": "The password don't match. Please try again"
@@ -399,6 +404,11 @@
       "changepw.req.username": "Nicht mehr als 2 Zeichen des Benutzernamens dürfen vorhanden sein",
       "changepw.req.email": "Nicht mehr als 2 Zeichen der E-Mail dürfen vorhanden sein.",
       "changepw.req.pii": "Enthält nicht mehr als 2 aufeinanderfolgende Zeichen Ihres Vornamens, Nachnamens oder Ihrer E-Mail-Adresse.",
+      "changepw.strength.label": "Passwortstärke",
+      "changepw.strength.weak": "Schwach",
+      "changepw.strength.fair": "Mäßig",
+      "changepw.strength.good": "Gut",
+      "changepw.strength.strong": "Stark",
       "changepw.error.required": "Neues Passwort ist erforderlich.",
       "changepw.error.requirements": "Bitte erfüllen Sie alle Passwortanforderungen.",
       "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut."
@@ -433,6 +443,11 @@
       "changepw.req.username": "Non devono essere presenti più di 2 caratteri del nome utente",
       "changepw.req.email": "Non devono essere presenti più di 2 caratteri dell'email.",
       "changepw.req.pii": "Non contiene più di 2 caratteri consecutivi del tuo nome, cognome o indirizzo email.",
+      "changepw.strength.label": "Sicurezza della password",
+      "changepw.strength.weak": "Debole",
+      "changepw.strength.fair": "Discreta",
+      "changepw.strength.good": "Buona",
+      "changepw.strength.strong": "Forte",
       "changepw.error.required": "La nuova password è obbligatoria.",
       "changepw.error.requirements": "Soddisfa tutti i requisiti della password.",
       "changepw.error.mismatch": "Le password non corrispondono. Riprova."
@@ -467,6 +482,11 @@
       "changepw.req.username": "يجب ألا يحتوي على أكثر من حرفين من اسم المستخدم",
       "changepw.req.email": "يجب ألا يحتوي على أكثر من حرفين من البريد الإلكتروني.",
       "changepw.req.pii": "لا يحتوي على أكثر من حرفين متتاليين من اسمك الأول أو اسم العائلة أو عنوان بريدك الإلكتروني.",
+      "changepw.strength.label": "قوة كلمة المرور",
+      "changepw.strength.weak": "ضعيفة",
+      "changepw.strength.fair": "متوسطة",
+      "changepw.strength.good": "جيدة",
+      "changepw.strength.strong": "قوية",
       "changepw.error.required": "كلمة المرور الجديدة مطلوبة.",
       "changepw.error.requirements": "يرجى استيفاء جميع متطلبات كلمة المرور.",
       "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى."
@@ -501,6 +521,11 @@
       "changepw.req.username": "Não devem estar presentes mais de 2 caracteres do nome de usuário",
       "changepw.req.email": "Não devem estar presentes mais de 2 caracteres do e-mail.",
       "changepw.req.pii": "Não contém mais de 2 caracteres consecutivos do seu nome, sobrenome ou endereço de e-mail.",
+      "changepw.strength.label": "Força da senha",
+      "changepw.strength.weak": "Fraca",
+      "changepw.strength.fair": "Razoável",
+      "changepw.strength.good": "Boa",
+      "changepw.strength.strong": "Forte",
       "changepw.error.required": "A nova senha é obrigatória.",
       "changepw.error.requirements": "Atenda a todos os requisitos da senha.",
       "changepw.error.mismatch": "As senhas não coincidem. Tente novamente."
@@ -535,6 +560,11 @@
       "changepw.req.username": "No debe haber más de 2 caracteres del nombre de usuario",
       "changepw.req.email": "No debe haber más de 2 caracteres del correo electrónico.",
       "changepw.req.pii": "No contiene más de 2 caracteres consecutivos de su nombre, apellido o dirección de correo electrónico.",
+      "changepw.strength.label": "Seguridad de la contraseña",
+      "changepw.strength.weak": "Débil",
+      "changepw.strength.fair": "Aceptable",
+      "changepw.strength.good": "Buena",
+      "changepw.strength.strong": "Fuerte",
       "changepw.error.required": "La nueva contraseña es obligatoria.",
       "changepw.error.requirements": "Cumpla con todos los requisitos de la contraseña.",
       "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo."
@@ -569,6 +599,11 @@
       "changepw.req.username": "Pas plus de 2 caractères du nom d'utilisateur ne doivent être présents",
       "changepw.req.email": "Pas plus de 2 caractères de l'e-mail ne doivent être présents.",
       "changepw.req.pii": "Ne contient pas plus de 2 caractères consécutifs de votre prénom, nom ou adresse e-mail.",
+      "changepw.strength.label": "Force du mot de passe",
+      "changepw.strength.weak": "Faible",
+      "changepw.strength.fair": "Moyen",
+      "changepw.strength.good": "Bon",
+      "changepw.strength.strong": "Fort",
       "changepw.error.required": "Le nouveau mot de passe est requis.",
       "changepw.error.requirements": "Veuillez satisfaire à toutes les exigences du mot de passe.",
       "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer."
@@ -603,6 +638,11 @@
       "changepw.req.username": "Niet meer dan 2 tekens van de gebruikersnaam mogen aanwezig zijn",
       "changepw.req.email": "Niet meer dan 2 tekens van het e-mailadres mogen aanwezig zijn.",
       "changepw.req.pii": "Bevat niet meer dan 2 opeenvolgende tekens van uw voornaam, achternaam of e-mailadres.",
+      "changepw.strength.label": "Wachtwoordsterkte",
+      "changepw.strength.weak": "Zwak",
+      "changepw.strength.fair": "Redelijk",
+      "changepw.strength.good": "Goed",
+      "changepw.strength.strong": "Sterk",
       "changepw.error.required": "Nieuw wachtwoord is vereist.",
       "changepw.error.requirements": "Voldoe aan alle wachtwoordvereisten.",
       "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw."
@@ -1734,6 +1774,33 @@
 
       newPasswordWrap.parentNode.insertBefore(errorText, newPasswordWrap.nextSibling);
       newPasswordWrap.parentNode.insertBefore(helper, newPasswordWrap.nextSibling);
+
+      /* Password strength meter (below the policy list) */
+      var strengthBox = document.createElement("div");
+      strengthBox.id = "mo-cp-strength";
+      strengthBox.style.margin = "4px 0 16px";
+      strengthBox.style.display = "none";
+      var track = document.createElement("div");
+      track.style.height = "6px";
+      track.style.background = "#e0e7ef";
+      track.style.borderRadius = "4px";
+      track.style.overflow = "hidden";
+      var fill = document.createElement("div");
+      fill.className = "mo-strength-fill";
+      fill.style.height = "100%";
+      fill.style.width = "0";
+      fill.style.background = "#ef2f2f";
+      fill.style.transition = "width .2s, background .2s";
+      track.appendChild(fill);
+      var slabel = document.createElement("div");
+      slabel.className = "mo-strength-label";
+      slabel.style.fontFamily = "'Figtree', sans-serif";
+      slabel.style.fontSize = "12px";
+      slabel.style.fontWeight = "600";
+      slabel.style.marginTop = "6px";
+      strengthBox.appendChild(track);
+      strengthBox.appendChild(slabel);
+      helper.parentNode.insertBefore(strengthBox, helper.nextSibling);
     }
 
     /* Dynamic Validation Function (keeps list updated behind the scenes for validation checks) */
@@ -1816,6 +1883,47 @@
       });
     }
 
+    /* Password strength score (0-100) — graduated by composition, not just
+       "all rules met": rewards length tiers, mixed case, multiple digits and
+       multiple special characters. */
+    function calcStrength(v) {
+      if (!v) return 0;
+      var score = 0;
+      if (v.length >= 8) score += 15;
+      if (v.length >= 12) score += 15;
+      if (v.length >= 16) score += 10;
+      if (/[a-z]/.test(v)) score += 10;                                  /* lowercase */
+      if (/[A-Z]/.test(v)) score += 10;                                  /* uppercase */
+      if ((v.match(/[A-Z]/g) || []).length >= 2) score += 5;            /* 2+ uppercase */
+      if (/[0-9]/.test(v)) score += 10;                                  /* a digit */
+      if ((v.match(/[0-9]/g) || []).length >= 2) score += 5;           /* 2+ digits */
+      var sp = (v.match(/[!@#$.%^&*_-]/g) || []).length;
+      if (sp >= 1) score += 10;                                          /* a symbol */
+      if (sp >= 2) score += 10;                                          /* 2+ symbols */
+      return Math.min(score, 100);
+    }
+
+    function updateStrength(val) {
+      var box = document.getElementById("mo-cp-strength");
+      if (!box) return;
+      var score = calcStrength(val);
+      /* Guard on score so observer ticks with the same value don't rewrite
+         style/text (which would retrigger the observer and loop). */
+      if (box.dataset.score === String(score)) return;
+      box.dataset.score = String(score);
+      var fill = box.querySelector(".mo-strength-fill");
+      var label = box.querySelector(".mo-strength-label");
+      if (!val) { box.style.display = "none"; return; }
+      box.style.display = "block";
+      var tier, color;
+      if (score < 40) { tier = tr("changepw.strength.weak"); color = "#ef2f2f"; }
+      else if (score < 70) { tier = tr("changepw.strength.fair"); color = "#f59e0b"; }
+      else if (score < 90) { tier = tr("changepw.strength.good"); color = "#0A55D7"; }
+      else { tier = tr("changepw.strength.strong"); color = "#1b8f3a"; }
+      if (fill) { fill.style.width = score + "%"; fill.style.background = color; }
+      if (label) { label.textContent = tr("changepw.strength.label") + ": " + tier; label.style.color = color; }
+    }
+
     /* Bind events for dynamic updates */
     if (newPasswordInput && !newPasswordInput.dataset.moListener) {
       newPasswordInput.dataset.moListener = "true";
@@ -1823,12 +1931,14 @@
       newPasswordInput.addEventListener("input", clearCpError);
       newPasswordInput.addEventListener("input", function () {
         updateMoReqList(newPasswordInput.value || "");
+        updateStrength(newPasswordInput.value || "");
       });
       updatePasswordRequirementsAndStrength();
     }
     /* Initial paint (handles dots + empty-state, runs even if listeners
        were already bound on a previous call) */
     updateMoReqList(newPasswordInput ? (newPasswordInput.value || "") : "");
+    updateStrength(newPasswordInput ? (newPasswordInput.value || "") : "");
     if (confirmPasswordInput && !confirmPasswordInput.dataset.moListener) {
       confirmPasswordInput.dataset.moListener = "true";
       confirmPasswordInput.addEventListener("input", clearCpError);
