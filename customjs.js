@@ -1149,6 +1149,8 @@
 
     var wrapper = document.getElementById("login-wrapper");
     if (wrapper) wrapper.querySelectorAll("hr,br").forEach(function (el) { el.style.display = "none"; });
+
+    $('body').addClass('h-100 align-items-center');
   }
 
   /* ── FORGOT PASSWORD PAGE (/moas/idp/forgotpassword) ── */
@@ -1581,7 +1583,8 @@
   /* ── CHANGE PASSWORD PAGE (/moas/idp/changepassword) ── */
   function applyChangePasswordPage() {
     if (!checkIsChangePass()) return;
-
+    $('.col-xs-8.col-xs-offset-2').addClass('text-start');
+    $('.form-group').addClass('text-start');
     $('br').remove();
     /* CSS — inject once */
     if (!document.getElementById("mo-cp-css")) {
@@ -2216,8 +2219,6 @@
       });
       $('#error-alert-message').hide();
     }
-
-    $('.col-xs-8.col-xs-offset-2').addClass('text-start');
 
   }
 
