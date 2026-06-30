@@ -1597,6 +1597,27 @@
     if (cancelBtn && cancelBtn.textContent !== tr("otp.cancel.button")) {
       cancelBtn.textContent = tr("otp.cancel.button");
     }
+    /* Redirect Cancel to the broker login instead of submitting the
+       cancelauthentication form. Override the inline onclick once. */
+    if (cancelBtn && !cancelBtn.dataset.moCancel) {
+      cancelBtn.dataset.moCancel = "true";
+      cancelBtn.removeAttribute("onclick");
+      cancelBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.replace(MO_URLS.dashboardRedirect);
+      });
+    }
+
+    /* Backend typo fix in the OTP success message: "...to Validate." -> "...to validate."
+       English only — detected via the "Please enter the OTP" phrase. Idempotent:
+       only rewrites when the capitalised "Validate" is still present. */
+    var otpSuccessSpan = document.querySelector("#success-alert-message .actionMessage li span");
+    if (otpSuccessSpan) {
+      var sm = otpSuccessSpan.textContent;
+      if (sm.indexOf("Please enter the OTP") !== -1 && sm.indexOf("Validate") !== -1) {
+        otpSuccessSpan.textContent = sm.replace(/Validate/g, "validate");
+      }
+    }
 
     /* ── One-time-only below (server error handling + done marker) ── */
     if (document.getElementById("mo-otp-done")) return;
@@ -1640,6 +1661,7 @@
       }
       $('#error-alert-message').hide();
     }
+    
 
   }
 
