@@ -11,6 +11,11 @@
     fontStylesheet: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
   };
 
+  /* White right-arrow as an inline SVG data URI — used as a background-image
+     inside the brand submit buttons. <input> buttons can't hold a child <i>
+     or use ::after, so the icon lives in the button's background instead. */
+  var MO_ARROW_BG = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='13 5 20 12 13 19'/%3E%3C/svg%3E\")";
+
   document.querySelectorAll('#login-main-body, #login-header, #login-body')
     .forEach(el => {
       el.style.setProperty('display', 'randomstring', 'important');
@@ -294,8 +299,10 @@
       "border:none!important;color:#fff!important;font-family:'Figtree',sans-serif!important;" +
       "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
       "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;width:auto!important;" +
+      "padding-right:44px!important;background-image:" + MO_ARROW_BG + "!important;" +
+      "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;" +
       "}" +
-      "#loginbutton:hover{background:#0844b0!important;background-color:#0844b0!important;}" +
+      "#loginbutton:hover{background-color:#0844b0!important;}" +
       /* button row — left align the submit button */
       "#enduserloginform .row div:has(#loginbutton),#idploginform .row div:has(#loginbutton){text-align:left!important;display:block!important;}" +
 
@@ -331,6 +338,19 @@
   function getForgotHref() {
     var a = document.querySelector("a[href*='forgotpassword'], a[href*='resetpassword']");
     return a ? a.href : "#";
+  }
+
+  /* Set a submit button's label. The trailing white right-arrow is supplied
+     by CSS (background-image: MO_ARROW_BG) on the button selectors, so the
+     look is identical whether the button is an <input> or a <button>.
+     Idempotent — safe to call on every observer pass. */
+  function setBtnArrowLabel(btn, label) {
+    if (!btn) return;
+    if (btn.tagName === "INPUT") {
+      if (btn.value !== label) { btn.value = label; btn.dataset.mo = "1"; }
+    } else {
+      if (btn.textContent !== label) { btn.textContent = label; btn.dataset.mo = "1"; }
+    }
   }
 
   function getUrlParam(name) {
@@ -385,7 +405,7 @@
       "changepw.req.email": "More than 2 characters of Email should not be present.",
       "changepw.req.pii": "Does not contain more than 2 consecutive characters of your first name, last name, or email address.",
       "changepw.strength.label": "Password strength",
-      "changepw.strength.weak": "Weak",
+      "changepw.strength.weak": "Poor",
       "changepw.strength.fair": "Fair",
       "changepw.strength.good": "Good",
       "changepw.strength.strong": "Strong",
@@ -424,7 +444,7 @@
       "changepw.req.email": "Nicht mehr als 2 Zeichen der E-Mail dürfen vorhanden sein.",
       "changepw.req.pii": "Enthält nicht mehr als 2 aufeinanderfolgende Zeichen Ihres Vornamens, Nachnamens oder Ihrer E-Mail-Adresse.",
       "changepw.strength.label": "Passwortstärke",
-      "changepw.strength.weak": "Schwach",
+      "changepw.strength.weak": "Mangelhaft",
       "changepw.strength.fair": "Mäßig",
       "changepw.strength.good": "Gut",
       "changepw.strength.strong": "Stark",
@@ -463,7 +483,7 @@
       "changepw.req.email": "Non devono essere presenti più di 2 caratteri dell'email.",
       "changepw.req.pii": "Non contiene più di 2 caratteri consecutivi del tuo nome, cognome o indirizzo email.",
       "changepw.strength.label": "Sicurezza della password",
-      "changepw.strength.weak": "Debole",
+      "changepw.strength.weak": "Scarsa",
       "changepw.strength.fair": "Discreta",
       "changepw.strength.good": "Buona",
       "changepw.strength.strong": "Forte",
@@ -502,7 +522,7 @@
       "changepw.req.email": "يجب ألا يحتوي على أكثر من حرفين من البريد الإلكتروني.",
       "changepw.req.pii": "لا يحتوي على أكثر من حرفين متتاليين من اسمك الأول أو اسم العائلة أو عنوان بريدك الإلكتروني.",
       "changepw.strength.label": "قوة كلمة المرور",
-      "changepw.strength.weak": "ضعيفة",
+      "changepw.strength.weak": "رديئة",
       "changepw.strength.fair": "متوسطة",
       "changepw.strength.good": "جيدة",
       "changepw.strength.strong": "قوية",
@@ -541,7 +561,7 @@
       "changepw.req.email": "Não devem estar presentes mais de 2 caracteres do e-mail.",
       "changepw.req.pii": "Não contém mais de 2 caracteres consecutivos do seu nome, sobrenome ou endereço de e-mail.",
       "changepw.strength.label": "Força da senha",
-      "changepw.strength.weak": "Fraca",
+      "changepw.strength.weak": "Ruim",
       "changepw.strength.fair": "Razoável",
       "changepw.strength.good": "Boa",
       "changepw.strength.strong": "Forte",
@@ -580,7 +600,7 @@
       "changepw.req.email": "No debe haber más de 2 caracteres del correo electrónico.",
       "changepw.req.pii": "No contiene más de 2 caracteres consecutivos de su nombre, apellido o dirección de correo electrónico.",
       "changepw.strength.label": "Seguridad de la contraseña",
-      "changepw.strength.weak": "Débil",
+      "changepw.strength.weak": "Pobre",
       "changepw.strength.fair": "Aceptable",
       "changepw.strength.good": "Buena",
       "changepw.strength.strong": "Fuerte",
@@ -619,7 +639,7 @@
       "changepw.req.email": "Pas plus de 2 caractères de l'e-mail ne doivent être présents.",
       "changepw.req.pii": "Ne contient pas plus de 2 caractères consécutifs de votre prénom, nom ou adresse e-mail.",
       "changepw.strength.label": "Force du mot de passe",
-      "changepw.strength.weak": "Faible",
+      "changepw.strength.weak": "Médiocre",
       "changepw.strength.fair": "Moyen",
       "changepw.strength.good": "Bon",
       "changepw.strength.strong": "Fort",
@@ -658,7 +678,7 @@
       "changepw.req.email": "Niet meer dan 2 tekens van het e-mailadres mogen aanwezig zijn.",
       "changepw.req.pii": "Bevat niet meer dan 2 opeenvolgende tekens van uw voornaam, achternaam of e-mailadres.",
       "changepw.strength.label": "Wachtwoordsterkte",
-      "changepw.strength.weak": "Zwak",
+      "changepw.strength.weak": "Slecht",
       "changepw.strength.fair": "Redelijk",
       "changepw.strength.good": "Goed",
       "changepw.strength.strong": "Sterk",
@@ -707,10 +727,7 @@
 
     /* Button label */
     var btn = document.getElementById("loginbutton");
-    if (btn && !btn.dataset.mo) {
-      btn.value = tr("login.page.button") + " \u2192";
-      btn.dataset.mo = "1";
-    }
+    setBtnArrowLabel(btn, tr("login.page.button"));
 
     /* Server-rendered error banner -> show below the email field.
        Guarded by #mo-userlogin-error so it runs ONCE (avoids the
@@ -784,10 +801,7 @@
 
     /* Button label */
     var btn = document.getElementById("loginbutton");
-    var moLoginVal = tr("login.page.button") + " \u2192";
-    if (btn && btn.value !== moLoginVal) {
-      btn.value = moLoginVal;
-    }
+    setBtnArrowLabel(btn, tr("login.page.button"));
 
     if (document.getElementById("mo-pw-lbl")) return; // already applied
 
@@ -859,7 +873,7 @@
       pwField.type = show ? "text" : "password";
       eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
     });
-    wrap.appendChild(eyeBtn);
+    if (!wrap.querySelector(".mo-eye")) wrap.appendChild(eyeBtn);
 
     /* On server error, add the red cross icon inside the password field
        (same look as the change-password page) */
@@ -1083,7 +1097,7 @@
           pwField.type = show ? "text" : "password";
           eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
         });
-        wrap.appendChild(eyeBtn);
+        if (!wrap.querySelector(".mo-eye")) wrap.appendChild(eyeBtn);
 
         /* Forgot password link row */
         if (!document.getElementById("mo-bottom")) {
@@ -1098,11 +1112,7 @@
 
     /* Button label */
     var btn = document.getElementById("loginbutton");
-    var moLoginVal = tr("login.page.button") + " →";
-    if (btn && btn.value !== moLoginVal) {
-      btn.value = moLoginVal;
-      btn.dataset.mo = "1";
-    }
+    setBtnArrowLabel(btn, tr("login.page.button"));
 
     $('#loginbutton').parent().addClass('d-flex')
 
@@ -1135,7 +1145,60 @@
       } else {
         $('#username').after(errHtml);
       }
-      $('#username, #plaintextPassword').addClass('border border-danger');
+      $('#username, #plaintextPassword').addClass('border border-danger mo-input-error');
+
+      var RD_CROSS = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
+
+      /* Red cross inside the email field (wrap it once for positioning).
+         Uses id mo-userlogin-icon so handleLoginErrors() treats it as exempt
+         and doesn't strip it on later observer ticks. */
+      var rdEmail = document.getElementById("username");
+      if (rdEmail) {
+        var rdEw = rdEmail.parentNode;
+        if (!rdEw.classList.contains("mo-input-wrap")) {
+          rdEw = document.createElement("div");
+          rdEw.className = "mo-input-wrap";
+          rdEw.style.position = "relative";
+          rdEw.style.display = "flex";
+          rdEw.style.alignItems = "center";
+          rdEw.style.width = "100%";
+          rdEmail.parentNode.insertBefore(rdEw, rdEmail);
+          rdEw.appendChild(rdEmail);
+        }
+        if (!rdEw.querySelector(".mo-error-icon")) {
+          var rdEIcon = document.createElement("span");
+          rdEIcon.id = "mo-userlogin-icon";
+          rdEIcon.className = "mo-error-icon";
+          rdEIcon.innerHTML = RD_CROSS;
+          rdEw.appendChild(rdEIcon);
+        }
+      }
+
+      /* Red cross inside the password field (inside its .mo-pw-wrap).
+         Uses id mo-pw-server-icon so handleLoginErrors() leaves it alone. */
+      var rdPwWrap = document.querySelector(".mo-pw-wrap");
+      if (rdPwWrap && !rdPwWrap.querySelector(".mo-error-icon")) {
+        var rdPIcon = document.createElement("span");
+        rdPIcon.id = "mo-pw-server-icon";
+        rdPIcon.className = "mo-error-icon";
+        rdPIcon.innerHTML = RD_CROSS;
+        rdPwWrap.appendChild(rdPIcon);
+      }
+
+      /* Once the user edits either field, clear the error message, borders
+         and cross icons (bound once per field). */
+      ["username", "plaintextPassword"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && !el.dataset.moRedirectClear) {
+          el.dataset.moRedirectClear = "true";
+          el.addEventListener("input", function () {
+            $('#mo-redirect-error').remove();
+            $('#mo-userlogin-icon, #mo-pw-server-icon').remove();
+            $('#username, #plaintextPassword').removeClass('border border-danger mo-input-error');
+          });
+        }
+      });
+
       $('#error-alert-message').hide();
     }
 
@@ -1269,9 +1332,11 @@
         "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
         "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;" +
         "width:auto!important;margin:10px auto 10px 0!important;align-self:flex-start!important;" +
+        "padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
+        "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;" +
         "}" +
         ".d-grid.mb-3 button[type=submit]:hover,#userform button[type=submit]:hover,#userform button.custom-button:hover{" +
-        "background:#0844b0!important;background-color:#0844b0!important;" +
+        "background-color:#0844b0!important;" +
         "}" +
         "#userform .row div:has(.custom-button){text-align:left!important;width:100%!important;}" +
 
@@ -1357,9 +1422,7 @@
 
     /* Change button text to NEXT → */
     var fpBtn = fpForm.querySelector("button") || fpForm.querySelector("input[type='submit']");
-    if (fpBtn) {
-      fpBtn.innerHTML = tr("next.button") + ' <span style="margin-left: 6px;">&rarr;</span>';
-    }
+    setBtnArrowLabel(fpBtn, tr("next.button"));
 
     /* Mark as done */
     var done = document.createElement("span");
@@ -1470,7 +1533,9 @@
         "font-weight:700!important;text-transform:uppercase!important;" +
         "letter-spacing:.6px!important;padding:8px 24px!important;" +
         "cursor:pointer!important;min-height:40px!important;}" +
-        "#validate:hover{background:#0844b0!important;background-color:#0844b0!important;}" +
+        "#validate{padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
+        "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;}" +
+        "#validate:hover{background-color:#0844b0!important;}" +
         ".btn-cancel{background:#e9ecef!important;border:none!important;" +
         "border-radius:0!important;color:#3c515d!important;" +
         "font-family:'Figtree',sans-serif!important;font-size:14px!important;" +
@@ -1525,9 +1590,7 @@
 
     /* Verify button */
     var verifyBtn = document.getElementById("validate");
-    if (verifyBtn && verifyBtn.value !== tr("otp.verify.button") + " \u2192") {
-      verifyBtn.value = tr("otp.verify.button") + " \u2192";
-    }
+    setBtnArrowLabel(verifyBtn, tr("otp.verify.button"));
 
     /* Cancel button */
     var cancelBtn = document.querySelector(".btn-cancel");
@@ -1658,7 +1721,9 @@
         "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;" +
         "width:auto!important;margin:10px auto 10px 0!important;align-self:flex-start!important;" +
         "}" +
-        "#validate:hover,#submit:hover{background:#0844b0!important;background-color:#0844b0!important;}" +
+        "#validate,#submit{padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
+        "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;}" +
+        "#validate:hover,#submit:hover{background-color:#0844b0!important;}" +
 
         /* Hide Go Back to Login link */
         "#passwordform a.btn-link,#back-link{display:none!important;}";
@@ -1770,7 +1835,7 @@
         newPasswordInput.type = show ? "text" : "password";
         eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
       });
-      wrap.appendChild(eyeBtn);
+      if (!wrap.querySelector(".mo-eye")) wrap.appendChild(eyeBtn);
     }
 
     /* Wrap confirm password in .mo-pw-wrap for eye toggle */
@@ -1793,7 +1858,7 @@
         confirmPasswordInput.type = show ? "text" : "password";
         eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
       });
-      wrap.appendChild(eyeBtn);
+      if (!wrap.querySelector(".mo-eye")) wrap.appendChild(eyeBtn);
     }
 
     /* Helper text and Error message injection */
@@ -1953,10 +2018,10 @@
            textContent/style writes retrigger the observer and loop. */
         if (marker.dataset.state === state) return;
         marker.dataset.state = state;
-        if (state === "dot") { marker.textContent = "•"; marker.style.color = "#6b7a8d"; }
-        else if (state === "empty") { marker.textContent = ""; marker.style.color = ""; }
-        else if (state === "ok") { marker.textContent = "✔"; marker.style.color = "#1b8f3a"; }
-        else { marker.textContent = "○"; marker.style.color = "#6b7a8d"; }  /* not satisfied -> hollow dot */
+        if (state === "dot") { marker.textContent = "•"; marker.style.color = "#6b7a8d"; li.style.color = ""; }
+        else if (state === "empty") { marker.textContent = ""; marker.style.color = ""; li.style.color = ""; }
+        else if (state === "ok") { marker.textContent = "✔"; marker.style.color = "#1b8f3a"; li.style.color = "#1b8f3a"; }  /* satisfied -> green text */
+        else { marker.textContent = "○"; marker.style.color = "#6b7a8d"; li.style.color = ""; }  /* not satisfied -> hollow dot */
       });
     }
 
@@ -2019,13 +2084,7 @@
 
     /* Update button text to NEXT → */
     var saveBtn = document.getElementById("validate") || document.getElementById("submit");
-    if (saveBtn) {
-      if (saveBtn.tagName === "INPUT") {
-        saveBtn.value = tr("next.button") + " \u2192";
-      } else {
-        saveBtn.innerHTML = tr("next.button") + ' <span style="margin-left: 6px;">&rarr;</span>';
-      }
-    }
+    setBtnArrowLabel(saveBtn, tr("next.button"));
 
     /* Disable native HTML5 validation bubbles/hovers */
     var form = document.getElementById("passwordform") || document.getElementById("userform");
@@ -2197,6 +2256,12 @@
     if (isPageHasError && !document.getElementById("mo-cp-server-error") && !(fpForm && fpForm.dataset.moServerErrDismissed)) {
       console.log('IN ERROR SECTION ');
       var message = $('#error-alert-message .errorMessage li span').text().trim();
+      /* The server returns the full password policy string when the password
+         fails the policy (e.g. contains the user's name/email). We validate
+         all those rules manually, so collapse this one case into a short msg. */
+      if (/should be present|should not be present/i.test(message)) {
+        message = "Password requirement not matched";
+      }
       var $cpWrap = $('.mo-pw-wrap');
       var cpErrHtml = '<p id="mo-cp-server-error" class="text-danger pb-2" style="font-size:12px;margin-top:-10px;margin-bottom:8px;">' + message + '</p>';
       if ($cpWrap.length) {
