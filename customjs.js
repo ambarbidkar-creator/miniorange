@@ -1808,6 +1808,24 @@
       });
     }
 
+    /* Read the REAL min/max/symbol set from the server policy list so the
+       displayed requirements and their live validation match what the server
+       actually enforces (the translation text is hardcoded to 8/50, which can
+       silently disagree with the server and block a "looks valid" password). */
+    var cpMin = 8, cpMax = 50, cpSymbols = "!@#$.%^&*-_";
+    if (listcontent) {
+      listcontent.querySelectorAll("li").forEach(function (li) {
+        var raw = li.textContent, low = raw.toLowerCase(), m;
+        if ((m = low.match(/minimum\s+(\d+)/))) cpMin = parseInt(m[1], 10);
+        if ((m = low.match(/maximum\s+(\d+)/))) cpMax = parseInt(m[1], 10);
+        if (low.indexOf("symbol") !== -1) {
+          var sm = raw.match(/symbols?[\s:]+(\S+)/i);
+          if (sm) cpSymbols = sm[1];
+        }
+      });
+    }
+    var cpSymRegex = new RegExp("[" + cpSymbols.replace(/[\]\\^-]/g, "\\$&") + "]");
+
     /* Move requirements block below new password input (above confirm password input) */
     var newPasswordCol = newPasswordInput ? newPasswordInput.closest("div") : null;
     var requirementsBlock = document.querySelector(".password-padding");
@@ -1908,7 +1926,11 @@
         marker.style.fontWeight = "700";
         marker.style.lineHeight = "1.6";
         var txt = document.createElement("span");
-        txt.textContent = tr(k);
+        /* Swap the hardcoded length numbers for the real policy values. */
+        var label = tr(k);
+        if (k === "changepw.req.min") label = label.replace(/\d+/, cpMin);
+        else if (k === "changepw.req.max") label = label.replace(/\d+/, cpMax);
+        txt.textContent = label;
         li.appendChild(marker);
         li.appendChild(txt);
         helper.appendChild(li);
@@ -2000,11 +2022,11 @@
       var list = document.getElementById("mo-cp-helper-text");
       if (!list) return;
       var checks = {
-        "changepw.req.min": val.length >= 8,
-        "changepw.req.max": val.length <= 50,
+        "changepw.req.min": val.length >= cpMin,
+        "changepw.req.max": val.length <= cpMax,
         "changepw.req.number": /[0-9]/.test(val),
         "changepw.req.uppercase": /[A-Z]/.test(val),
-        "changepw.req.symbol": /[!@#$.%^&*_-]/.test(val)
+        "changepw.req.symbol": cpSymRegex.test(val)
       };
       list.querySelectorAll("li[data-req]").forEach(function (li) {
         var key = li.dataset.req;
@@ -2177,8 +2199,16 @@
           return;
         }
 
-        var invalidItems = document.querySelectorAll("#listcontent li.mo-invalid");
-        if (invalidItems.length > 0) {
+        /* Re-evaluate the VISIBLE requirement list and block only if a shown,
+           client-checkable rule is unmet — keeps the gate in sync with the
+           green/red ticks the user actually sees (PII rules show a dot and are
+           validated server-side, so they never block here). */
+        updateMoReqList(val);
+        var unmet = false;
+        document.querySelectorAll("#mo-cp-helper-text li[data-req] .mo-req-marker").forEach(function (m) {
+          if (m.dataset.state === "bad") unmet = true;
+        });
+        if (unmet) {
           e.preventDefault();
           showCpError(tr("changepw.error.requirements"));
           if (newPasswordInput) newPasswordInput.focus();
