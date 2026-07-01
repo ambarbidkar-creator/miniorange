@@ -7,6 +7,8 @@
     logoutRedirect: "https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout",
     /* Enduser dashboard -> broker login */
     dashboardRedirect: "https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession",
+    /* Forgot-password helper -> customer support page */
+    supportPage: "https://dev.bouwmaat.nl/pages/customer-support-page",
     /* Figtree webfont stylesheet */
     fontStylesheet: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
   };
@@ -1413,7 +1415,7 @@
         helper.id = "mo-fp-helper";
         helper.innerHTML =
           tr("forgot.page.helper") + "<br>" +
-          '<a href="mailto:support@example.com">' + tr("forgot.page.helper.link") + '</a>';
+          '<a href="' + MO_URLS.supportPage + '">' + tr("forgot.page.helper.link") + '</a>';
         inputWrapper.parentNode.insertBefore(helper, inputWrapper.nextSibling);
       }
     }
