@@ -1329,7 +1329,7 @@
         /* Helper text */
         "#mo-fp-helper{font-size:13px;color:#6b7a8d;font-family:'Figtree',sans-serif;" +
         "margin:14px 0 18px;line-height:1.5;text-align:left!important;width:100%!important;padding-left:0;padding-right:0;}" +
-        "#mo-fp-helper a{color:#0A55D7;text-decoration:none;font-weight:500;}" +
+        "#mo-fp-helper a{display:block;margin-top:4px;color:#0A55D7;text-decoration:none;font-weight:500;}" +
         "#mo-fp-helper a:hover{text-decoration:underline;}" +
 
         /* NEXT button */
