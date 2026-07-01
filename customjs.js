@@ -156,7 +156,7 @@
         /* Card (override the inline white border/bg from the markup) */
         "#login-wrapper{background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:36px 40px 32px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
+        "padding:20px 10px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
 
         /* Heading -> left-aligned bold, like the LOG IN title */
         "#login-wrapper h4{font-family:'Figtree',sans-serif!important;font-size:26px!important;" +
@@ -238,7 +238,7 @@
       "#login-wrapper{" +
       "background:#fff!important;border:1px solid #e0e7ef!important;" +
       "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-      "padding:36px 40px 32px!important;max-width:560px!important;margin:0 auto!important;" +
+      "padding:20px 10px!important;max-width:560px!important;margin:0 auto!important;" +
       "}" +
 
       /* Form: stretch children to full width (removes Bootstrap center alignment) */
@@ -1260,7 +1260,7 @@
         "margin-top:0!important;margin-bottom:0!important;" +
         "display:block!important;float:none!important;" +
         "position:relative!important;left:auto!important;right:auto!important;" +
-        "padding:36px 40px 32px!important;box-sizing:border-box!important;" +
+        "padding:20px 10px!important;box-sizing:border-box!important;" +
         "height:auto!important;min-height:unset!important;align-self:center!important;" +
         "}" +
 
@@ -1701,7 +1701,7 @@
         "#login-wrapper{" +
         "background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:36px 40px 32px!important;max-width:560px!important;width:100%!important;" +
+        "padding:20px 10px!important;max-width:560px!important;width:100%!important;" +
         "margin:40px auto!important;box-sizing:border-box!important;" +
         "}" +
 
