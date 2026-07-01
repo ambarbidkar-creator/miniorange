@@ -2181,10 +2181,15 @@
         }
       });
 
-      // Show message (requirements list stays visible at all times)
+      // Show message. Hide the policy checklist ONLY for the mismatch error;
+      // keep it visible for "required"/"requirements" so the user can still
+      // see which rule is unmet.
       if (errEl) {
         errEl.textContent = msg;
         errEl.style.display = "block";
+      }
+      if (helpEl) {
+        helpEl.style.display = (msg === tr("changepw.error.mismatch")) ? "none" : "block";
       }
     }
 
@@ -2287,6 +2292,8 @@
             ($newWrap.length ? $newWrap : $('[name="password"]'))
               .after('<p id="mo-match-error" class="text-danger pb-2" style="font-size:12px;margin-top:-10px;margin-bottom:8px;">' + tr("changepw.error.mismatch") + '</p>');
           }
+          /* Hide the password-policy checklist while the mismatch is shown */
+          $('#mo-cp-helper-text').hide();
         } else {
           $(newPasswordInput).removeClass("border border-danger");
           $(confirmPasswordInput).removeClass("border border-danger");
@@ -2300,6 +2307,8 @@
             }
           });
           $("#mo-match-error").remove();
+          /* Mismatch cleared -> restore the password-policy checklist */
+          $('#mo-cp-helper-text').show();
         }
       }
 
