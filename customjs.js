@@ -1560,13 +1560,20 @@
     var otpInput = document.getElementById("otpToken");
     if (!otpInput) return;
 
-    /* VERIFY YOUR IDENTITY title */
+    /* VERIFY YOUR IDENTITY title — re-sync on every tick (don't freeze). The
+       first tick can run before mo_locale settles (script imported early in the
+       JSP), so tr() may return English; a later tick must be able to correct it.
+       Compare before writing so a matched value doesn't retrigger the observer. */
     var modalHeader = document.getElementById("modal-header-main");
-    if (modalHeader && !document.getElementById("mo-otp-title")) {
-      var otpTitle = document.createElement("span");
-      otpTitle.id = "mo-otp-title";
-      otpTitle.textContent = tr("otp.page.title");
-      modalHeader.insertBefore(otpTitle, modalHeader.firstChild);
+    if (modalHeader) {
+      var otpTitle = document.getElementById("mo-otp-title");
+      if (!otpTitle) {
+        otpTitle = document.createElement("span");
+        otpTitle.id = "mo-otp-title";
+        modalHeader.insertBefore(otpTitle, modalHeader.firstChild);
+      }
+      var otpTitleTxt = tr("otp.page.title");
+      if (otpTitle.textContent !== otpTitleTxt) otpTitle.textContent = otpTitleTxt;
     }
 
     /* Label above OTP input — reuse a server-rendered label[for=otpToken]
@@ -1579,10 +1586,12 @@
       otpInput.parentNode.insertBefore(otpLbl, otpInput);
     }
     if (otpLbl.id !== "mo-otp-lbl") otpLbl.id = "mo-otp-lbl";
-    /* Only write innerHTML when not already localized \u2014 otherwise the childList
-       mutation retriggers the observer and loops infinitely. */
-    if (otpLbl.dataset.moLocalized !== "1") {
-      otpLbl.innerHTML = tr("otp.field.label") + ' <span class="mo-req">*</span>';
+    /* Re-sync on every tick like the title. Compare against the target first so
+       we only touch innerHTML when the locale actually changed \u2014 otherwise the
+       childList mutation retriggers the observer and loops infinitely. */
+    var otpLblHtml = tr("otp.field.label") + ' <span class="mo-req">*</span>';
+    if (otpLbl.innerHTML !== otpLblHtml) {
+      otpLbl.innerHTML = otpLblHtml;
       otpLbl.dataset.moLocalized = "1";
     }
 
