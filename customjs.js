@@ -1224,6 +1224,12 @@
     var emailInput = document.getElementById("emailAddress") || document.getElementById("username");
     if (!emailInput) return; // not ready yet
 
+    /* resetpassword endpoint: strip all <br> spacers (runs every tick to
+       catch any re-added by React). */
+    if (window.location.pathname.toLowerCase().indexOf("moas/idp/resetpassword") !== -1) {
+      $('br').remove();
+    }
+
     /* ── CSS injection (once) ── */
     if (!document.getElementById("mo-fp-css")) {
       var fpCss =
@@ -1285,7 +1291,7 @@
         "color:#0d1b2a;margin-bottom:6px;letter-spacing:-.3px;text-align:left!important;}" +
 
         /* Subtitle */
-        "#mo-fp-subtitle{display:block;font-size:14px;color:#6b7a8d;font-family:'Figtree',sans-serif;margin-bottom:20px;text-align:left!important;}" +
+        "#mo-fp-subtitle{display:block;font-size:14px;color:#6b7a8d;font-family:'Figtree',sans-serif;margin-bottom:12px;text-align:left!important;}" +
 
         /* Label */
         "#mo-fp-lbl{" +
