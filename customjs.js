@@ -118,6 +118,15 @@
     /* Reuse the shared /login page styling (background, card, font, etc.) */
     injectFontAndCss();
 
+    /* This page only: override the card padding via jQuery to 20px 18px.
+       Guarded (only write when it differs) so the style mutation doesn't
+       retrigger the observer in a loop. */
+    $('#login-wrapper').each(function () {
+      if (this.style.padding !== "20px 18px") {
+        this.style.setProperty("padding", "20px 18px", "important");
+      }
+    });
+
     /* Full-height centering for the React layout wrapper.
        Only set when not already set — otherwise the style mutation
        retriggers the observer and creates an infinite loop. */
