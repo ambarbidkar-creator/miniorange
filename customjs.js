@@ -365,6 +365,11 @@
       var sel = document.getElementById("languageSelect");
       if (sel) lang = sel.value;
     }
+    if (!lang) {
+      /* Fall back to the document language, e.g. <html lang="it">. */
+      var htmlLang = document.documentElement.getAttribute("lang");
+      if (htmlLang) lang = htmlLang.trim().toLowerCase().split("-")[0];
+    }
     if (lang) localStorage.setItem("mo_locale", lang);
     return lang;
   }
