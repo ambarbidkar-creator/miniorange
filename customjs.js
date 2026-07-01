@@ -2314,9 +2314,20 @@
 
       $(confirmPasswordInput).on("blur", checkMatch);
 
-      /* Re-run check live once mismatch is already flagged */
+      /* As soon as the user types again, hide the "passwords don't match"
+         error and its indicators (re-checked on the next blur). */
       $(newPasswordInput).add(confirmPasswordInput).on("input", function () {
-        if ($(confirmPasswordInput).hasClass("border-danger")) { checkMatch(); }
+        if (!document.getElementById("mo-match-error") && !$(confirmPasswordInput).hasClass("border-danger")) return;
+        $(newPasswordInput).removeClass("border border-danger");
+        $(confirmPasswordInput).removeClass("border border-danger");
+        [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
+          inp.classList.remove("mo-input-error");
+          var w = inp.closest(".mo-pw-wrap");
+          if (w) { var ic = w.querySelector(".mo-error-icon"); if (ic) ic.remove(); }
+        });
+        $("#mo-match-error").remove();
+        /* Restore the password-policy checklist that the mismatch hid */
+        $('#mo-cp-helper-text').show();
       });
     }
     bindPasswordMatchCheck();
