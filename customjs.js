@@ -1433,9 +1433,19 @@
 
     /* Server-rendered error banner -> red border + cross on the input and a
        message directly below it. Runs after the label exists so the wrap won't
-       trap the label. Guarded so it doesn't stack; cleared once the user edits. */
+       trap the label. Guarded so it doesn't stack; cleared once the user edits.
+
+       Exception: on the /moas/idp/resetpassword endpoint specifically, suppress
+       ALL error UI (message, red border, cross icon). Other forgot/reset
+       endpoints (forgotpassword, resetuserpassword) keep it. */
+    var isResetPasswordEndpoint = window.location.pathname.toLowerCase().indexOf("moas/idp/resetpassword") !== -1;
     var fpHasError = errorOnPage();
-    if (fpHasError && !document.getElementById("mo-fp-error")) {
+    if (isResetPasswordEndpoint) {
+      $('#error-alert-message').hide();
+      $('#mo-fp-error').remove();
+      $('#mo-fp-error-icon').remove();
+      $(emailInput).removeClass("border border-danger mo-input-error");
+    } else if (fpHasError && !document.getElementById("mo-fp-error")) {
       console.log('IN ERROR SECTION ');
       var fpMessage = $('#error-alert-message .errorMessage li span').text().trim();
       /* Wrap ONLY the input in a relative flex container for the cross icon */
