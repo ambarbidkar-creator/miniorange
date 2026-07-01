@@ -1335,7 +1335,7 @@
         "border:none!important;color:#fff!important;font-family:'Figtree',sans-serif!important;" +
         "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
         "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;" +
-        "width:auto!important;margin:10px auto 10px 0!important;align-self:flex-start!important;" +
+        "width:auto!important;margin:0 auto 0 0!important;align-self:flex-start!important;" +
         "padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
         "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;" +
         "}" +
