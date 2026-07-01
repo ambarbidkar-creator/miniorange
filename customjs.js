@@ -2191,6 +2191,9 @@
       if (helpEl) {
         helpEl.style.display = (msg === tr("changepw.error.mismatch")) ? "none" : "block";
       }
+      /* Mismatch also hides the strength meter; other errors leave it as-is
+         (updateStrength manages its own visibility from the field value). */
+      if (msg === tr("changepw.error.mismatch")) $('#mo-cp-strength').hide();
     }
 
     function clearCpError() {
@@ -2292,8 +2295,10 @@
             ($newWrap.length ? $newWrap : $('[name="password"]'))
               .after('<p id="mo-match-error" class="text-danger pb-2" style="font-size:12px;margin-top:-10px;margin-bottom:8px;">' + tr("changepw.error.mismatch") + '</p>');
           }
-          /* Hide the password-policy checklist while the mismatch is shown */
+          /* Hide the password-policy checklist + strength meter while the
+             mismatch is shown */
           $('#mo-cp-helper-text').hide();
+          $('#mo-cp-strength').hide();
         } else {
           $(newPasswordInput).removeClass("border border-danger");
           $(confirmPasswordInput).removeClass("border border-danger");
@@ -2307,8 +2312,12 @@
             }
           });
           $("#mo-match-error").remove();
-          /* Mismatch cleared -> restore the password-policy checklist */
+          /* Mismatch cleared -> restore the checklist + strength meter
+             (recompute so an empty field stays hidden). */
           $('#mo-cp-helper-text').show();
+          var sBox = document.getElementById("mo-cp-strength");
+          if (sBox) sBox.dataset.score = "";
+          updateStrength(newPasswordInput.value || "");
         }
       }
 
@@ -2326,8 +2335,12 @@
           if (w) { var ic = w.querySelector(".mo-error-icon"); if (ic) ic.remove(); }
         });
         $("#mo-match-error").remove();
-        /* Restore the password-policy checklist that the mismatch hid */
+        /* Restore the checklist + strength meter that the mismatch hid
+           (recompute so an empty field stays hidden). */
         $('#mo-cp-helper-text').show();
+        var sBox = document.getElementById("mo-cp-strength");
+        if (sBox) sBox.dataset.score = "";
+        updateStrength(newPasswordInput.value || "");
       });
     }
     bindPasswordMatchCheck();
