@@ -1797,20 +1797,6 @@
       } else {
         h3.insertBefore(document.createTextNode(tr("reset.password")), h3.firstChild);
       }
-      
-      if (!document.getElementById("mo-cp-close")) {
-        var closeBtn = document.createElement("a");
-        closeBtn.id = "mo-cp-close";
-        closeBtn.href = "login";
-        closeBtn.innerHTML = "&times;";
-        closeBtn.style.color = "#a0aab6";
-        closeBtn.style.textDecoration = "none";
-        closeBtn.style.fontSize = "24px";
-        closeBtn.style.fontWeight = "400";
-        closeBtn.style.cursor = "pointer";
-        closeBtn.style.lineHeight = "1";
-        h3.appendChild(closeBtn);
-      }
     }
 
     /* Add * to labels */
