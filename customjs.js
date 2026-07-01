@@ -95,6 +95,7 @@
     return path.indexOf("idp/showpasswordsentmessage") !== -1;
   }
 
+
   /* ── LOGOUT PAGE: auto-redirect ── */
   function applyLogoutPage() {
     if (!checkIsLogout()) return;
@@ -2343,6 +2344,9 @@
   function run() {
     if (checkIsLogout()) { applyLogoutPage(); return; }
 
+    /* getLocale() below already captures ?request_locale from the URL on the
+       openidsso page too, and that page renders the normal login form — so we
+       let it fall through to the login styling instead of short-circuiting. */
     getLocale();
 
     var isLogin = checkIsLogin();
