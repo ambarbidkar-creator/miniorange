@@ -95,21 +95,6 @@
     return path.indexOf("idp/showpasswordsentmessage") !== -1;
   }
 
-  function checkIsOpenidSso() {
-    var path = window.location.pathname.toLowerCase();
-    return path.indexOf("/moas/idp/openidsso") !== -1;
-  }
-
-  /* ── OPENID SSO PAGE (/moas/idp/openidsso) ── */
-  /* Landing/redirect page that carries ?request_locale=xx — capture it into
-     localStorage (via getLocale) so the chosen language persists to the
-     login/OTP/reset pages the user is sent to next. */
-  function applyOpenidSso() {
-    if (!checkIsOpenidSso()) return;
-    getLocale();
-    console.log("on openidsso page, mo_locale =", localStorage.getItem("mo_locale"));
-  }
-
   /* ── LOGOUT PAGE: auto-redirect ── */
   function applyLogoutPage() {
     if (!checkIsLogout()) return;
@@ -2357,7 +2342,6 @@
   /* ── MAIN RUN ── */
   function run() {
     if (checkIsLogout()) { applyLogoutPage(); return; }
-    if (checkIsOpenidSso()) { applyOpenidSso(); return; }
 
     getLocale();
 
@@ -2428,7 +2412,6 @@
     if (isChangePass) { applyChangePasswordPage(); }
     if (checkIsEnduserDashboard()) { applyEnduserDashboard(); }
     if (checkIsPasswordSentMessage()) { applyPasswordSentMessage(); }
-    if (checkIsOpenidSso()) { applyOpenidSso(); }
   });
   observer.observe(document.body, {
     childList: true,
