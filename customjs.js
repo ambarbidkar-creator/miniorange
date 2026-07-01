@@ -400,16 +400,15 @@
       "otp.cancel.button": "CANCEL",
       "changepw.newpassword.label": "New password",
       "changepw.confirmpassword.label": "Confirm password",
-      "changepw.req.min": "Minimum 8 characters should be present",
-      "changepw.req.max": "Maximum 50 characters should be present",
-      "changepw.req.number": "1 number character should be present",
-      "changepw.req.uppercase": "1 uppercase character should be present",
-      "changepw.req.symbol": "At least one of the following symbols !@#$.%^&*-_ should be present",
-      "changepw.req.firstname": "More than 2 characters of FirstName should not be present",
-      "changepw.req.lastname": "More than 2 characters of LastName should not be present",
-      "changepw.req.username": "More than 2 characters of Username should not be present",
-      "changepw.req.email": "More than 2 characters of Email should not be present.",
-      "changepw.req.pii": "Does not contain more than 2 consecutive characters of your first name, last name, or email address.",
+      "changepw.req.length": "{min}-{max} characters",
+      "changepw.req.uppercase": "At least one uppercase letter",
+      "changepw.req.number": "At least one number",
+      "changepw.req.symbol": "At least one special character ( {symbols} )",
+      "changepw.req.consecutive": "Does not contain more than {n} consecutive characters of {fields}",
+      "changepw.field.firstname": "first name",
+      "changepw.field.lastname": "last name",
+      "changepw.field.username": "username",
+      "changepw.field.email": "email",
       "changepw.strength.label": "Password strength",
       "changepw.strength.weak": "Poor",
       "changepw.strength.fair": "Fair",
@@ -439,16 +438,15 @@
       "otp.cancel.button": "ABBRECHEN",
       "changepw.newpassword.label": "Neues Passwort",
       "changepw.confirmpassword.label": "Passwort bestätigen",
-      "changepw.req.min": "Mindestens 8 Zeichen müssen vorhanden sein",
-      "changepw.req.max": "Maximal 50 Zeichen dürfen vorhanden sein",
-      "changepw.req.number": "1 Ziffer muss vorhanden sein",
-      "changepw.req.uppercase": "1 Großbuchstabe muss vorhanden sein",
-      "changepw.req.symbol": "Mindestens eines der folgenden Symbole !@#$.%^&*-_ muss vorhanden sein",
-      "changepw.req.firstname": "Nicht mehr als 2 Zeichen des Vornamens dürfen vorhanden sein",
-      "changepw.req.lastname": "Nicht mehr als 2 Zeichen des Nachnamens dürfen vorhanden sein",
-      "changepw.req.username": "Nicht mehr als 2 Zeichen des Benutzernamens dürfen vorhanden sein",
-      "changepw.req.email": "Nicht mehr als 2 Zeichen der E-Mail dürfen vorhanden sein.",
-      "changepw.req.pii": "Enthält nicht mehr als 2 aufeinanderfolgende Zeichen Ihres Vornamens, Nachnamens oder Ihrer E-Mail-Adresse.",
+      "changepw.req.length": "{min}-{max} Zeichen",
+      "changepw.req.uppercase": "Mindestens ein Großbuchstabe",
+      "changepw.req.number": "Mindestens eine Ziffer",
+      "changepw.req.symbol": "Mindestens ein Sonderzeichen ( {symbols} )",
+      "changepw.req.consecutive": "Enthält nicht mehr als {n} aufeinanderfolgende Zeichen von {fields}",
+      "changepw.field.firstname": "Vorname",
+      "changepw.field.lastname": "Nachname",
+      "changepw.field.username": "Benutzername",
+      "changepw.field.email": "E-Mail",
       "changepw.strength.label": "Passwortstärke",
       "changepw.strength.weak": "Mangelhaft",
       "changepw.strength.fair": "Mäßig",
@@ -478,16 +476,15 @@
       "otp.cancel.button": "ANNULLA",
       "changepw.newpassword.label": "Nuova password",
       "changepw.confirmpassword.label": "Conferma password",
-      "changepw.req.min": "Devono essere presenti almeno 8 caratteri",
-      "changepw.req.max": "Devono essere presenti al massimo 50 caratteri",
-      "changepw.req.number": "Deve essere presente 1 numero",
-      "changepw.req.uppercase": "Deve essere presente 1 lettera maiuscola",
-      "changepw.req.symbol": "Deve essere presente almeno uno dei seguenti simboli !@#$.%^&*-_",
-      "changepw.req.firstname": "Non devono essere presenti più di 2 caratteri del nome",
-      "changepw.req.lastname": "Non devono essere presenti più di 2 caratteri del cognome",
-      "changepw.req.username": "Non devono essere presenti più di 2 caratteri del nome utente",
-      "changepw.req.email": "Non devono essere presenti più di 2 caratteri dell'email.",
-      "changepw.req.pii": "Non contiene più di 2 caratteri consecutivi del tuo nome, cognome o indirizzo email.",
+      "changepw.req.length": "{min}-{max} caratteri",
+      "changepw.req.uppercase": "Almeno una lettera maiuscola",
+      "changepw.req.number": "Almeno un numero",
+      "changepw.req.symbol": "Almeno un carattere speciale ( {symbols} )",
+      "changepw.req.consecutive": "Non contiene più di {n} caratteri consecutivi di {fields}",
+      "changepw.field.firstname": "nome",
+      "changepw.field.lastname": "cognome",
+      "changepw.field.username": "nome utente",
+      "changepw.field.email": "email",
       "changepw.strength.label": "Sicurezza della password",
       "changepw.strength.weak": "Scarsa",
       "changepw.strength.fair": "Discreta",
@@ -517,16 +514,15 @@
       "otp.cancel.button": "إلغاء",
       "changepw.newpassword.label": "كلمة المرور الجديدة",
       "changepw.confirmpassword.label": "تأكيد كلمة المرور",
-      "changepw.req.min": "يجب أن يحتوي على 8 أحرف على الأقل",
-      "changepw.req.max": "يجب ألا يزيد عن 50 حرفًا",
-      "changepw.req.number": "يجب أن يحتوي على رقم واحد",
-      "changepw.req.uppercase": "يجب أن يحتوي على حرف كبير واحد",
-      "changepw.req.symbol": "يجب أن يحتوي على أحد الرموز التالية على الأقل !@#$.%^&*-_",
-      "changepw.req.firstname": "يجب ألا يحتوي على أكثر من حرفين من الاسم الأول",
-      "changepw.req.lastname": "يجب ألا يحتوي على أكثر من حرفين من اسم العائلة",
-      "changepw.req.username": "يجب ألا يحتوي على أكثر من حرفين من اسم المستخدم",
-      "changepw.req.email": "يجب ألا يحتوي على أكثر من حرفين من البريد الإلكتروني.",
-      "changepw.req.pii": "لا يحتوي على أكثر من حرفين متتاليين من اسمك الأول أو اسم العائلة أو عنوان بريدك الإلكتروني.",
+      "changepw.req.length": "{min}-{max} حرفًا",
+      "changepw.req.uppercase": "حرف كبير واحد على الأقل",
+      "changepw.req.number": "رقم واحد على الأقل",
+      "changepw.req.symbol": "رمز خاص واحد على الأقل ( {symbols} )",
+      "changepw.req.consecutive": "لا يحتوي على أكثر من {n} أحرف متتالية من {fields}",
+      "changepw.field.firstname": "الاسم الأول",
+      "changepw.field.lastname": "اسم العائلة",
+      "changepw.field.username": "اسم المستخدم",
+      "changepw.field.email": "البريد الإلكتروني",
       "changepw.strength.label": "قوة كلمة المرور",
       "changepw.strength.weak": "رديئة",
       "changepw.strength.fair": "متوسطة",
@@ -556,16 +552,15 @@
       "otp.cancel.button": "CANCELAR",
       "changepw.newpassword.label": "Nova senha",
       "changepw.confirmpassword.label": "Confirmar senha",
-      "changepw.req.min": "Devem estar presentes no mínimo 8 caracteres",
-      "changepw.req.max": "Devem estar presentes no máximo 50 caracteres",
-      "changepw.req.number": "Deve estar presente 1 número",
-      "changepw.req.uppercase": "Deve estar presente 1 letra maiúscula",
-      "changepw.req.symbol": "Deve estar presente pelo menos um dos seguintes símbolos !@#$.%^&*-_",
-      "changepw.req.firstname": "Não devem estar presentes mais de 2 caracteres do nome",
-      "changepw.req.lastname": "Não devem estar presentes mais de 2 caracteres do sobrenome",
-      "changepw.req.username": "Não devem estar presentes mais de 2 caracteres do nome de usuário",
-      "changepw.req.email": "Não devem estar presentes mais de 2 caracteres do e-mail.",
-      "changepw.req.pii": "Não contém mais de 2 caracteres consecutivos do seu nome, sobrenome ou endereço de e-mail.",
+      "changepw.req.length": "{min}-{max} caracteres",
+      "changepw.req.uppercase": "Pelo menos uma letra maiúscula",
+      "changepw.req.number": "Pelo menos um número",
+      "changepw.req.symbol": "Pelo menos um caractere especial ( {symbols} )",
+      "changepw.req.consecutive": "Não contém mais de {n} caracteres consecutivos de {fields}",
+      "changepw.field.firstname": "nome",
+      "changepw.field.lastname": "sobrenome",
+      "changepw.field.username": "nome de usuário",
+      "changepw.field.email": "e-mail",
       "changepw.strength.label": "Força da senha",
       "changepw.strength.weak": "Ruim",
       "changepw.strength.fair": "Razoável",
@@ -595,16 +590,15 @@
       "otp.cancel.button": "CANCELAR",
       "changepw.newpassword.label": "Nueva contraseña",
       "changepw.confirmpassword.label": "Confirmar contraseña",
-      "changepw.req.min": "Debe haber al menos 8 caracteres",
-      "changepw.req.max": "Debe haber como máximo 50 caracteres",
-      "changepw.req.number": "Debe haber 1 número",
-      "changepw.req.uppercase": "Debe haber 1 letra mayúscula",
-      "changepw.req.symbol": "Debe haber al menos uno de los siguientes símbolos !@#$.%^&*-_",
-      "changepw.req.firstname": "No debe haber más de 2 caracteres del nombre",
-      "changepw.req.lastname": "No debe haber más de 2 caracteres del apellido",
-      "changepw.req.username": "No debe haber más de 2 caracteres del nombre de usuario",
-      "changepw.req.email": "No debe haber más de 2 caracteres del correo electrónico.",
-      "changepw.req.pii": "No contiene más de 2 caracteres consecutivos de su nombre, apellido o dirección de correo electrónico.",
+      "changepw.req.length": "{min}-{max} caracteres",
+      "changepw.req.uppercase": "Al menos una letra mayúscula",
+      "changepw.req.number": "Al menos un número",
+      "changepw.req.symbol": "Al menos un carácter especial ( {symbols} )",
+      "changepw.req.consecutive": "No contiene más de {n} caracteres consecutivos de {fields}",
+      "changepw.field.firstname": "nombre",
+      "changepw.field.lastname": "apellido",
+      "changepw.field.username": "nombre de usuario",
+      "changepw.field.email": "correo electrónico",
       "changepw.strength.label": "Seguridad de la contraseña",
       "changepw.strength.weak": "Pobre",
       "changepw.strength.fair": "Aceptable",
@@ -634,16 +628,15 @@
       "otp.cancel.button": "ANNULER",
       "changepw.newpassword.label": "Nouveau mot de passe",
       "changepw.confirmpassword.label": "Confirmer le mot de passe",
-      "changepw.req.min": "Au moins 8 caractères doivent être présents",
-      "changepw.req.max": "Au maximum 50 caractères doivent être présents",
-      "changepw.req.number": "1 chiffre doit être présent",
-      "changepw.req.uppercase": "1 lettre majuscule doit être présente",
-      "changepw.req.symbol": "Au moins l'un des symboles suivants !@#$.%^&*-_ doit être présent",
-      "changepw.req.firstname": "Pas plus de 2 caractères du prénom ne doivent être présents",
-      "changepw.req.lastname": "Pas plus de 2 caractères du nom de famille ne doivent être présents",
-      "changepw.req.username": "Pas plus de 2 caractères du nom d'utilisateur ne doivent être présents",
-      "changepw.req.email": "Pas plus de 2 caractères de l'e-mail ne doivent être présents.",
-      "changepw.req.pii": "Ne contient pas plus de 2 caractères consécutifs de votre prénom, nom ou adresse e-mail.",
+      "changepw.req.length": "{min}-{max} caractères",
+      "changepw.req.uppercase": "Au moins une lettre majuscule",
+      "changepw.req.number": "Au moins un chiffre",
+      "changepw.req.symbol": "Au moins un caractère spécial ( {symbols} )",
+      "changepw.req.consecutive": "Ne contient pas plus de {n} caractères consécutifs de {fields}",
+      "changepw.field.firstname": "prénom",
+      "changepw.field.lastname": "nom de famille",
+      "changepw.field.username": "nom d'utilisateur",
+      "changepw.field.email": "e-mail",
       "changepw.strength.label": "Force du mot de passe",
       "changepw.strength.weak": "Médiocre",
       "changepw.strength.fair": "Moyen",
@@ -673,16 +666,15 @@
       "otp.cancel.button": "ANNULEREN",
       "changepw.newpassword.label": "Nieuw wachtwoord",
       "changepw.confirmpassword.label": "Wachtwoord bevestigen",
-      "changepw.req.min": "Er moeten minimaal 8 tekens aanwezig zijn",
-      "changepw.req.max": "Er mogen maximaal 50 tekens aanwezig zijn",
-      "changepw.req.number": "Er moet 1 cijfer aanwezig zijn",
-      "changepw.req.uppercase": "Er moet 1 hoofdletter aanwezig zijn",
-      "changepw.req.symbol": "Ten minste een van de volgende symbolen !@#$.%^&*-_ moet aanwezig zijn",
-      "changepw.req.firstname": "Niet meer dan 2 tekens van de voornaam mogen aanwezig zijn",
-      "changepw.req.lastname": "Niet meer dan 2 tekens van de achternaam mogen aanwezig zijn",
-      "changepw.req.username": "Niet meer dan 2 tekens van de gebruikersnaam mogen aanwezig zijn",
-      "changepw.req.email": "Niet meer dan 2 tekens van het e-mailadres mogen aanwezig zijn.",
-      "changepw.req.pii": "Bevat niet meer dan 2 opeenvolgende tekens van uw voornaam, achternaam of e-mailadres.",
+      "changepw.req.length": "{min}-{max} tekens",
+      "changepw.req.uppercase": "Minimaal één hoofdletter",
+      "changepw.req.number": "Minimaal één cijfer",
+      "changepw.req.symbol": "Minimaal één speciaal teken ( {symbols} )",
+      "changepw.req.consecutive": "Bevat niet meer dan {n} opeenvolgende tekens van {fields}",
+      "changepw.field.firstname": "voornaam",
+      "changepw.field.lastname": "achternaam",
+      "changepw.field.username": "gebruikersnaam",
+      "changepw.field.email": "e-mailadres",
       "changepw.strength.label": "Wachtwoordsterkte",
       "changepw.strength.weak": "Slecht",
       "changepw.strength.fair": "Redelijk",
@@ -1845,23 +1837,20 @@
       });
     }
 
-    /* Read the REAL min/max/symbol set from the server policy list so the
-       displayed requirements and their live validation match what the server
-       actually enforces (the translation text is hardcoded to 8/50, which can
-       silently disagree with the server and block a "looks valid" password). */
-    var cpMin = 8, cpMax = 50, cpSymbols = "!@#$.%^&*-_";
-    if (listcontent) {
-      listcontent.querySelectorAll("li").forEach(function (li) {
-        var raw = li.textContent, low = raw.toLowerCase(), m;
-        if ((m = low.match(/minimum\s+(\d+)/))) cpMin = parseInt(m[1], 10);
-        if ((m = low.match(/maximum\s+(\d+)/))) cpMax = parseInt(m[1], 10);
-        if (low.indexOf("symbol") !== -1) {
-          var sm = raw.match(/symbols?[\s:]+(\S+)/i);
-          if (sm) cpSymbols = sm[1];
-        }
-      });
-    }
+    /* Hardcoded password policy (kept in sync with the server policy manually).
+       The displayed requirements and their live validation both use these. */
+    var cpMin = 12, cpMax = 50, cpSymbols = "!@#$.%^&*-_";
+    /* Consecutive-characters rule: N and the restricted fields shown on the
+       (static, server-validated) consecutive line. */
+    var cpConsecN = 2;
+    var cpFields = ["username", "email", "firstname", "lastname"];
     var cpSymRegex = new RegExp("[" + cpSymbols.replace(/[\]\\^-]/g, "\\$&") + "]");
+
+    /* Build the localized, comma-joined field list for the consecutive line. */
+    var cpFieldNames = cpFields.map(function (f) { return tr("changepw.field." + f); });
+    var cpFieldsStr = cpFieldNames.length === 1
+      ? cpFieldNames[0]
+      : cpFieldNames.slice(0, -1).join(", ") + " & " + cpFieldNames[cpFieldNames.length - 1];
 
     /* Move requirements block below new password input (above confirm password input) */
     var newPasswordCol = newPasswordInput ? newPasswordInput.closest("div") : null;
@@ -1941,17 +1930,20 @@
       helper.style.listStyle = "none";
       helper.style.textAlign = "left";
       helper.style.display = "block";
-      var moReqKeys = [
-        "changepw.req.min",
-        "changepw.req.max",
-        "changepw.req.number",
-        "changepw.req.uppercase",
-        "changepw.req.symbol",
-        "changepw.req.pii"
+      /* Fixed 5-line list. `check` is the live-validation type used by
+         updateMoReqList; "static" rows (consecutive) always show a plain dot
+         since first name / last name / username / email aren't available
+         client-side. Numbers/symbols/fields come from the parsed server policy. */
+      var moReqDefs = [
+        { key: "changepw.req.length", check: "length" },
+        { key: "changepw.req.uppercase", check: "uppercase" },
+        { key: "changepw.req.number", check: "number" },
+        { key: "changepw.req.symbol", check: "symbol" },
+        { key: "changepw.req.consecutive", check: "static" }
       ];
-      moReqKeys.forEach(function (k) {
+      moReqDefs.forEach(function (def) {
         var li = document.createElement("li");
-        li.dataset.req = k;
+        li.dataset.req = def.check;
         li.style.display = "flex";
         li.style.alignItems = "flex-start";
         li.style.gap = "6px";
@@ -1963,10 +1955,14 @@
         marker.style.fontWeight = "700";
         marker.style.lineHeight = "1.6";
         var txt = document.createElement("span");
-        /* Swap the hardcoded length numbers for the real policy values. */
-        var label = tr(k);
-        if (k === "changepw.req.min") label = label.replace(/\d+/, cpMin);
-        else if (k === "changepw.req.max") label = label.replace(/\d+/, cpMax);
+        /* Fill placeholders with the real parsed policy values. Use function
+           replacements so a "$" in the symbol set isn't treated as a $-pattern. */
+        var label = tr(def.key)
+          .replace("{min}", function () { return cpMin; })
+          .replace("{max}", function () { return cpMax; })
+          .replace("{symbols}", function () { return cpSymbols; })
+          .replace("{n}", function () { return cpConsecN; })
+          .replace("{fields}", function () { return cpFieldsStr; });
         txt.textContent = label;
         li.appendChild(marker);
         li.appendChild(txt);
@@ -2053,17 +2049,17 @@
     }
 
     /* Live green-tick / red-cross on our visible requirements list.
-       Empty field -> no marker on the 5 character rules. The 4 name/email
-       rules always show a plain dot (we don't have that data client-side). */
+       Empty field -> no marker on the live-checkable rules. The consecutive
+       rule always shows a plain dot (we don't have the name/email data
+       client-side, so it's validated server-side). */
     function updateMoReqList(val) {
       var list = document.getElementById("mo-cp-helper-text");
       if (!list) return;
       var checks = {
-        "changepw.req.min": val.length >= cpMin,
-        "changepw.req.max": val.length <= cpMax,
-        "changepw.req.number": /[0-9]/.test(val),
-        "changepw.req.uppercase": /[A-Z]/.test(val),
-        "changepw.req.symbol": cpSymRegex.test(val)
+        "length": val.length >= cpMin && val.length <= cpMax,
+        "number": /[0-9]/.test(val),
+        "uppercase": /[A-Z]/.test(val),
+        "symbol": cpSymRegex.test(val)
       };
       list.querySelectorAll("li[data-req]").forEach(function (li) {
         var key = li.dataset.req;
