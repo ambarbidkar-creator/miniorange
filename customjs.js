@@ -1315,6 +1315,10 @@
         "width:100%!important;max-width:100%!important;padding:0!important;margin:0!important;" +
         "display:block!important;" +
         "}" +
+        /* resetpassword endpoint: restore horizontal padding on the field
+           container (JS adds .px-2 there only, so this is scoped to it and
+           out-specifies the padding:0 rule above via the extra class). */
+        "#userform .w-75.px-2{padding-left:.5rem!important;padding-right:.5rem!important;}" +
 
         /* Helper text */
         "#mo-fp-helper{font-size:13px;color:#6b7a8d;font-family:'Figtree',sans-serif;" +
@@ -1389,6 +1393,18 @@
       fpSub.id = "mo-fp-subtitle";
       fpSub.textContent = tr("reset.password.subtext");
       fpForm.parentNode.insertBefore(fpSub, fpForm);
+    }
+
+    /* resetpassword endpoint only: add horizontal padding (px-2) to the
+       title, subtitle and the field container div. classList.add is a no-op
+       when the class is already present, so this is observer-loop safe. */
+    if (window.location.pathname.toLowerCase().indexOf("moas/idp/resetpassword") !== -1) {
+      var rpTitle = document.getElementById("mo-fp-title");
+      if (rpTitle) rpTitle.classList.add("px-2");
+      var rpSub = document.getElementById("mo-fp-subtitle");
+      if (rpSub) rpSub.classList.add("px-2");
+      var rpBody = document.querySelector("#userform .w-75.px-4");
+      if (rpBody) rpBody.classList.add("px-2");
     }
 
     /* Replace/create label text */
