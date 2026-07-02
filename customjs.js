@@ -213,10 +213,12 @@
 
     var lang = localStorage.getItem('mo_locale');
     if (lang === 'nl') {
-      $('.alert-success .actionMessage span').text(
-        "Als 'EMAIL' is gekoppeld aan een account, ontvang je een e-mail om je wachtwoord opnieuw in te stellen."
-      );
-      $('#go-back-link').text('Terug naar inloggen');
+      var $psmSpan = $('.alert-success .actionMessage span');
+      var nlAlert = "Als 'EMAIL' is gekoppeld aan een account, ontvang je een e-mail om je wachtwoord opnieuw in te stellen.";
+      if ($psmSpan.text().trim() !== nlAlert) $psmSpan.text(nlAlert);
+
+      var $goBack = $('#go-back-link');
+      if ($goBack.text().trim() !== 'Terug naar inloggen') $goBack.text('Terug naar inloggen');
     }
 
   }
@@ -2620,19 +2622,15 @@
         }
       });
 
-      // Show message. Hide the policy checklist ONLY for the mismatch error;
-      // keep it visible for "required"/"requirements" so the user can still
-      // see which rule is unmet.
+      // Show message. Always keep the password policy checklist and the
+      // strength meter visible (never hidden), regardless of the error type.
       if (errEl) {
         errEl.textContent = msg;
         errEl.style.display = "block";
       }
       if (helpEl) {
-        helpEl.style.display = (msg === tr("changepw.error.mismatch")) ? "none" : "block";
+        helpEl.style.display = "block";
       }
-      /* Mismatch also hides the strength meter; other errors leave it as-is
-         (updateStrength manages its own visibility from the field value). */
-      if (msg === tr("changepw.error.mismatch")) $('#mo-cp-strength').hide();
     }
 
     function clearCpError() {
@@ -2705,82 +2703,27 @@
     }
 
     /* ── PASSWORD MATCH CHECK (blur on confirm) ── */
+    /* Reuses the single showCpError/clearCpError message element
+       (#mo-cp-error-text) so the mismatch message can never be shown twice
+       (the submit handler uses the same element). The per-field input
+       listeners already bound above call clearCpError on every keystroke, so
+       the error clears as soon as the user edits either field. */
     function bindPasswordMatchCheck() {
       if (!newPasswordInput || !confirmPasswordInput) return;
       if (confirmPasswordInput.dataset.moMatchListener) return;
       confirmPasswordInput.dataset.moMatchListener = "true";
 
-      var MATCH_CROSS = '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg>';
-
       function checkMatch() {
         var newVal = newPasswordInput.value;
         var confirmVal = confirmPasswordInput.value;
         if (confirmVal && newVal !== confirmVal) {
-          $(newPasswordInput).addClass("border border-danger");
-          $(confirmPasswordInput).addClass("border border-danger");
-          /* Red cross icon inside each field (same as requirement error) */
-          [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
-            inp.classList.add("mo-input-error");
-            var w = inp.closest(".mo-pw-wrap");
-            if (w && !w.querySelector(".mo-error-icon")) {
-              var icon = document.createElement("span");
-              icon.className = "mo-error-icon";
-              icon.innerHTML = MATCH_CROSS;
-              w.appendChild(icon);
-            }
-          });
-          if (!document.getElementById("mo-match-error")) {
-            var $newWrap = $('[name="password"]').closest(".mo-pw-wrap");
-            ($newWrap.length ? $newWrap : $('[name="password"]'))
-              .after('<p id="mo-match-error" class="text-danger pb-2" style="font-size:12px;margin-top:-10px;margin-bottom:8px;">' + tr("changepw.error.mismatch") + '</p>');
-          }
-          /* Hide the password-policy checklist + strength meter while the
-             mismatch is shown */
-          $('#mo-cp-helper-text').hide();
-          $('#mo-cp-strength').hide();
+          showCpError(tr("changepw.error.mismatch"));
         } else {
-          $(newPasswordInput).removeClass("border border-danger");
-          $(confirmPasswordInput).removeClass("border border-danger");
-          /* Remove the red cross icons */
-          [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
-            inp.classList.remove("mo-input-error");
-            var w = inp.closest(".mo-pw-wrap");
-            if (w) {
-              var ic = w.querySelector(".mo-error-icon");
-              if (ic) ic.remove();
-            }
-          });
-          $("#mo-match-error").remove();
-          /* Mismatch cleared -> restore the checklist + strength meter
-             (recompute so an empty field stays hidden). */
-          $('#mo-cp-helper-text').show();
-          var sBox = document.getElementById("mo-cp-strength");
-          if (sBox) sBox.dataset.score = "";
-          updateStrength(newPasswordInput.value || "");
+          clearCpError();
         }
       }
 
       $(confirmPasswordInput).on("blur", checkMatch);
-
-      /* As soon as the user types again, hide the "passwords don't match"
-         error and its indicators (re-checked on the next blur). */
-      $(newPasswordInput).add(confirmPasswordInput).on("input", function () {
-        if (!document.getElementById("mo-match-error") && !$(confirmPasswordInput).hasClass("border-danger")) return;
-        $(newPasswordInput).removeClass("border border-danger");
-        $(confirmPasswordInput).removeClass("border border-danger");
-        [newPasswordInput, confirmPasswordInput].forEach(function (inp) {
-          inp.classList.remove("mo-input-error");
-          var w = inp.closest(".mo-pw-wrap");
-          if (w) { var ic = w.querySelector(".mo-error-icon"); if (ic) ic.remove(); }
-        });
-        $("#mo-match-error").remove();
-        /* Restore the checklist + strength meter that the mismatch hid
-           (recompute so an empty field stays hidden). */
-        $('#mo-cp-helper-text').show();
-        var sBox = document.getElementById("mo-cp-strength");
-        if (sBox) sBox.dataset.score = "";
-        updateStrength(newPasswordInput.value || "");
-      });
     }
     bindPasswordMatchCheck();
 
