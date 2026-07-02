@@ -1788,14 +1788,23 @@
     $('.form-group').addClass('text-start');
     $('br').remove();
 
-    /* changeuserpassword endpoint only: override the card padding to 20px 28px.
-       An inline !important is required to beat the #mo-cp-css `#login-wrapper`
-       rule (jQuery's .css() can't set !important). Guarded (only write when it
-       differs) so the style mutation doesn't retrigger the observer loop. */
+    /* changeuserpassword endpoint only: override the card padding to 28px on
+       all sides. An inline !important is required to beat the #mo-cp-css
+       `#login-wrapper` rule (jQuery's .css() can't set !important). Guarded
+       (only write when it differs) so the style mutation doesn't retrigger the
+       observer loop. */
     if (window.location.pathname.toLowerCase().indexOf("changeuserpassword") !== -1) {
       var cupWrapper = document.getElementById("login-wrapper");
-      if (cupWrapper && cupWrapper.style.padding !== "20px 28px") {
-        cupWrapper.style.setProperty("padding", "20px 28px", "important");
+      if (cupWrapper && cupWrapper.style.padding !== "28px") {
+        cupWrapper.style.setProperty("padding", "28px", "important");
+      }
+
+      /* #userform carries Bootstrap's .p-3 (padding:1rem!important), so zeroing
+         it needs an inline !important too. Guarded against the NORMALIZED
+         read-back ("0" comes back as "0px") so it doesn't loop the observer. */
+      var cupForm = document.getElementById("userform");
+      if (cupForm && cupForm.style.padding !== "0px") {
+        cupForm.style.setProperty("padding", "0", "important");
       }
     }
     /* CSS — inject once */
