@@ -137,34 +137,31 @@
       if (this.style.height !== "100vh") this.style.height = "100vh";
     });
 
-    /* Replace heading text with RESET PASSWORD (localized).
-       Guarded so we only write when it differs — avoids the observer loop. */
-    var psmTitle = document.querySelector("#login-wrapper h4");
-    if (psmTitle && psmTitle.textContent !== tr("psm.title")) {
-      psmTitle.textContent = tr("psm.title");
-    }
+    /* TRANSLATION DISABLED (debugging "stuck on loading"): heading-text
+       localization commented out so no text is rewritten on this page. */
+    // var psmTitle = document.querySelector("#login-wrapper h4");
+    // if (psmTitle && psmTitle.textContent !== tr("psm.title")) {
+    //   psmTitle.textContent = tr("psm.title");
+    // }
 
-    /* Point "Go back to Login Page" at the broker login (dashboard) URL */
+    /* Point "Go back to Login Page" at the broker login (dashboard) URL.
+       (Not a translation — kept active.) */
     var goBackLink = document.getElementById("go-back-link");
     if (goBackLink && goBackLink.getAttribute("href") !== MO_URLS.dashboardRedirect) {
       goBackLink.setAttribute("href", MO_URLS.dashboardRedirect);
     }
-    /* Localize the go-back link label ("Terug naar inloggen" in nl). Use a
-       PER-ELEMENT guard (compare each node's own text) so a multi-match set
-       can't produce a concatenated read that never equals the target — which
-       would rewrite on every observer tick and spin the page on "loading". */
-    $('#go-back-link').each(function () {
-      if (this.textContent.trim() !== tr("goback.login")) this.textContent = tr("goback.login");
-    });
 
-    /* Localize the success alert message (overrides the server-rendered text).
-       tr() resolves nl to the approved Dutch copy and every other locale to its
-       own translation. Per-element guard for the same anti-loop reason as the
-       link above: `.actionMessage span` can match more than one span, and a
-       combined .text() read would never equal a single-message target. */
-    $('.alert-success .actionMessage span').each(function () {
-      if (this.textContent.trim() !== tr("psm.alert")) this.textContent = tr("psm.alert");
-    });
+    /* TRANSLATION DISABLED (debugging "stuck on loading"): go-back link label
+       localization commented out. */
+    // $('#go-back-link').each(function () {
+    //   if (this.textContent.trim() !== tr("goback.login")) this.textContent = tr("goback.login");
+    // });
+
+    /* TRANSLATION DISABLED (debugging "stuck on loading"): success-alert
+       message localization commented out. */
+    // $('.alert-success .actionMessage span').each(function () {
+    //   if (this.textContent.trim() !== tr("psm.alert")) this.textContent = tr("psm.alert");
+    // });
 
     /* Page-specific styling (inject once) — makes this page match /login:
        carded wrapper, left-aligned bold heading, clean green message box,
