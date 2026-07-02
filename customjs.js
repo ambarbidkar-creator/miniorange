@@ -140,8 +140,8 @@
     /* Replace heading text with RESET PASSWORD (localized).
        Guarded so we only write when it differs — avoids the observer loop. */
     var psmTitle = document.querySelector("#login-wrapper h4");
-    if (psmTitle && psmTitle.textContent !== tr("reset.password")) {
-      psmTitle.textContent = tr("reset.password");
+    if (psmTitle && psmTitle.textContent !== tr("psm.title")) {
+      psmTitle.textContent = tr("psm.title");
     }
 
     /* Point "Go back to Login Page" at the broker login (dashboard) URL */
@@ -424,11 +424,11 @@
     en: {
       "login.page.title": "LOG IN",
       "login.page.button": "LOG IN",
-      "email.field.placeholder": "Email",
+      "email.field.placeholder": "email",
       "email.field.label": "Email address",
       "password.field.label": "Password",
       "password.field.placeholder": "Password",
-      "forgot.password.link": "Forgot password",
+      "forgot.password.link": "Forgot Password",
       "reset.password": "RESET PASSWORD",
       "reset.password.subtext": "We will send you an email with instructions on how to recover it",
       "forgot.page.helper": "Not receiving an email to reset your password? Then the e-mail address used is not known to us. Can’t figure it out?",
@@ -437,14 +437,18 @@
       "otp.page.title": "VERIFY YOUR IDENTITY",
       "otp.field.label": "Enter OTP here",
       "otp.field.placeholder": "OTP number",
-      "otp.verify.button": "VERIFY",
-      "otp.cancel.button": "CANCEL",
+      "otp.verify.button": "Verify",
+      "otp.cancel.button": "Cancel",
+      "otp.alert": "The OTP has been sent to {Email}. Please enter the OTP you received to Validate.",
+      "otp.resend.link": "Did not receive OTP? Click here to Resend OTP",
+      "otp.error.invalid": "Invalid OTP provided. Please try again. You have {X} more attempt(s) left.",
+      "changepw.title": "RESET PASSWORD",
       "changepw.newpassword.label": "New password",
       "changepw.confirmpassword.label": "Confirm password",
       "changepw.req.length": "{min}-{max} characters",
-      "changepw.req.uppercase": "At least one uppercase letter",
-      "changepw.req.number": "At least one number",
-      "changepw.req.symbol": "At least one special character ( {symbols} )",
+      "changepw.req.uppercase": "1 uppercase character should be present",
+      "changepw.req.number": "1 number character should be present",
+      "changepw.req.symbol": "At least one of the following symbols ( {symbols} ) should be present",
       "changepw.req.consecutive": "Does not contain more than {n} consecutive characters of {fields}",
       "changepw.field.firstname": "first name",
       "changepw.field.lastname": "last name",
@@ -457,7 +461,13 @@
       "changepw.strength.strong": "Strong",
       "changepw.error.required": "New password is required.",
       "changepw.error.requirements": "Please satisfy all password requirements.",
-      "changepw.error.mismatch": "The password don't match. Please try again"
+      "changepw.error.mismatch": "The password don't match. Please try again",
+      "psm.title": "Reset Password",
+      "psm.alert": "You will receive a password reset email shortly if the \"EMAIL\" is associated with an account.",
+      "goback.login": "Go back to Login Page",
+      "changepw.success.title": "Password Successfully Changed",
+      "changepw.success.text": "Your password has been successfully changed",
+      "login.error.invalid": "Invalid username or password. You have {X} more attempt(s) left."
     },
     de: {
       "login.page.title": "ANMELDEN",
@@ -477,12 +487,16 @@
       "otp.field.placeholder": "OTP-Nummer",
       "otp.verify.button": "BESTÄTIGEN",
       "otp.cancel.button": "ABBRECHEN",
+      "otp.alert": "Der OTP wurde an {Email} gesendet. Bitte geben Sie den erhaltenen OTP zur Bestätigung ein.",
+      "otp.resend.link": "Keinen OTP erhalten? Klicken Sie hier, um den OTP erneut zu senden",
+      "otp.error.invalid": "Ungültiger OTP eingegeben. Bitte versuchen Sie es erneut. Sie haben noch {X} Versuch(e) übrig.",
+      "changepw.title": "PASSWORT ZURÜCKSETZEN",
       "changepw.newpassword.label": "Neues Passwort",
       "changepw.confirmpassword.label": "Passwort bestätigen",
       "changepw.req.length": "{min}-{max} Zeichen",
-      "changepw.req.uppercase": "Mindestens ein Großbuchstabe",
-      "changepw.req.number": "Mindestens eine Ziffer",
-      "changepw.req.symbol": "Mindestens ein Sonderzeichen ( {symbols} )",
+      "changepw.req.uppercase": "Es muss mindestens ein Großbuchstabe vorhanden sein",
+      "changepw.req.number": "Es muss mindestens eine Ziffer vorhanden sein",
+      "changepw.req.symbol": "Mindestens eines der folgenden Sonderzeichen ( {symbols} ) muss vorhanden sein",
       "changepw.req.consecutive": "Enthält nicht mehr als {n} aufeinanderfolgende Zeichen von {fields}",
       "changepw.field.firstname": "Vorname",
       "changepw.field.lastname": "Nachname",
@@ -495,7 +509,13 @@
       "changepw.strength.strong": "Stark",
       "changepw.error.required": "Neues Passwort ist erforderlich.",
       "changepw.error.requirements": "Bitte erfüllen Sie alle Passwortanforderungen.",
-      "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut."
+      "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut.",
+      "psm.title": "Passwort zurücksetzen",
+      "psm.alert": "Sie erhalten in Kürze eine E-Mail zum Zurücksetzen des Passworts, wenn die \"EMAIL\" mit einem Konto verknüpft ist.",
+      "goback.login": "Zurück zur Anmeldeseite",
+      "changepw.success.title": "Passwort erfolgreich geändert",
+      "changepw.success.text": "Ihr Passwort wurde erfolgreich geändert",
+      "login.error.invalid": "Ungültiger Benutzername oder ungültiges Passwort. Sie haben noch {X} Versuch(e) übrig."
     },
     it: {
       "login.page.title": "ACCEDI",
@@ -515,12 +535,16 @@
       "otp.field.placeholder": "Numero OTP",
       "otp.verify.button": "VERIFICA",
       "otp.cancel.button": "ANNULLA",
+      "otp.alert": "Il codice OTP è stato inviato a {Email}. Inserisci il codice OTP ricevuto per confermare.",
+      "otp.resend.link": "Non hai ricevuto l'OTP? Clicca qui per inviarlo di nuovo",
+      "otp.error.invalid": "OTP non valido. Riprova. Hai ancora {X} tentativo/i.",
+      "changepw.title": "REIMPOSTA PASSWORD",
       "changepw.newpassword.label": "Nuova password",
       "changepw.confirmpassword.label": "Conferma password",
       "changepw.req.length": "{min}-{max} caratteri",
-      "changepw.req.uppercase": "Almeno una lettera maiuscola",
-      "changepw.req.number": "Almeno un numero",
-      "changepw.req.symbol": "Almeno un carattere speciale ( {symbols} )",
+      "changepw.req.uppercase": "Deve essere presente almeno una lettera maiuscola",
+      "changepw.req.number": "Deve essere presente almeno un numero",
+      "changepw.req.symbol": "Deve essere presente almeno uno dei seguenti simboli ( {symbols} )",
       "changepw.req.consecutive": "Non contiene più di {n} caratteri consecutivi di {fields}",
       "changepw.field.firstname": "nome",
       "changepw.field.lastname": "cognome",
@@ -533,7 +557,13 @@
       "changepw.strength.strong": "Forte",
       "changepw.error.required": "La nuova password è obbligatoria.",
       "changepw.error.requirements": "Soddisfa tutti i requisiti della password.",
-      "changepw.error.mismatch": "Le password non corrispondono. Riprova."
+      "changepw.error.mismatch": "Le password non corrispondono. Riprova.",
+      "psm.title": "Reimposta password",
+      "psm.alert": "Riceverai a breve un'email per reimpostare la password se \"EMAIL\" è associata a un account.",
+      "goback.login": "Torna alla pagina di accesso",
+      "changepw.success.title": "Password modificata con successo",
+      "changepw.success.text": "La tua password è stata modificata con successo",
+      "login.error.invalid": "Nome utente o password non validi. Hai ancora {X} tentativo/i."
     },
     ar: {
       "login.page.title": "تسجيل الدخول",
@@ -553,12 +583,16 @@
       "otp.field.placeholder": "رقم OTP",
       "otp.verify.button": "تحقق",
       "otp.cancel.button": "إلغاء",
+      "otp.alert": "تم إرسال رمز OTP إلى {Email}. يرجى إدخال الرمز الذي تلقيته للتحقق.",
+      "otp.resend.link": "لم تتلقَّ رمز OTP؟ انقر هنا لإعادة إرساله",
+      "otp.error.invalid": "رمز OTP غير صالح. يرجى المحاولة مرة أخرى. لديك {X} محاولة/محاولات متبقية.",
+      "changepw.title": "إعادة تعيين كلمة المرور",
       "changepw.newpassword.label": "كلمة المرور الجديدة",
       "changepw.confirmpassword.label": "تأكيد كلمة المرور",
       "changepw.req.length": "{min}-{max} حرفًا",
-      "changepw.req.uppercase": "حرف كبير واحد على الأقل",
-      "changepw.req.number": "رقم واحد على الأقل",
-      "changepw.req.symbol": "رمز خاص واحد على الأقل ( {symbols} )",
+      "changepw.req.uppercase": "يجب أن يحتوي على حرف كبير واحد على الأقل",
+      "changepw.req.number": "يجب أن يحتوي على رقم واحد على الأقل",
+      "changepw.req.symbol": "يجب أن يحتوي على واحد على الأقل من الرموز التالية ( {symbols} )",
       "changepw.req.consecutive": "لا يحتوي على أكثر من {n} أحرف متتالية من {fields}",
       "changepw.field.firstname": "الاسم الأول",
       "changepw.field.lastname": "اسم العائلة",
@@ -571,7 +605,13 @@
       "changepw.strength.strong": "قوية",
       "changepw.error.required": "كلمة المرور الجديدة مطلوبة.",
       "changepw.error.requirements": "يرجى استيفاء جميع متطلبات كلمة المرور.",
-      "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى."
+      "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى.",
+      "psm.title": "إعادة تعيين كلمة المرور",
+      "psm.alert": "ستتلقى قريبًا بريدًا إلكترونيًا لإعادة تعيين كلمة المرور إذا كان \"EMAIL\" مرتبطًا بحساب.",
+      "goback.login": "العودة إلى صفحة تسجيل الدخول",
+      "changepw.success.title": "تم تغيير كلمة المرور بنجاح",
+      "changepw.success.text": "تم تغيير كلمة المرور الخاصة بك بنجاح",
+      "login.error.invalid": "اسم المستخدم أو كلمة المرور غير صالحة. لديك {X} محاولة/محاولات متبقية."
     },
     pt: {
       "login.page.title": "ENTRAR",
@@ -591,12 +631,16 @@
       "otp.field.placeholder": "Número OTP",
       "otp.verify.button": "VERIFICAR",
       "otp.cancel.button": "CANCELAR",
+      "otp.alert": "O código OTP foi enviado para {Email}. Insira o código OTP recebido para validar.",
+      "otp.resend.link": "Não recebeu o OTP? Clique aqui para reenviar o OTP",
+      "otp.error.invalid": "OTP inválido. Tente novamente. Você tem mais {X} tentativa(s).",
+      "changepw.title": "REDEFINIR SENHA",
       "changepw.newpassword.label": "Nova senha",
       "changepw.confirmpassword.label": "Confirmar senha",
       "changepw.req.length": "{min}-{max} caracteres",
-      "changepw.req.uppercase": "Pelo menos uma letra maiúscula",
-      "changepw.req.number": "Pelo menos um número",
-      "changepw.req.symbol": "Pelo menos um caractere especial ( {symbols} )",
+      "changepw.req.uppercase": "Deve conter pelo menos uma letra maiúscula",
+      "changepw.req.number": "Deve conter pelo menos um número",
+      "changepw.req.symbol": "Deve conter pelo menos um dos seguintes símbolos ( {symbols} )",
       "changepw.req.consecutive": "Não contém mais de {n} caracteres consecutivos de {fields}",
       "changepw.field.firstname": "nome",
       "changepw.field.lastname": "sobrenome",
@@ -609,7 +653,13 @@
       "changepw.strength.strong": "Forte",
       "changepw.error.required": "A nova senha é obrigatória.",
       "changepw.error.requirements": "Atenda a todos os requisitos da senha.",
-      "changepw.error.mismatch": "As senhas não coincidem. Tente novamente."
+      "changepw.error.mismatch": "As senhas não coincidem. Tente novamente.",
+      "psm.title": "Redefinir senha",
+      "psm.alert": "Você receberá em breve um e-mail de redefinição de senha se \"EMAIL\" estiver associado a uma conta.",
+      "goback.login": "Voltar para a página de login",
+      "changepw.success.title": "Senha alterada com sucesso",
+      "changepw.success.text": "Sua senha foi alterada com sucesso",
+      "login.error.invalid": "Nome de usuário ou senha inválidos. Você tem mais {X} tentativa(s)."
     },
     es: {
       "login.page.title": "INICIAR SESIÓN",
@@ -629,12 +679,16 @@
       "otp.field.placeholder": "Número OTP",
       "otp.verify.button": "VERIFICAR",
       "otp.cancel.button": "CANCELAR",
+      "otp.alert": "El código OTP se ha enviado a {Email}. Introduzca el código OTP recibido para validar.",
+      "otp.resend.link": "¿No recibió el OTP? Haga clic aquí para reenviarlo",
+      "otp.error.invalid": "OTP no válido. Inténtelo de nuevo. Le queda(n) {X} intento(s).",
+      "changepw.title": "RESTABLECER CONTRASEÑA",
       "changepw.newpassword.label": "Nueva contraseña",
       "changepw.confirmpassword.label": "Confirmar contraseña",
       "changepw.req.length": "{min}-{max} caracteres",
-      "changepw.req.uppercase": "Al menos una letra mayúscula",
-      "changepw.req.number": "Al menos un número",
-      "changepw.req.symbol": "Al menos un carácter especial ( {symbols} )",
+      "changepw.req.uppercase": "Debe contener al menos una letra mayúscula",
+      "changepw.req.number": "Debe contener al menos un número",
+      "changepw.req.symbol": "Debe contener al menos uno de los siguientes símbolos ( {symbols} )",
       "changepw.req.consecutive": "No contiene más de {n} caracteres consecutivos de {fields}",
       "changepw.field.firstname": "nombre",
       "changepw.field.lastname": "apellido",
@@ -647,7 +701,13 @@
       "changepw.strength.strong": "Fuerte",
       "changepw.error.required": "La nueva contraseña es obligatoria.",
       "changepw.error.requirements": "Cumpla con todos los requisitos de la contraseña.",
-      "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo."
+      "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo.",
+      "psm.title": "Restablecer contraseña",
+      "psm.alert": "Recibirá en breve un correo electrónico para restablecer la contraseña si \"EMAIL\" está asociado a una cuenta.",
+      "goback.login": "Volver a la página de inicio de sesión",
+      "changepw.success.title": "Contraseña cambiada correctamente",
+      "changepw.success.text": "Su contraseña se ha cambiado correctamente",
+      "login.error.invalid": "Nombre de usuario o contraseña no válidos. Le queda(n) {X} intento(s)."
     },
     fr: {
       "login.page.title": "CONNEXION",
@@ -659,7 +719,7 @@
       "forgot.password.link": "Mot de passe oublié",
       "reset.password": "RÉINITIALISER LE MOT DE PASSE",
       "reset.password.subtext": "Nous vous enverrons un e-mail contenant des instructions pour le récupérer",
-      "forgot.page.helper": "Vous ne recevez pas d'e-mail pour réinitialiser votre mot de passe ? Alors l'adresse e-mail utilisée ne nous est pas connue. Vous ne trouvez pas ?",
+      "forgot.page.helper": "Vous ne recevez pas d'e-mail pour réinitialiser votre mot de passe ? Alors l'adresse e-mail utilisée ne nous est pas connue. Vous ne trouvez pas ?",
       "forgot.page.helper.link": "Contacter le service client",
       "next.button": "SUIVANT",
       "otp.page.title": "VÉRIFIEZ VOTRE IDENTITÉ",
@@ -667,12 +727,16 @@
       "otp.field.placeholder": "Numéro OTP",
       "otp.verify.button": "VÉRIFIER",
       "otp.cancel.button": "ANNULER",
+      "otp.alert": "Le code OTP a été envoyé à {Email}. Veuillez saisir le code OTP reçu pour valider.",
+      "otp.resend.link": "Vous n'avez pas reçu l'OTP ? Cliquez ici pour le renvoyer",
+      "otp.error.invalid": "OTP invalide. Veuillez réessayer. Il vous reste {X} tentative(s).",
+      "changepw.title": "RÉINITIALISER LE MOT DE PASSE",
       "changepw.newpassword.label": "Nouveau mot de passe",
       "changepw.confirmpassword.label": "Confirmer le mot de passe",
       "changepw.req.length": "{min}-{max} caractères",
-      "changepw.req.uppercase": "Au moins une lettre majuscule",
-      "changepw.req.number": "Au moins un chiffre",
-      "changepw.req.symbol": "Au moins un caractère spécial ( {symbols} )",
+      "changepw.req.uppercase": "Au moins une lettre majuscule doit être présente",
+      "changepw.req.number": "Au moins un chiffre doit être présent",
+      "changepw.req.symbol": "Au moins un des symboles suivants ( {symbols} ) doit être présent",
       "changepw.req.consecutive": "Ne contient pas plus de {n} caractères consécutifs de {fields}",
       "changepw.field.firstname": "prénom",
       "changepw.field.lastname": "nom de famille",
@@ -685,7 +749,13 @@
       "changepw.strength.strong": "Fort",
       "changepw.error.required": "Le nouveau mot de passe est requis.",
       "changepw.error.requirements": "Veuillez satisfaire à toutes les exigences du mot de passe.",
-      "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer."
+      "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer.",
+      "psm.title": "Réinitialiser le mot de passe",
+      "psm.alert": "Vous recevrez sous peu un e-mail de réinitialisation du mot de passe si \"EMAIL\" est associé à un compte.",
+      "goback.login": "Retour à la page de connexion",
+      "changepw.success.title": "Mot de passe modifié avec succès",
+      "changepw.success.text": "Votre mot de passe a été modifié avec succès",
+      "login.error.invalid": "Nom d'utilisateur ou mot de passe invalide. Il vous reste {X} tentative(s)."
     },
     nl: {
       "login.page.title": "INLOGGEN",
@@ -694,23 +764,27 @@
       "email.field.label": "E-mailadres",
       "password.field.label": "Wachtwoord",
       "password.field.placeholder": "Wachtwoord",
-      "forgot.password.link": "Wachtwoord vergeten",
-      "reset.password": "WACHTWOORD OPNIEUW INSTELLEN",
-      "reset.password.subtext": "We sturen u een e-mail met instructies om het te herstellen",
-      "forgot.page.helper": "Ontvangt u geen e-mail om uw wachtwoord opnieuw in te stellen? Dan is het gebruikte e-mailadres bij ons niet bekend. Komt u er niet uit?",
-      "forgot.page.helper.link": "Neem contact op met de klantenservice",
+      "forgot.password.link": "Wachtwoord vergeten?",
+      "reset.password": "WACHTWOORD WIJZIGEN",
+      "reset.password.subtext": "We sturen je een e-mail met instructies om je wachtwoord opnieuw in te stellen.",
+      "forgot.page.helper": "Geen e-mail ontvangen? Controleer of het juiste e-mailadres is ingevoerd, of het opgegeven e-mailadres is niet bij ons bekend.",
+      "forgot.page.helper.link": "Neem contact op met onze klantenservice.",
       "next.button": "VOLGENDE",
-      "otp.page.title": "VERIFIEER UW IDENTITEIT",
-      "otp.field.label": "Voer hier de OTP in",
-      "otp.field.placeholder": "OTP-nummer",
-      "otp.verify.button": "VERIFIËREN",
-      "otp.cancel.button": "ANNULEREN",
-      "changepw.newpassword.label": "Nieuw wachtwoord",
-      "changepw.confirmpassword.label": "Wachtwoord bevestigen",
-      "changepw.req.length": "{min}-{max} tekens",
+      "otp.page.title": "BEVESTIG DAT JIJ HET BENT",
+      "otp.field.label": "Vul eenmalige login code in",
+      "otp.field.placeholder": "Eenmalige code",
+      "otp.verify.button": "BEVESTIG",
+      "otp.cancel.button": "ANNULEER",
+      "otp.alert": "De eenmalige code is verzonden naar {Email}. Vul de code in om verder te gaan.",
+      "otp.resend.link": "Geen eenmalige code ontvangen? Vraag een nieuwe code aan.",
+      "otp.error.invalid": "Ongeldige eenmalige code. Je mag het nog {X} keer proberen.",
+      "changepw.title": "NIEUW WACHTWOORD INSTELLEN",
+      "changepw.newpassword.label": "Vul een nieuw wachtwoord in",
+      "changepw.confirmpassword.label": "Bevestig wachtwoord",
+      "changepw.req.length": "{min}-{max} karakters",
       "changepw.req.uppercase": "Minimaal één hoofdletter",
       "changepw.req.number": "Minimaal één cijfer",
-      "changepw.req.symbol": "Minimaal één speciaal teken ( {symbols} )",
+      "changepw.req.symbol": "Minimaal één speciaal karakter ( {symbols} )",
       "changepw.req.consecutive": "Bevat niet meer dan {n} opeenvolgende tekens van {fields}",
       "changepw.field.firstname": "voornaam",
       "changepw.field.lastname": "achternaam",
@@ -723,7 +797,13 @@
       "changepw.strength.strong": "Sterk",
       "changepw.error.required": "Nieuw wachtwoord is vereist.",
       "changepw.error.requirements": "Voldoe aan alle wachtwoordvereisten.",
-      "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw."
+      "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw.",
+      "psm.title": "NIEUW WACHTWOORD INSTELLEN",
+      "psm.alert": "Als 'EMAIL' is gekoppeld aan een account, ontvang je een e-mail om je wachtwoord opnieuw in te stellen.",
+      "goback.login": "Terug naar inloggen",
+      "changepw.success.title": "Wachtwoord gewijzigd",
+      "changepw.success.text": "Je wachtwoord is gewijzigd",
+      "login.error.invalid": "De combinatie van e-mailadres en wachtwoord is niet geldig. Je mag het nog {X} keer proberen."
     }
   };
 
@@ -1946,9 +2026,9 @@
         }
       }
       if (titleTextNode) {
-        titleTextNode.nodeValue = tr("reset.password");
+        titleTextNode.nodeValue = tr("changepw.title");
       } else {
-        h3.insertBefore(document.createTextNode(tr("reset.password")), h3.firstChild);
+        h3.insertBefore(document.createTextNode(tr("changepw.title")), h3.firstChild);
       }
     }
 
@@ -2080,8 +2160,7 @@
         { key: "changepw.req.length", check: "length" },
         { key: "changepw.req.uppercase", check: "uppercase" },
         { key: "changepw.req.number", check: "number" },
-        { key: "changepw.req.symbol", check: "symbol" },
-        { key: "changepw.req.consecutive", check: "static" }
+        { key: "changepw.req.symbol", check: "symbol" }
       ];
       moReqDefs.forEach(function (def) {
         var li = document.createElement("li");
