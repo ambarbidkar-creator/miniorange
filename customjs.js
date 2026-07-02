@@ -346,7 +346,7 @@
       "gap:8px!important;min-height:40px!important;padding:8px 20px!important;" +
       "border-radius:0!important;background:#0A55D7!important;background-color:#0A55D7!important;" +
       "border:none!important;color:#fff!important;font-family:'Figtree',sans-serif!important;" +
-      "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
+      "font-size:16px!important;font-weight:700!important;letter-spacing:.6px!important;" +
       "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;width:auto!important;" +
       "padding-right:44px!important;background-image:" + MO_ARROW_BG + "!important;" +
       "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;" +
@@ -1544,7 +1544,7 @@
         "gap:8px!important;min-height:40px!important;padding:8px 24px!important;" +
         "border-radius:0!important;background:#0A55D7!important;background-color:#0A55D7!important;" +
         "border:none!important;color:#fff!important;font-family:'Figtree',sans-serif!important;" +
-        "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
+        "font-size:16px!important;font-weight:700!important;letter-spacing:.6px!important;" +
         "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;" +
         "width:auto!important;margin:0 auto 0 0!important;align-self:flex-start!important;" +
         "padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
@@ -2020,7 +2020,7 @@
         "gap:8px!important;min-height:40px!important;padding:8px 24px!important;" +
         "border-radius:0!important;background:#0A55D7!important;background-color:#0A55D7!important;" +
         "border:none!important;color:#fff!important;font-family:'Figtree',sans-serif!important;" +
-        "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
+        "font-size:16px!important;font-weight:700!important;letter-spacing:.6px!important;" +
         "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;" +
         "width:auto!important;margin:0!important;align-self:flex-start!important;" +
         "}" +
