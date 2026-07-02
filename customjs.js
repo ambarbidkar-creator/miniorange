@@ -165,7 +165,7 @@
         /* Card (override the inline white border/bg from the markup) */
         "#login-wrapper{background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:28px 18px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
+        "padding:28px 15px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
 
         /* Heading -> left-aligned bold, like the LOG IN title */
         "#login-wrapper h4{font-family:'Figtree',sans-serif!important;font-size:26px!important;" +
@@ -247,7 +247,7 @@
       "#login-wrapper{" +
       "background:#fff!important;border:1px solid #e0e7ef!important;" +
       "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-      "padding:28px 18px!important;max-width:560px!important;margin:0 auto!important;" +
+      "padding:28px 15px!important;max-width:560px!important;margin:0 auto!important;" +
       "}" +
 
       /* Form: stretch children to full width (removes Bootstrap center alignment) */
@@ -1278,6 +1278,15 @@
        catch any re-added by React). */
     if (window.location.pathname.toLowerCase().indexOf("moas/idp/resetpassword") !== -1) {
       $('br').remove();
+
+      /* This page only: override the card padding to 28px 20px. An inline
+         !important is required to beat the #mo-fp-css `#login-wrapper` rule
+         (jQuery's .css() can't set !important). Guarded (only write when it
+         differs) so the style mutation doesn't retrigger the observer loop. */
+      var rpWrapper = document.getElementById("login-wrapper");
+      if (rpWrapper && rpWrapper.style.padding !== "28px 20px") {
+        rpWrapper.style.setProperty("padding", "28px 20px", "important");
+      }
     }
 
     /* ── CSS injection (once) ── */
@@ -1316,7 +1325,7 @@
         "margin-top:0!important;margin-bottom:0!important;" +
         "display:block!important;float:none!important;" +
         "position:relative!important;left:auto!important;right:auto!important;" +
-        "padding:28px 18px!important;box-sizing:border-box!important;" +
+        "padding:28px 15px!important;box-sizing:border-box!important;" +
         "height:auto!important;min-height:unset!important;align-self:center!important;" +
         "}" +
 
@@ -1773,7 +1782,7 @@
         "#login-wrapper{" +
         "background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:28px 18px!important;max-width:560px!important;width:100%!important;" +
+        "padding:28px 15px!important;max-width:560px!important;width:100%!important;" +
         "margin:40px auto!important;box-sizing:border-box!important;" +
         "}" +
 
