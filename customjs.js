@@ -2687,6 +2687,11 @@
       $('#error-alert-message').hide();
     }
 
+    var newPwLabel = $("span.d-flex.align-items-left")[0];
+    if (newPwLabel && newPwLabel.textContent == 'Nieuw wachtwoord') {
+      newPwLabel.textContent = 'Vul een nieuw wachtwoord in';
+    }
+
   }
 
   /* ── MAIN RUN ── */
