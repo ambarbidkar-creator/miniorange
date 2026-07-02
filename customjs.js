@@ -720,10 +720,33 @@
     return key;
   }
 
+  /* Re-sync every locale-dependent text node on the login page on EVERY tick.
+     The custom nodes are inserted once (guarded by id), but their text must be
+     refreshed later: on a cold load the /openidsso 302 means our JS never ran
+     to capture ?request_locale, so <html lang> is the only locale carrier and
+     miniOrange can set it AFTER our first ticks — labels first render in English
+     and must correct to the resolved locale once it settles. Compare before
+     writing so a matched value doesn't retrigger the MutationObserver. */
+  function syncLoginText() {
+    function setText(el, val) { if (el && el.textContent !== val) el.textContent = val; }
+    function setHtml(el, val) { if (el && el.innerHTML !== val) el.innerHTML = val; }
+    function setPh(el, val) { if (el && el.getAttribute("placeholder") !== val) el.setAttribute("placeholder", val); }
+
+    setText(document.getElementById("mo-title"), tr("login.page.title"));
+    setHtml(document.getElementById("mo-email-lbl"), tr("email.field.label") + ' <span class="mo-req">*</span>');
+    setHtml(document.getElementById("mo-pw-lbl"), tr("password.field.label") + ' <span class="mo-req">*</span>');
+    setText(document.getElementById("mo-user-display-lbl"), tr("email.field.label"));
+    setText(document.getElementById("mo-forgot"), tr("forgot.password.link"));
+    setPh(document.getElementById("username"), tr("email.field.placeholder"));
+    setPh(document.getElementById("plaintextPassword"), tr("password.field.placeholder"));
+  }
+
   /* ── STEP 1: Email page UI ── */
   function applyEmailStep() {
     var wrapper = document.getElementById("login-wrapper");
     if (!wrapper) return;
+
+    syncLoginText();
 
     /* LOG IN title — insert once before any form child */
     if (!document.getElementById("mo-title")) {
@@ -802,6 +825,8 @@
     if (!pwField) return;                          // not the password step yet
     if (pwField.style.display === "none" || pwField.classList.contains("d-none")) return;
 
+    syncLoginText();
+
     /* Force-hide elements that jQuery's showAdminPassword() re-shows */
     var dynUser = document.getElementById("dynamicUserName");
     if (dynUser) { dynUser.style.setProperty("display", "none", "important"); }
@@ -845,6 +870,7 @@
       if (usernameVal) {
         var userFg = document.createElement("div"); userFg.className = "mo-fg";
         var userLbl = document.createElement("label"); userLbl.className = "mo-lbl";
+        userLbl.id = "mo-user-display-lbl";
         userLbl.textContent = tr("email.field.label");
         var userBox = document.createElement("div"); userBox.id = "mo-user-display";
         userBox.className = "mo-user-display";
@@ -2509,6 +2535,17 @@
     subtree: true,
     attributes: true,
     attributeFilter: ["style", "class"]
+  });
+
+  /* miniOrange can set <html lang> AFTER our timed ticks on a cold load. Since
+     the /openidsso 302 stops our JS from ever seeing ?request_locale, that
+     attribute is the only locale carrier here — re-resolve and re-render the
+     moment it appears/changes so a late "it" corrects the English first paint.
+     Watches documentElement (not body), which the observer above never sees. */
+  var htmlLangObserver = new MutationObserver(function () { run(); });
+  htmlLangObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["lang"]
   });
 
 }());
