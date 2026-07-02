@@ -149,6 +149,21 @@
     if (goBackLink && goBackLink.getAttribute("href") !== MO_URLS.dashboardRedirect) {
       goBackLink.setAttribute("href", MO_URLS.dashboardRedirect);
     }
+    /* Localize the go-back link label ("Terug naar inloggen" in nl). Pick the
+       link inside its flex container with jQuery. Guarded so the text write
+       doesn't retrigger the observer. */
+    var $goBack = $('.d-flex.justify-content-center.gap-3 #go-back-link');
+    if ($goBack.length && $goBack.text().trim() !== tr("goback.login")) {
+      $goBack.text(tr("goback.login"));
+    }
+
+    /* Localize the success alert message (overrides the server-rendered text).
+       tr() resolves nl to the approved Dutch copy and every other locale to its
+       own translation. Guarded so the text write doesn't retrigger the observer. */
+    var $psmMsg = $('.alert.alert-success .actionMessage li span');
+    if ($psmMsg.length && $psmMsg.text().trim() !== tr("psm.alert")) {
+      $psmMsg.text(tr("psm.alert"));
+    }
 
     /* Page-specific styling (inject once) — makes this page match /login:
        carded wrapper, left-aligned bold heading, clean green message box,
