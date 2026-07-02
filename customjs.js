@@ -371,16 +371,31 @@
   }
 
   function getLocale() {
-    var lang = getUrlParam("request_locale");
-    if (!lang) {
-      var sel = document.getElementById("languageSelect");
-      if (sel) lang = sel.value;
+    /* Normalize any locale string ("it", "it-IT", "it_IT", " IT ") to the
+       2-letter lowercase key used in TRANSLATIONS. Returns "" unless we
+       actually ship translations for it, so an unknown value falls through
+       to the next signal instead of forcing English via tr()'s fallback. */
+    function norm(v) {
+      if (!v) return "";
+      var code = String(v).trim().toLowerCase().split(/[-_]/)[0];
+      return TRANSLATIONS[code] ? code : "";
     }
-    if (!lang) {
-      /* Fall back to the document language, e.g. <html lang="it">. */
-      var htmlLang = document.documentElement.getAttribute("lang");
-      if (htmlLang) lang = htmlLang.trim().toLowerCase().split("-")[0];
-    }
+
+    /* Priority: signals the SERVER controls beat the client-side dropdown.
+         1. ?request_locale — authoritative on the /openidsso entry page.
+         2. <html lang>     — set by the server from request_locale and, unlike
+            the query param, survives the 302 -> /userlogin redirect.
+         3. #languageSelect — only a UI widget; its default may not reflect the
+            locale actually applied, so it ranks last among live signals.
+         4. localStorage    — final fallback so a resolved locale persists onto
+            pages that expose none of the above. */
+    var sel = document.getElementById("languageSelect");
+    var lang =
+      norm(getUrlParam("request_locale")) ||
+      norm(document.documentElement.getAttribute("lang")) ||
+      norm(sel && sel.value) ||
+      norm(localStorage.getItem("mo_locale"));
+
     if (lang) localStorage.setItem("mo_locale", lang);
     return lang;
   }
