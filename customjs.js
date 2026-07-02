@@ -7,8 +7,8 @@
     logoutRedirect: "https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout",
     /* Enduser dashboard -> broker login */
     dashboardRedirect: "https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession",
-    /* OTP page (validatenextfactor) Cancel button -> broker login */
-    otpCancelRedirect: "https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_UCC&redirect_endpoint=/usersession",
+    /* OTP page (validatenextfactor) Cancel button -> account login page */
+    otpCancelRedirect: "https://dev.account.bouwmaat.nl/inloggen",
     /* Forgot-password helper -> customer support page */
     supportPage: "https://dev.bouwmaat.nl/pages/customer-support-page",
     /* Figtree webfont stylesheet */
@@ -1978,6 +1978,24 @@
       if (sm.indexOf("Please enter the OTP") !== -1 && sm.indexOf("Validate") !== -1) {
         otpSuccessSpan.textContent = sm.replace(/Validate/g, "validate");
       }
+    }
+
+    /* Resend OTP link text (nl) — re-synced every tick since the AJAX resend
+       re-renders this link back to its server-default text. */
+    if ($("#resendIdpOtpLink").text().trim() === "OTP verzonden. Klik opnieuw als u het niet hebt ontvangen.") {
+      $("#resendIdpOtpLink").text('Geen eenmalige code ontvangen? Vraag een nieuwe code aan.');
+    }
+
+    /* OTP-sent alert text (nl) — the email address in the middle of the
+       server string varies per user, so match on the fixed tail instead of
+       the whole string, then re-insert the parsed email into our copy. */
+    var otpAlertSpanTxt = $("#success-alert-message .actionMessage li span").text().trim();
+    if (otpAlertSpanTxt.indexOf("Voer de OTP in die u hebt ontvangen om te valideren.") !== -1) {
+      var otpAlertEmailMatch = otpAlertSpanTxt.match(/[\w.+-]+@[\w-]+\.[\w.-]+/);
+      var otpAlertEmail = otpAlertEmailMatch ? otpAlertEmailMatch[0] : "";
+      $("#success-alert-message .actionMessage li span").text(
+        'De eenmalige code is verzonden naar ' + otpAlertEmail + '. Vul de code in om verder te gaan.'
+      );
     }
 
     /* ── One-time-only below (server error handling + done marker) ── */
