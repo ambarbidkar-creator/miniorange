@@ -2041,9 +2041,24 @@
        login page" link to the broker login URL. Runs before the form check
        below (the success screen has no password form). */
     if (window.location.pathname.toLowerCase().indexOf("updateuserpassword") !== -1) {
-      var cpBackLink = document.querySelector('a.btn-link[href="/login"]') || document.querySelector('a[href="/login"]');
+      var cpBackLink = document.querySelector('a.btn.btn-link.custom-small-text') || document.querySelector('a.btn-link[href="/login"]') || document.querySelector('a[href="/login"]');
       if (cpBackLink && cpBackLink.getAttribute("href") !== MO_URLS.dashboardRedirect) {
         cpBackLink.setAttribute("href", MO_URLS.dashboardRedirect);
+      }
+
+      var lang = localStorage.getItem('mo_locale');
+      if (lang === 'nl') {
+        var upTitle = document.querySelector(".login-header");
+        if (upTitle && upTitle.textContent.trim() === 'Wachtwoord Succesvol veranderd.') {
+          upTitle.textContent = 'Wachtwoord gewijzigd';
+        }
+        var upMsg = document.querySelector(".row .col-xs-8.col-xs-offset-2");
+        if (upMsg && upMsg.textContent.trim() === 'Uw wachtwoord is met succes gewijzigd.') {
+          upMsg.textContent = 'Je wachtwoord is gewijzigd';
+        }
+        if (cpBackLink && cpBackLink.textContent.trim() === 'Go back to Login Page') {
+          cpBackLink.textContent = 'Terug naar inloggen';
+        }
       }
 
       /* Success screen: card padding 24px 28px. Inline !important is required
