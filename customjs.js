@@ -370,53 +370,8 @@
     return params.get(name);
   }
 
-  /* Server-rendered #loginbutton value -> locale code. The backend renders
-     the login button in the session locale (e.g. value="Accedi" for Italian)
-     even when request_locale is absent from the URL — which is exactly what
-     happens after the openidsso -> userlogin redirect, which drops the param.
-     We reverse-map that value to a locale so tr() can then render every UI
-     string from TRANSLATIONS in the right language.
-
-     This object is for DETECTION ONLY and is intentionally separate from
-     TRANSLATIONS — add/adjust entries here to match the exact button text the
-     server renders per locale. Matching is case-insensitive + trimmed. */
-  var LOGIN_BUTTON_LOCALES = {
-    it: "Accedi",
-    nl: "Inloggen",
-    en: "Login",
-    de: "Anmeldung",
-    ar: "تسجيل الدخول",
-    pt: "Entrar",
-    es: "De acceso",
-    fr: "Connexion"
-  };
-
-  function detectLocaleFromLoginButton() {
-    var btn = document.getElementById("loginbutton");
-    if (!btn) return "";
-    /* Cache the original server value the first time we see the button, before
-       setBtnArrowLabel() overwrites it with our own tr() label. Every later
-       call detects from this cached original, so the detected locale stays
-       stable and the weaker languageSelect/<html lang> fallbacks below can't
-       overwrite it on subsequent observer/timeout ticks. */
-    if (!btn.dataset.moServerValue) {
-      var v = (btn.value || btn.textContent || "").trim();
-      if (v) btn.dataset.moServerValue = v;
-    }
-    var val = (btn.dataset.moServerValue || "").toLowerCase();
-    if (!val) return "";
-    for (var loc in LOGIN_BUTTON_LOCALES) {
-      if (!Object.prototype.hasOwnProperty.call(LOGIN_BUTTON_LOCALES, loc)) continue;
-      if (LOGIN_BUTTON_LOCALES[loc].trim().toLowerCase() === val) return loc;
-    }
-    return "";
-  }
-
   function getLocale() {
     var lang = getUrlParam("request_locale");
-    /* No request_locale in the URL (e.g. after openidsso -> userlogin)? Detect
-       it from the server-rendered login button before the weaker fallbacks. */
-    if (!lang) lang = detectLocaleFromLoginButton();
     if (!lang) {
       var sel = document.getElementById("languageSelect");
       if (sel) lang = sel.value;
