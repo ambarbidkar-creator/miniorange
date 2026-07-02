@@ -1787,6 +1787,17 @@
     $('.col-xs-8.col-xs-offset-2').addClass('text-start');
     $('.form-group').addClass('text-start');
     $('br').remove();
+
+    /* changeuserpassword endpoint only: override the card padding to 20px 28px.
+       An inline !important is required to beat the #mo-cp-css `#login-wrapper`
+       rule (jQuery's .css() can't set !important). Guarded (only write when it
+       differs) so the style mutation doesn't retrigger the observer loop. */
+    if (window.location.pathname.toLowerCase().indexOf("changeuserpassword") !== -1) {
+      var cupWrapper = document.getElementById("login-wrapper");
+      if (cupWrapper && cupWrapper.style.padding !== "20px 28px") {
+        cupWrapper.style.setProperty("padding", "20px 28px", "important");
+      }
+    }
     /* CSS — inject once */
     if (!document.getElementById("mo-cp-css")) {
       var cpCss =
