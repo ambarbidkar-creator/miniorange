@@ -1413,7 +1413,7 @@
         "#userform .w-75.px-2{padding-left:.5rem!important;padding-right:.5rem!important;}" +
 
         /* Helper text */
-        "#mo-fp-helper{font-size:14px;font-weight:400;color:#6b7a8d;font-family:'Figtree',sans-serif;" +
+        "#mo-fp-helper{font-size:14px;font-weight:400;color:#000933;font-family:'Figtree',sans-serif;" +
         "margin:14px 0 18px;line-height:1.5;text-align:left!important;width:100%!important;padding-left:0;padding-right:0;}" +
         "#mo-fp-helper a{display:block;margin-top:4px;color:#0A55D7;text-decoration:none;font-weight:500;}" +
         "#mo-fp-helper a:hover{text-decoration:underline;}" +
