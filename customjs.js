@@ -313,7 +313,7 @@
 
       /* Shared input style */
       "#username,#plaintextPassword,.mo-styled-input{" +
-      "height:40px!important;border:1px solid #C1CFD7;border-radius:4px!important;" +
+      "height:40px!important;border:1px solid #C1CFD7;border-radius:0!important;" +
       "padding:0 12px!important;font-size:14px!important;font-family:'Figtree',sans-serif!important;" +
       "color:#000933!important;background:#fff!important;width:100%!important;" +
       "box-shadow:none!important;outline:none!important;box-sizing:border-box!important;" +
@@ -336,7 +336,7 @@
       "#mo-forgot:hover{text-decoration:underline;}" +
 
       /* Read-only username display on password step */
-      ".mo-user-display{height:40px;border:1px solid #C1CFD7;border-radius:4px;padding:0 12px;" +
+      ".mo-user-display{height:40px;border:1px solid #C1CFD7;border-radius:0;padding:0 12px;" +
       "font-size:14px;color:#6b7a8d;background:#f5f7fa;display:flex;align-items:center;" +
       "font-family:'Figtree',sans-serif;box-sizing:border-box;width:100%;cursor:default;}" +
 
@@ -359,7 +359,7 @@
       "@media(max-width:576px){" +
       "#login-wrapper{padding:24px 18px 20px!important;}" +
       ".mo-lbl,#username,#plaintextPassword{font-size:16px!important;}" +
-      "#loginbutton{font-size:12px!important;}" +
+      "#loginbutton{font-size:16px!important;}" +
       "}" +
 
       /* Input Error Styling */
@@ -843,6 +843,106 @@
       "changepw.success.title": "Wachtwoord gewijzigd",
       "changepw.success.text": "Je wachtwoord is gewijzigd",
       "login.error.invalid": "De combinatie van e-mailadres en wachtwoord is niet geldig. Je mag het nog {X} keer proberen."
+    },
+    tr: {
+      "login.page.title": "GİRİŞ YAP",
+      "login.page.button": "GİRİŞ YAP",
+      "email.field.placeholder": "e-posta",
+      "email.field.label": "E-posta adresi",
+      "password.field.label": "Şifre",
+      "password.field.placeholder": "Şifre",
+      "forgot.password.link": "Şifremi Unuttum",
+      "reset.password": "ŞİFREYİ SIFIRLA",
+      "reset.password.subtext": "Şifrenizi nasıl kurtaracağınıza dair talimatları içeren bir e-posta göndereceğiz",
+      "forgot.page.helper": "Şifrenizi sıfırlamak için bir e-posta almadınız mı? O halde kullanılan e-posta adresi bizde kayıtlı değil. Sorunu çözemiyor musunuz?",
+      "forgot.page.helper.link": "Müşteri hizmetleriyle iletişime geçin",
+      "next.button": "İLERİ",
+      "otp.page.title": "KİMLİĞİNİZİ DOĞRULAYIN",
+      "otp.field.label": "OTP'yi buraya girin",
+      "otp.field.placeholder": "OTP numarası",
+      "otp.verify.button": "DOĞRULA",
+      "otp.cancel.button": "İPTAL",
+      "otp.alert": "OTP, {Email} adresine gönderildi. Doğrulamak için aldığınız OTP'yi girin.",
+      "otp.resend.link": "OTP almadınız mı? Yeniden göndermek için buraya tıklayın",
+      "otp.error.invalid": "Geçersiz OTP girildi. Lütfen tekrar deneyin. {X} deneme hakkınız kaldı.",
+      "changepw.title": "ŞİFREYİ SIFIRLA",
+      "changepw.newpassword.label": "Yeni şifre",
+      "changepw.confirmpassword.label": "Şifreyi onayla",
+      "changepw.req.length": "{min}-{max} karakter",
+      "changepw.req.uppercase": "En az 1 büyük harf içermelidir",
+      "changepw.req.number": "En az 1 rakam içermelidir",
+      "changepw.req.symbol": "Aşağıdaki sembollerden en az biri bulunmalıdır ( {symbols} )",
+      "changepw.req.consecutive": "{fields} içinden {n} karakterden fazla ardışık karakter içermemelidir",
+      "changepw.field.firstname": "ad",
+      "changepw.field.lastname": "soyad",
+      "changepw.field.username": "kullanıcı adı",
+      "changepw.field.email": "e-posta",
+      "changepw.strength.label": "Şifre gücü",
+      "changepw.strength.weak": "Zayıf",
+      "changepw.strength.fair": "Orta",
+      "changepw.strength.good": "İyi",
+      "changepw.strength.strong": "Güçlü",
+      "changepw.error.required": "Yeni şifre gereklidir.",
+      "changepw.error.requirements": "Lütfen tüm şifre gereksinimlerini karşılayın.",
+      "changepw.error.mismatch": "Şifreler eşleşmiyor. Lütfen tekrar deneyin",
+      "changepw.expired.title": "Şifre Bağlantısının Süresi Doldu",
+      "changepw.expired.message": "Şifre sıfırlama bağlantınızın süresi doldu. Lütfen şifrenizi sıfırlamak için geçerli bir bağlantı kullanın.",
+      "psm.title": "Şifreyi Sıfırla",
+      "psm.alert": "\"EMAIL\" bir hesapla ilişkilendirilmişse kısa süre içinde bir şifre sıfırlama e-postası alacaksınız.",
+      "goback.login": "Giriş Sayfasına Geri Dön",
+      "changepw.success.title": "Şifre Başarıyla Değiştirildi",
+      "changepw.success.text": "Şifreniz başarıyla değiştirildi",
+      "login.error.invalid": "Geçersiz kullanıcı adı veya şifre. {X} deneme hakkınız kaldı."
+    },
+    pl: {
+      "login.page.title": "ZALOGUJ SIĘ",
+      "login.page.button": "ZALOGUJ SIĘ",
+      "email.field.placeholder": "e-mail",
+      "email.field.label": "Adres e-mail",
+      "password.field.label": "Hasło",
+      "password.field.placeholder": "Hasło",
+      "forgot.password.link": "Nie pamiętam hasła",
+      "reset.password": "ZRESETUJ HASŁO",
+      "reset.password.subtext": "Wyślemy Ci e-mail z instrukcjami, jak je odzyskać",
+      "forgot.page.helper": "Nie otrzymujesz e-maila umożliwiającego zresetowanie hasła? Oznacza to, że podany adres e-mail nie jest nam znany. Nie możesz sobie poradzić?",
+      "forgot.page.helper.link": "Skontaktuj się z obsługą klienta",
+      "next.button": "DALEJ",
+      "otp.page.title": "ZWERYFIKUJ SWOJĄ TOŻSAMOŚĆ",
+      "otp.field.label": "Wprowadź kod OTP tutaj",
+      "otp.field.placeholder": "Numer OTP",
+      "otp.verify.button": "ZWERYFIKUJ",
+      "otp.cancel.button": "ANULUJ",
+      "otp.alert": "Kod OTP został wysłany na adres {Email}. Wprowadź otrzymany kod OTP, aby zweryfikować.",
+      "otp.resend.link": "Nie otrzymałeś kodu OTP? Kliknij tutaj, aby wysłać go ponownie",
+      "otp.error.invalid": "Podano nieprawidłowy kod OTP. Spróbuj ponownie. Pozostało Ci {X} prób(y).",
+      "changepw.title": "ZRESETUJ HASŁO",
+      "changepw.newpassword.label": "Nowe hasło",
+      "changepw.confirmpassword.label": "Potwierdź hasło",
+      "changepw.req.length": "{min}-{max} znaków",
+      "changepw.req.uppercase": "Musi zawierać co najmniej 1 wielką literę",
+      "changepw.req.number": "Musi zawierać co najmniej 1 cyfrę",
+      "changepw.req.symbol": "Musi zawierać co najmniej jeden z następujących symboli ( {symbols} )",
+      "changepw.req.consecutive": "Nie zawiera więcej niż {n} kolejnych znaków z {fields}",
+      "changepw.field.firstname": "imię",
+      "changepw.field.lastname": "nazwisko",
+      "changepw.field.username": "nazwa użytkownika",
+      "changepw.field.email": "e-mail",
+      "changepw.strength.label": "Siła hasła",
+      "changepw.strength.weak": "Słabe",
+      "changepw.strength.fair": "Przeciętne",
+      "changepw.strength.good": "Dobre",
+      "changepw.strength.strong": "Silne",
+      "changepw.error.required": "Nowe hasło jest wymagane.",
+      "changepw.error.requirements": "Spełnij wszystkie wymagania dotyczące hasła.",
+      "changepw.error.mismatch": "Hasła nie są zgodne. Spróbuj ponownie",
+      "changepw.expired.title": "Link do zmiany hasła wygasł",
+      "changepw.expired.message": "Twój link do zresetowania hasła wygasł. Użyj ważnego linku, aby zresetować hasło.",
+      "psm.title": "Zresetuj hasło",
+      "psm.alert": "Wkrótce otrzymasz e-mail z linkiem do zresetowania hasła, jeśli \"EMAIL\" jest powiązany z kontem.",
+      "goback.login": "Powrót do strony logowania",
+      "changepw.success.title": "Hasło zostało pomyślnie zmienione",
+      "changepw.success.text": "Twoje hasło zostało pomyślnie zmienione",
+      "login.error.invalid": "Nieprawidłowa nazwa użytkownika lub hasło. Pozostało Ci {X} prób(y)."
     }
   };
 
@@ -1508,7 +1608,7 @@
 
         /* Email input */
         "#emailAddress,#username{" +
-        "height:40px!important;border:1px solid #C1CFD7;border-radius:4px!important;" +
+        "height:40px!important;border:1px solid #C1CFD7;border-radius:0!important;" +
         "padding:0 12px!important;padding-left:12px!important;font-size:14px!important;" +
         "font-family:'Figtree',sans-serif!important;color:#000933!important;" +
         "background:#fff!important;width:100%!important;box-shadow:none!important;" +
@@ -1751,7 +1851,7 @@
         "font-weight:700;color:#3c515d;margin-bottom:6px;}" +
         "#mo-otp-lbl .mo-req{color:#e02020;margin-left:2px;}" +
         "#otpToken{height:40px!important;border:1px solid #C1CFD7;" +
-        "border-radius:4px!important;padding:0 12px!important;font-size:14px!important;" +
+        "border-radius:0!important;padding:0 12px!important;font-size:14px!important;" +
         "font-family:'Figtree',sans-serif!important;color:#000933!important;" +
         "background:#fff!important;box-shadow:none!important;" +
         "width:100%!important;box-sizing:border-box!important;}" +
@@ -2000,7 +2100,7 @@
 
         /* Style inputs */
         "#newPassword,#confirmPassword,#password,#userform input[type='password']{" +
-        "height:40px!important;border:1px solid #C1CFD7;border-radius:4px!important;" +
+        "height:40px!important;border:1px solid #C1CFD7;border-radius:0!important;" +
         "padding:0 42px 0 12px!important;font-size:14px!important;font-family:'Figtree',sans-serif!important;" +
         "color:#000933!important;background:#fff!important;width:100%!important;" +
         "box-shadow:none!important;outline:none!important;box-sizing:border-box!important;" +
