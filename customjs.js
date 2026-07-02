@@ -1684,6 +1684,17 @@
     /* Form padding (jQuery no-ops when classes already match, so no loop) */
     $('#validateIdentityForm').removeClass('p-4').addClass('p-0');
 
+    /* modal-footer padding, this page only. jQuery selects it, but the value
+       is applied via setProperty with !important (jQuery's .css() can't set
+       !important, and this must beat the #mo-otp-css `#modal-footer` rule).
+       Guarded against the NORMALIZED read-back ("0" comes back as "0px") so
+       the style write doesn't retrigger the observer loop. */
+    $('#modal-footer').each(function () {
+      if (this.style.padding !== "0px 26px 24px 24px") {
+        this.style.setProperty("padding", "0 26px 24px 24px", "important");
+      }
+    });
+
     /* Placeholder (attribute not observed) */
     if (otpInput.getAttribute("placeholder") !== tr("otp.field.placeholder")) {
       otpInput.setAttribute("placeholder", tr("otp.field.placeholder"));
