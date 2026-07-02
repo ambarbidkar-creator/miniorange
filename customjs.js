@@ -7,6 +7,8 @@
     logoutRedirect: "https://dev.account.bouwmaat.nl/account/logout?returnTo=https://dev.bouwmaat.nl/account/logout",
     /* Enduser dashboard -> broker login */
     dashboardRedirect: "https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_Hhc&redirect_endpoint=/usersession",
+    /* OTP page (validatenextfactor) Cancel button -> broker login */
+    otpCancelRedirect: "https://store.xecurify.com/moas/broker/login/shopify/dev.bouwmaat.nl/account?idpname=custom_oauth_UCC&redirect_endpoint=/usersession",
     /* Forgot-password helper -> customer support page */
     supportPage: "https://dev.bouwmaat.nl/pages/customer-support-page",
     /* Figtree webfont stylesheet */
@@ -262,6 +264,13 @@
       ".login-header.custom-title,hr,#dynamicUserName,#feedback-msg,#username-error,br.my-2," +
       "#goBack," +
       "a[href*='businessfreetrial'],a[href*='forgotpassword']:not(#mo-forgot),a[href*='resetpassword']:not(#mo-forgot),.col-auto.form-group{display:none!important;}" +
+
+      /* Hide the bottom links block ("Sign in with another account" + forgot).
+         There are two .w-75.px-4 wrappers; the FIRST holds the form (its row is
+         plain .row) and the SECOND holds only these links (its row is
+         .row.justify-content-center). :has() targets just the second so the
+         form is never hidden. */
+      "#enduserloginform .w-75.px-4:has(.row.justify-content-center),#idploginform .w-75.px-4:has(.row.justify-content-center){display:none!important;}" +
 
       /* LOG IN heading — top LEFT */
       "#mo-title{display:block;font-family:'Figtree',sans-serif;font-size:26px;font-weight:800;" +
@@ -1729,7 +1738,7 @@
       cancelBtn.removeAttribute("onclick");
       cancelBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        window.location.replace(MO_URLS.dashboardRedirect);
+        window.location.replace(MO_URLS.otpCancelRedirect);
       });
     }
 
