@@ -462,6 +462,8 @@
       "changepw.error.required": "New password is required.",
       "changepw.error.requirements": "Please satisfy all password requirements.",
       "changepw.error.mismatch": "The password don't match. Please try again",
+      "changepw.expired.title": "Password Link Expired",
+      "changepw.expired.message": "Your password reset link has been expired. Please use valid link to reset your password.",
       "psm.title": "Reset Password",
       "psm.alert": "You will receive a password reset email shortly if the \"EMAIL\" is associated with an account.",
       "goback.login": "Go back to Login Page",
@@ -510,6 +512,8 @@
       "changepw.error.required": "Neues Passwort ist erforderlich.",
       "changepw.error.requirements": "Bitte erfüllen Sie alle Passwortanforderungen.",
       "changepw.error.mismatch": "Die Passwörter stimmen nicht überein. Bitte versuchen Sie es erneut.",
+      "changepw.expired.title": "Passwort-Link abgelaufen",
+      "changepw.expired.message": "Ihr Link zum Zurücksetzen des Passworts ist abgelaufen. Bitte verwenden Sie einen gültigen Link, um Ihr Passwort zurückzusetzen.",
       "psm.title": "Passwort zurücksetzen",
       "psm.alert": "Sie erhalten in Kürze eine E-Mail zum Zurücksetzen des Passworts, wenn die \"EMAIL\" mit einem Konto verknüpft ist.",
       "goback.login": "Zurück zur Anmeldeseite",
@@ -558,6 +562,8 @@
       "changepw.error.required": "La nuova password è obbligatoria.",
       "changepw.error.requirements": "Soddisfa tutti i requisiti della password.",
       "changepw.error.mismatch": "Le password non corrispondono. Riprova.",
+      "changepw.expired.title": "Link della password scaduto",
+      "changepw.expired.message": "Il tuo link per reimpostare la password è scaduto. Utilizza un link valido per reimpostare la password.",
       "psm.title": "Reimposta password",
       "psm.alert": "Riceverai a breve un'email per reimpostare la password se \"EMAIL\" è associata a un account.",
       "goback.login": "Torna alla pagina di accesso",
@@ -606,6 +612,8 @@
       "changepw.error.required": "كلمة المرور الجديدة مطلوبة.",
       "changepw.error.requirements": "يرجى استيفاء جميع متطلبات كلمة المرور.",
       "changepw.error.mismatch": "كلمتا المرور غير متطابقتين. يرجى المحاولة مرة أخرى.",
+      "changepw.expired.title": "انتهت صلاحية رابط كلمة المرور",
+      "changepw.expired.message": "انتهت صلاحية رابط إعادة تعيين كلمة المرور. يرجى استخدام رابط صالح لإعادة تعيين كلمة المرور.",
       "psm.title": "إعادة تعيين كلمة المرور",
       "psm.alert": "ستتلقى قريبًا بريدًا إلكترونيًا لإعادة تعيين كلمة المرور إذا كان \"EMAIL\" مرتبطًا بحساب.",
       "goback.login": "العودة إلى صفحة تسجيل الدخول",
@@ -654,6 +662,8 @@
       "changepw.error.required": "A nova senha é obrigatória.",
       "changepw.error.requirements": "Atenda a todos os requisitos da senha.",
       "changepw.error.mismatch": "As senhas não coincidem. Tente novamente.",
+      "changepw.expired.title": "Link de senha expirado",
+      "changepw.expired.message": "Seu link de redefinição de senha expirou. Use um link válido para redefinir sua senha.",
       "psm.title": "Redefinir senha",
       "psm.alert": "Você receberá em breve um e-mail de redefinição de senha se \"EMAIL\" estiver associado a uma conta.",
       "goback.login": "Voltar para a página de login",
@@ -702,6 +712,8 @@
       "changepw.error.required": "La nueva contraseña es obligatoria.",
       "changepw.error.requirements": "Cumpla con todos los requisitos de la contraseña.",
       "changepw.error.mismatch": "Las contraseñas no coinciden. Inténtelo de nuevo.",
+      "changepw.expired.title": "Enlace de contraseña caducado",
+      "changepw.expired.message": "Su enlace para restablecer la contraseña ha caducado. Utilice un enlace válido para restablecer su contraseña.",
       "psm.title": "Restablecer contraseña",
       "psm.alert": "Recibirá en breve un correo electrónico para restablecer la contraseña si \"EMAIL\" está asociado a una cuenta.",
       "goback.login": "Volver a la página de inicio de sesión",
@@ -750,6 +762,8 @@
       "changepw.error.required": "Le nouveau mot de passe est requis.",
       "changepw.error.requirements": "Veuillez satisfaire à toutes les exigences du mot de passe.",
       "changepw.error.mismatch": "Les mots de passe ne correspondent pas. Veuillez réessayer.",
+      "changepw.expired.title": "Lien de mot de passe expiré",
+      "changepw.expired.message": "Votre lien de réinitialisation du mot de passe a expiré. Veuillez utiliser un lien valide pour réinitialiser votre mot de passe.",
       "psm.title": "Réinitialiser le mot de passe",
       "psm.alert": "Vous recevrez sous peu un e-mail de réinitialisation du mot de passe si \"EMAIL\" est associé à un compte.",
       "goback.login": "Retour à la page de connexion",
@@ -798,6 +812,8 @@
       "changepw.error.required": "Nieuw wachtwoord is vereist.",
       "changepw.error.requirements": "Voldoe aan alle wachtwoordvereisten.",
       "changepw.error.mismatch": "De wachtwoorden komen niet overeen. Probeer het opnieuw.",
+      "changepw.expired.title": "Wachtwoordlink verlopen",
+      "changepw.expired.message": "Je wachtwoordlink is verlopen. Gebruik een geldige link om je wachtwoord opnieuw in te stellen.",
       "psm.title": "NIEUW WACHTWOORD INSTELLEN",
       "psm.alert": "Als 'EMAIL' is gekoppeld aan een account, ontvang je een e-mail om je wachtwoord opnieuw in te stellen.",
       "goback.login": "Terug naar inloggen",
@@ -2005,6 +2021,52 @@
       var cpBackLink = document.querySelector('a.btn-link[href="/login"]') || document.querySelector('a[href="/login"]');
       if (cpBackLink && cpBackLink.getAttribute("href") !== MO_URLS.dashboardRedirect) {
         cpBackLink.setAttribute("href", MO_URLS.dashboardRedirect);
+      }
+
+      /* Success screen: card padding 24px 28px. Inline !important is required
+         to beat the #mo-cp-css `#login-wrapper` rule (jQuery's .css() can't set
+         !important). Guarded against the NORMALIZED read-back so the style write
+         doesn't retrigger the observer loop. */
+      var upWrapper = document.getElementById("login-wrapper");
+      if (upWrapper && upWrapper.style.padding !== "24px 28px") {
+        upWrapper.style.setProperty("padding", "24px 28px", "important");
+      }
+
+      /* Zero the padding on the small "Go back to login" link button. Guarded
+         against the normalized "0px" read-back to stay observer-loop safe. */
+      document.querySelectorAll(".btn.btn-link.custom-small-text").forEach(function (b) {
+        if (b.style.padding !== "0px") b.style.setProperty("padding", "0", "important");
+      });
+
+      /* Hide empty <p> placeholders in the card (no text, no child elements)
+         that otherwise reserve vertical space. Guarded on display so the write
+         doesn't retrigger the observer. */
+      document.querySelectorAll("#login-wrapper p").forEach(function (p) {
+        if (!p.textContent.trim() && p.children.length === 0 && p.style.display !== "none") {
+          p.style.setProperty("display", "none", "important");
+        }
+      });
+    }
+
+    /* "Password Link Expired" error screen (changeuserpassword with an invalid/
+       expired token). It has no password form, so translate its header + body
+       here BEFORE the fpForm early-return below. Detected via the English title
+       or its already-translated value so it stays idempotent across observer
+       ticks. */
+    var cpHeader = document.querySelector(".login-header");
+    if (cpHeader && (cpHeader.textContent.trim() === "Password Link Expired" ||
+                     cpHeader.textContent.trim() === tr("changepw.expired.title"))) {
+      if (cpHeader.textContent.trim() !== tr("changepw.expired.title")) {
+        cpHeader.textContent = tr("changepw.expired.title");
+      }
+      /* This screen only: my-3 -> mb-3 (drop the top margin) */
+      if (cpHeader.classList.contains("my-3")) {
+        cpHeader.classList.remove("my-3");
+        cpHeader.classList.add("mb-3");
+      }
+      var cpExpMsg = document.querySelector(".row .col-xs-8.col-xs-offset-2");
+      if (cpExpMsg && cpExpMsg.textContent.trim() !== tr("changepw.expired.message")) {
+        cpExpMsg.textContent = tr("changepw.expired.message");
       }
     }
 
