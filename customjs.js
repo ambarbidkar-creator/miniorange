@@ -1187,7 +1187,12 @@
        Guarded by #mo-redirect-error so it runs ONCE — otherwise the DOM
        mutations below keep re-triggering the observer (infinite loop). */
     var isPageHasError = errorOnPage();
-    if (isPageHasError && !document.getElementById("mo-redirect-error")) {
+    /* Also gate on a "dismissed" flag: the server banner (#error-alert-message)
+       stays in the DOM (just hidden), so errorOnPage() keeps returning true.
+       Without this flag the next observer tick would re-inject the message,
+       border and icons the moment the user's input handler removes them. */
+    var rdUname = document.getElementById("username");
+    if (isPageHasError && !document.getElementById("mo-redirect-error") && !(rdUname && rdUname.dataset.moRedirectDismissed)) {
       console.log('IN ERROR SECTION ');
       var message = $('#error-alert-message .errorMessage li span').text().trim();
       var errHtml = '<div id="mo-redirect-error" class="error-message text-start" style="color:red;">' + message + '</div>';
@@ -1243,6 +1248,10 @@
         if (el && !el.dataset.moRedirectClear) {
           el.dataset.moRedirectClear = "true";
           el.addEventListener("input", function () {
+            /* Mark dismissed so the guarded block above won't re-inject on the
+               next observer tick (the server banner is still in the DOM). */
+            var u = document.getElementById("username");
+            if (u) u.dataset.moRedirectDismissed = "true";
             $('#mo-redirect-error').remove();
             $('#mo-userlogin-icon, #mo-pw-server-icon').remove();
             $('#username, #plaintextPassword').removeClass('border border-danger mo-input-error');
