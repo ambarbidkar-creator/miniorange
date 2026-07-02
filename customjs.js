@@ -1868,7 +1868,7 @@
         "border:none!important;color:#fff!important;font-family:'Figtree',sans-serif!important;" +
         "font-size:14px!important;font-weight:700!important;letter-spacing:.6px!important;" +
         "text-transform:uppercase!important;cursor:pointer!important;box-shadow:none!important;" +
-        "width:auto!important;margin:10px auto 10px 0!important;align-self:flex-start!important;" +
+        "width:auto!important;margin:0!important;align-self:flex-start!important;" +
         "}" +
         "#validate,#submit{padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
         "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;}" +
@@ -1983,7 +1983,7 @@
       eyeBtn.addEventListener("click", function () {
         var show = newPasswordInput.type === "password";
         newPasswordInput.type = show ? "text" : "password";
-        eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
+        this.innerHTML = show ? EYE_ON : EYE_OFF;
       });
       if (!wrap.querySelector(".mo-eye")) wrap.appendChild(eyeBtn);
     }
@@ -2006,7 +2006,7 @@
       eyeBtn.addEventListener("click", function () {
         var show = confirmPasswordInput.type === "password";
         confirmPasswordInput.type = show ? "text" : "password";
-        eyeBtn.innerHTML = show ? EYE_ON : EYE_OFF;
+        this.innerHTML = show ? EYE_ON : EYE_OFF;
       });
       if (!wrap.querySelector(".mo-eye")) wrap.appendChild(eyeBtn);
     }
