@@ -210,7 +210,15 @@
       psmSt.id = "mo-psm-css"; psmSt.textContent = psmCss;
       document.head.appendChild(psmSt);
     }
-    
+
+    var lang = localStorage.getItem('mo_locale');
+    if (lang === 'nl') {
+      $('.alert-success .actionMessage span').text(
+        "Als 'EMAIL' is gekoppeld aan een account, ontvang je een e-mail om je wachtwoord opnieuw in te stellen."
+      );
+      $('#go-back-link').text('Terug naar inloggen');
+    }
+
   }
 
   /* ── ERROR DETECTION HELPER ── */
