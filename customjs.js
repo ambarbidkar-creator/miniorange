@@ -118,12 +118,13 @@
     /* Reuse the shared /login page styling (background, card, font, etc.) */
     injectFontAndCss();
 
-    /* This page only: override the card padding via jQuery to 20px 18px.
-       Guarded (only write when it differs) so the style mutation doesn't
-       retrigger the observer in a loop. */
+    /* This page only: override the card padding to 20px 24px. An inline
+       !important is required to beat the #mo-psm-css `#login-wrapper` rule
+       (jQuery's .css() can't set !important). Guarded (only write when it
+       differs) so the style mutation doesn't retrigger the observer loop. */
     $('#login-wrapper').each(function () {
-      if (this.style.padding !== "20px 18px") {
-        this.style.setProperty("padding", "20px 18px", "important");
+      if (this.style.padding !== "20px 24px") {
+        this.style.setProperty("padding", "20px 24px", "important");
       }
     });
 
