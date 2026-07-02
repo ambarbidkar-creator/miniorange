@@ -149,21 +149,22 @@
     if (goBackLink && goBackLink.getAttribute("href") !== MO_URLS.dashboardRedirect) {
       goBackLink.setAttribute("href", MO_URLS.dashboardRedirect);
     }
-    /* Localize the go-back link label ("Terug naar inloggen" in nl). Pick the
-       link inside its flex container with jQuery. Guarded so the text write
-       doesn't retrigger the observer. */
-    var $goBack = $('.d-flex.justify-content-center.gap-3 #go-back-link');
-    if ($goBack.length && $goBack.text().trim() !== tr("goback.login")) {
-      $goBack.text(tr("goback.login"));
-    }
+    /* Localize the go-back link label ("Terug naar inloggen" in nl). Use a
+       PER-ELEMENT guard (compare each node's own text) so a multi-match set
+       can't produce a concatenated read that never equals the target — which
+       would rewrite on every observer tick and spin the page on "loading". */
+    $('#go-back-link').each(function () {
+      if (this.textContent.trim() !== tr("goback.login")) this.textContent = tr("goback.login");
+    });
 
     /* Localize the success alert message (overrides the server-rendered text).
        tr() resolves nl to the approved Dutch copy and every other locale to its
-       own translation. Guarded so the text write doesn't retrigger the observer. */
-    var $psmMsg = $('.alert.alert-success .actionMessage li span');
-    if ($psmMsg.length && $psmMsg.text().trim() !== tr("psm.alert")) {
-      $psmMsg.text(tr("psm.alert"));
-    }
+       own translation. Per-element guard for the same anti-loop reason as the
+       link above: `.actionMessage span` can match more than one span, and a
+       combined .text() read would never equal a single-message target. */
+    $('.alert-success .actionMessage span').each(function () {
+      if (this.textContent.trim() !== tr("psm.alert")) this.textContent = tr("psm.alert");
+    });
 
     /* Page-specific styling (inject once) — makes this page match /login:
        carded wrapper, left-aligned bold heading, clean green message box,
@@ -210,17 +211,6 @@
       psmSt.id = "mo-psm-css"; psmSt.textContent = psmCss;
       document.head.appendChild(psmSt);
     }
-
-    var lang = localStorage.getItem('mo_locale');
-    if (lang === 'nl') {
-      var $psmSpan = $('.alert-success .actionMessage span');
-      var nlAlert = "Als 'EMAIL' is gekoppeld aan een account, ontvang je een e-mail om je wachtwoord opnieuw in te stellen.";
-      if ($psmSpan.text().trim() !== nlAlert) $psmSpan.text(nlAlert);
-
-      var $goBack = $('#go-back-link');
-      if ($goBack.text().trim() !== 'Terug naar inloggen') $goBack.text('Terug naar inloggen');
-    }
-
   }
 
   /* ── ERROR DETECTION HELPER ── */
