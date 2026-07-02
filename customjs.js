@@ -404,7 +404,8 @@
       norm(getUrlParam("request_locale")) ||
       norm(document.documentElement.getAttribute("lang")) ||
       norm(sel && sel.value) ||
-      norm(localStorage.getItem("mo_locale"));
+      norm(localStorage.getItem("mo_locale")) ||
+      "nl";   /* default locale when no other signal resolves */
 
     if (lang) localStorage.setItem("mo_locale", lang);
     return lang;
@@ -723,9 +724,12 @@
   };
 
   function tr(key) {
-    var locale = localStorage.getItem("mo_locale") || "en";
-    var dict = TRANSLATIONS[locale] || TRANSLATIONS.en;
+    /* Default to 'nl' so any tr() call before getLocale() resolves (or on a
+       page exposing no locale signal) renders Dutch rather than English. */
+    var locale = localStorage.getItem("mo_locale") || "nl";
+    var dict = TRANSLATIONS[locale] || TRANSLATIONS.nl || TRANSLATIONS.en;
     if (dict && dict[key] != null) return dict[key];
+    if (TRANSLATIONS.nl && TRANSLATIONS.nl[key] != null) return TRANSLATIONS.nl[key];
     if (TRANSLATIONS.en && TRANSLATIONS.en[key] != null) return TRANSLATIONS.en[key];
     return key;
   }
