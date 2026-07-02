@@ -172,7 +172,7 @@
 
         /* Heading -> left-aligned bold, like the LOG IN title */
         "#login-wrapper h4{font-family:'Figtree',sans-serif!important;font-size:26px!important;" +
-        "font-weight:800!important;color:#0d1b2a!important;text-align:left!important;margin:0 0 20px 0!important;}" +
+        "font-weight:800!important;color:#000933!important;text-align:left!important;margin:0 0 20px 0!important;}" +
 
         /* Hide the separator */
         "#login-wrapper hr{display:none!important;}" +
@@ -243,6 +243,10 @@
       "}" +
       "#login-body > br,#login-main-body > br{display:none!important;}" +
 
+      /* Error messages — uniform 12px */
+      ".error-message{font-size:12px!important;color:#E91616!important;}" +
+      ".border-danger{border-color:#E91616!important;}" +
+
       /* Logo — hidden */
       "#login-header{display:none!important;}" +
 
@@ -273,8 +277,8 @@
       "#enduserloginform .w-75.px-4:has(.row.justify-content-center),#idploginform .w-75.px-4:has(.row.justify-content-center){display:none!important;}" +
 
       /* LOG IN heading — top LEFT */
-      "#mo-title{display:block;font-family:'Figtree',sans-serif;font-size:26px;font-weight:800;" +
-      "color:#0d1b2a;margin-bottom:22px;text-align:left;}" +
+      "#mo-title{display:block;font-family:'Figtree',sans-serif;font-size:24px;font-weight:800;" +
+      "color:#000933;margin-bottom:12px;text-align:left;}" +
 
       /* Labels — left aligned */
       ".mo-lbl{display:block;color:#3c515d;font-size:14px;font-weight:700;padding:0 0 4px;" +
@@ -340,7 +344,7 @@
       ".mo-input-error:focus { box-shadow: 0 0 0 3px rgba(239, 47, 47, .12)!important; }" +
       ".mo-error-text { color: #ef2f2f; font-size: 13px; font-weight: 500; margin-top: 6px; text-align: left; display: block; font-family: 'Figtree', sans-serif; }" +
       "[dir='rtl'] .mo-error-text { text-align: right!important; }" +
-      ".mo-error-icon { position: absolute; right: 12px; display: flex; align-items: center; pointer-events: none; color: #ef2f2f; }" +
+      ".mo-error-icon { position: absolute; right: 12px; display: flex; align-items: center; pointer-events: none; color: #E91616; }" +
       ".mo-error-icon svg { width: 18px; height: 18px; fill: currentColor; }" +
       ".mo-input-error { padding-right: 40px!important; }" +
       "[dir='rtl'] .mo-error-icon { right: auto!important; left: 12px!important; }" +
@@ -799,7 +803,7 @@
       console.log('IN ERROR SECTION ');
       var message = $('#error-alert-message .errorMessage li span').text().trim();
       $('#userName').after(
-        '<div id="mo-userlogin-error" class="error-message text-start" style="color:red;">' + message + '</div>'
+        '<div id="mo-userlogin-error" class="error-message text-start" style="color:#E91616;">' + message + '</div>'
       );
       /* Red border + cross icon on the username field */
       $('#username').addClass('border border-danger mo-input-error');
@@ -901,7 +905,7 @@
       console.log('IN ERROR SECTION ')
       var message = $('#error-alert-message .errorMessage li span').text().trim();
       $('#mo-user-display').after(
-        '<div id="mo-pw-error" class="error-message text-start" style="color:red;">' + message + '</div>'
+        '<div id="mo-pw-error" class="error-message text-start" style="color:#E91616;">' + message + '</div>'
       );
       $('#username, #plaintextPassword').addClass('border border-danger');
       $('.mo-user-display').addClass('border border-danger');
@@ -1208,7 +1212,7 @@
     if (isPageHasError && !document.getElementById("mo-redirect-error") && !(rdUname && rdUname.dataset.moRedirectDismissed)) {
       console.log('IN ERROR SECTION ');
       var message = $('#error-alert-message .errorMessage li span').text().trim();
-      var errHtml = '<div id="mo-redirect-error" class="error-message text-start" style="color:red;">' + message + '</div>';
+      var errHtml = '<div id="mo-redirect-error" class="error-message text-start" style="color:#E91616;">' + message + '</div>';
       if ($('.mo-pw-wrap').length) {
         $('.mo-pw-wrap').after(errHtml);
       } else {
@@ -1370,10 +1374,10 @@
 
         /* RESET PASSWORD heading */
         "#mo-fp-title{display:block;font-family:'Figtree',sans-serif;font-size:24px;font-weight:800;" +
-        "color:#0d1b2a;margin-bottom:6px;letter-spacing:-.3px;text-align:left!important;}" +
+        "color:#000933;margin-bottom:6px;letter-spacing:-.3px;text-align:left!important;}" +
 
         /* Subtitle */
-        "#mo-fp-subtitle{display:block;font-size:14px;color:#6b7a8d;font-family:'Figtree',sans-serif;margin-bottom:12px;text-align:left!important;}" +
+        "#mo-fp-subtitle{display:block;font-size:14px;font-weight:400;color:#000933;font-family:'Figtree',sans-serif;margin-bottom:12px;text-align:left!important;}" +
 
         /* Label */
         "#mo-fp-lbl{" +
@@ -1409,7 +1413,7 @@
         "#userform .w-75.px-2{padding-left:.5rem!important;padding-right:.5rem!important;}" +
 
         /* Helper text */
-        "#mo-fp-helper{font-size:13px;color:#6b7a8d;font-family:'Figtree',sans-serif;" +
+        "#mo-fp-helper{font-size:14px;font-weight:400;color:#6b7a8d;font-family:'Figtree',sans-serif;" +
         "margin:14px 0 18px;line-height:1.5;text-align:left!important;width:100%!important;padding-left:0;padding-right:0;}" +
         "#mo-fp-helper a{display:block;margin-top:4px;color:#0A55D7;text-decoration:none;font-weight:500;}" +
         "#mo-fp-helper a:hover{text-decoration:underline;}" +
@@ -1573,7 +1577,7 @@
         fpIwrap.appendChild(fpIcon);
       }
       /* Message directly below the input wrapper */
-      $(fpIwrap || emailInput).after('<div id="mo-fp-error" class="error-message text-start" style="color:red;font-size:13px;margin-top:6px;">' + fpMessage + '</div>');
+      $(fpIwrap || emailInput).after('<div id="mo-fp-error" class="error-message text-start" style="color:#E91616;font-size:13px;margin-top:6px;">' + fpMessage + '</div>');
       /* Clear once the user edits the email again */
       if (!emailInput.dataset.moFpClear) {
         emailInput.dataset.moFpClear = "true";
@@ -1611,19 +1615,19 @@
         "#modal-header-main{border-bottom:none!important;padding:26px 26px 12px!important;}" +
         ".modal-title{font-size:0!important;color:transparent!important;}" +
         "#mo-otp-title{display:block;font-family:'Figtree',sans-serif;font-size:24px;" +
-        "font-weight:800;color:#0d1b2a;text-transform:uppercase;letter-spacing:-.3px;margin:0;}" +
+        "font-weight:800;color:#000933;text-transform:uppercase;letter-spacing:-.3px;margin:0;}" +
         "#modal-body{padding:4px 15px 4px!important;}" +
-        "#success-alert-message{background:#e8f5e9!important;border:none!important;" +
-        "border-left:4px solid #2e7d32!important;border-radius:4px!important;" +
-        "color:#1b5e20!important;padding:12px 16px!important;display:flex!important;" +
+        "#success-alert-message{background:#D8F3EA!important;border:none!important;" +
+        "border-left:4px solid #237659!important;border-radius:4px!important;" +
+        "color:#000933!important;padding:12px 16px!important;display:flex!important;" +
         "align-items:flex-start!important;gap:10px!important;margin-bottom:20px!important;}" +
-        "#success-alert-message .fa-check-circle{color:#2e7d32!important;" +
+        "#success-alert-message .fa-check-circle{color:#237659!important;" +
         "font-size:18px!important;flex-shrink:0;margin-top:2px!important;}" +
         "#success-alert-message .btn-close{display:none!important;}" +
         "#success-alert-message .actionMessage{list-style:none!important;" +
         "padding:0!important;margin:0!important;}" +
         "#success-alert-message .actionMessage li span{font-family:'Figtree',sans-serif;" +
-        "font-size:14px;line-height:1.5;}" +
+        "font-size:14px;line-height:1.5;color:#000933!important;}" +
         "#mo-otp-lbl{display:block;font-family:'Figtree',sans-serif;font-size:14px;" +
         "font-weight:700;color:#3c515d;margin-bottom:6px;}" +
         "#mo-otp-lbl .mo-req{color:#e02020;margin-left:2px;}" +
@@ -1643,15 +1647,15 @@
         "justify-content:flex-start!important;gap:12px!important;}" +
         "#validate{background:#0A55D7!important;background-color:#0A55D7!important;" +
         "border:none!important;border-radius:0!important;color:#fff!important;" +
-        "font-family:'Figtree',sans-serif!important;font-size:14px!important;" +
+        "font-family:'Figtree',sans-serif!important;font-size:16px!important;" +
         "font-weight:700!important;text-transform:uppercase!important;" +
         "letter-spacing:.6px!important;padding:8px 24px!important;" +
         "cursor:pointer!important;min-height:40px!important;}" +
         "#validate{padding-right:46px!important;background-image:" + MO_ARROW_BG + "!important;" +
         "background-repeat:no-repeat!important;background-position:right 18px center!important;background-size:15px 15px!important;}" +
         "#validate:hover{background-color:#0844b0!important;}" +
-        ".btn-cancel{background:#e9ecef!important;border:none!important;" +
-        "border-radius:0!important;color:#3c515d!important;" +
+        ".btn-cancel{background:#EFF3F5!important;border:none!important;" +
+        "border-radius:0!important;color:#000933!important;" +
         "font-family:'Figtree',sans-serif!important;font-size:14px!important;" +
         "font-weight:700!important;text-transform:uppercase!important;" +
         "letter-spacing:.6px!important;padding:8px 24px!important;min-height:40px!important;}" +
@@ -1770,7 +1774,7 @@
       console.log('IN ERROR SECTION ');
       var message = $('#error-alert-message .errorMessage li span').text().trim();
       $('#otpToken').after(
-        '<div id="mo-userlogin-error" class="error-message text-start" style="color:red;">' + message + '</div>'
+        '<div id="mo-userlogin-error" class="error-message text-start" style="color:#E91616;">' + message + '</div>'
       );
       $('input').addClass('border border-danger')
       /* Wrap the OTP input + add a red cross icon inside it */
@@ -1848,7 +1852,7 @@
         "#login-wrapper .login-header{" +
         "display:flex!important;justify-content:space-between!important;align-items:center!important;" +
         "font-family:'Figtree',sans-serif!important;font-size:24px!important;" +
-        "font-weight:800!important;color:#0d1b2a!important;text-transform:uppercase!important;" +
+        "font-weight:800!important;color:#000933!important;text-transform:uppercase!important;" +
         "letter-spacing:-.3px!important;margin-bottom:20px!important;text-align:left!important;" +
         "border:none!important;padding:0!important;" +
         "}" +
@@ -2059,7 +2063,8 @@
       helper.id = "mo-cp-helper-text";
       helper.style.fontFamily = "'Figtree', sans-serif";
       helper.style.fontSize = "12px";
-      helper.style.color = "#6b7a8d";
+      helper.style.fontWeight = "400";
+      helper.style.color = "#506C7C";
       helper.style.lineHeight = "1.6";
       helper.style.marginTop = "-6px";
       helper.style.marginBottom = "16px";
@@ -2210,10 +2215,10 @@
            textContent/style writes retrigger the observer and loop. */
         if (marker.dataset.state === state) return;
         marker.dataset.state = state;
-        if (state === "dot") { marker.textContent = "•"; marker.style.color = "#6b7a8d"; li.style.color = ""; }
+        if (state === "dot") { marker.textContent = "•"; marker.style.color = "#506C7C"; li.style.color = ""; }
         else if (state === "empty") { marker.textContent = ""; marker.style.color = ""; li.style.color = ""; }
         else if (state === "ok") { marker.textContent = "✔"; marker.style.color = "#1b8f3a"; li.style.color = "#1b8f3a"; }  /* satisfied -> green text */
-        else { marker.textContent = "○"; marker.style.color = "#6b7a8d"; li.style.color = ""; }  /* not satisfied -> hollow dot */
+        else { marker.textContent = "○"; marker.style.color = "#506C7C"; li.style.color = ""; }  /* not satisfied -> hollow dot */
       });
     }
 
