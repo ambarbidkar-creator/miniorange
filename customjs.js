@@ -166,7 +166,7 @@
         /* Card (override the inline white border/bg from the markup) */
         "#login-wrapper{background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:28px 15px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
+        "padding:28px 14px!important;max-width:560px!important;width:100%!important;margin:0 auto!important;}" +
 
         /* Heading -> left-aligned bold, like the LOG IN title */
         "#login-wrapper h4{font-family:'Figtree',sans-serif!important;font-size:26px!important;" +
@@ -248,7 +248,7 @@
       "#login-wrapper{" +
       "background:#fff!important;border:1px solid #e0e7ef!important;" +
       "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-      "padding:28px 15px!important;max-width:560px!important;margin:0 auto!important;" +
+      "padding:28px 14px!important;max-width:560px!important;margin:0 auto!important;" +
       "}" +
 
       /* Form: stretch children to full width (removes Bootstrap center alignment) */
@@ -1326,7 +1326,7 @@
         "margin-top:0!important;margin-bottom:0!important;" +
         "display:block!important;float:none!important;" +
         "position:relative!important;left:auto!important;right:auto!important;" +
-        "padding:28px 15px!important;box-sizing:border-box!important;" +
+        "padding:28px 14px!important;box-sizing:border-box!important;" +
         "height:auto!important;min-height:unset!important;align-self:center!important;" +
         "}" +
 
@@ -1586,11 +1586,11 @@
         ".modal-dialog{margin:0!important;max-width:640px!important;width:100%!important;}" +
         ".modal-content{border:1px solid #e0e7ef!important;border-radius:4px!important;" +
         "box-shadow:0 2px 12px rgba(0,0,0,.08)!important;}" +
-        "#modal-header-main{border-bottom:none!important;padding:32px 36px 12px!important;}" +
+        "#modal-header-main{border-bottom:none!important;padding:26px 26px 12px!important;}" +
         ".modal-title{font-size:0!important;color:transparent!important;}" +
         "#mo-otp-title{display:block;font-family:'Figtree',sans-serif;font-size:24px;" +
         "font-weight:800;color:#0d1b2a;text-transform:uppercase;letter-spacing:-.3px;margin:0;}" +
-        "#modal-body{padding:4px 36px 4px!important;}" +
+        "#modal-body{padding:4px 15px 4px!important;}" +
         "#success-alert-message{background:#e8f5e9!important;border:none!important;" +
         "border-left:4px solid #2e7d32!important;border-radius:4px!important;" +
         "color:#1b5e20!important;padding:12px 16px!important;display:flex!important;" +
@@ -1684,14 +1684,18 @@
     /* Form padding (jQuery no-ops when classes already match, so no loop) */
     $('#validateIdentityForm').removeClass('p-4').addClass('p-0');
 
+    /* Strip all <br> spacers on this page. No-op (no mutation) once none
+       remain, so it's observer-loop safe even running every tick. */
+    $('br').remove();
+
     /* modal-footer padding, this page only. jQuery selects it, but the value
        is applied via setProperty with !important (jQuery's .css() can't set
        !important, and this must beat the #mo-otp-css `#modal-footer` rule).
        Guarded against the NORMALIZED read-back ("0" comes back as "0px") so
        the style write doesn't retrigger the observer loop. */
     $('#modal-footer').each(function () {
-      if (this.style.padding !== "0px 26px 24px 24px") {
-        this.style.setProperty("padding", "0 26px 24px 24px", "important");
+      if (this.style.padding !== "0px 26px 24px 22px") {
+        this.style.setProperty("padding", "0 26px 24px 22px", "important");
       }
     });
 
@@ -1794,7 +1798,7 @@
         "#login-wrapper{" +
         "background:#fff!important;border:1px solid #e0e7ef!important;" +
         "border-radius:4px!important;box-shadow:0 2px 12px rgba(0,0,0,.08)!important;" +
-        "padding:28px 15px!important;max-width:560px!important;width:100%!important;" +
+        "padding:28px 14px!important;max-width:560px!important;width:100%!important;" +
         "margin:40px auto!important;box-sizing:border-box!important;" +
         "}" +
 
